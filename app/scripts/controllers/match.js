@@ -1,5 +1,5 @@
 angular.module('volleyApp')
-    .controller('MatchCtrl', function ($scope, gamesService) {
+    .controller('MatchCtrl', ['$scope', 'gamesService', function ($scope, gamesService) {
 
         'use strict';
         $scope.service = 2;
@@ -47,9 +47,9 @@ angular.module('volleyApp')
             }
 
                 //Check if one team has reach the set victory point with 2 points far ?
-            if (($scope.scoreTeam1[$scope.currentSet - 1] >= setMinimumPoint
-                || $scope.scoreTeam2[$scope.currentSet - 1] >= setMinimumPoint)
-                && Math.abs($scope.scoreTeam1[$scope.currentSet - 1] - $scope.scoreTeam2[$scope.currentSet - 1]) >= 2) {
+            if (($scope.scoreTeam1[$scope.currentSet - 1] >= setMinimumPoint ||
+                 $scope.scoreTeam2[$scope.currentSet - 1] >= setMinimumPoint) &&
+                 Math.abs($scope.scoreTeam1[$scope.currentSet - 1] - $scope.scoreTeam2[$scope.currentSet - 1]) >= 2) {
                 return true;
             }
             return false;
@@ -72,4 +72,4 @@ angular.module('volleyApp')
 
             gamesService.saveGame(match);
         };
-    });
+    }]);

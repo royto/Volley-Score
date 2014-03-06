@@ -1,7 +1,7 @@
-'use strict';
-
 angular.module('volleyApp', ['ngRoute'])
     .config(function ($routeProvider) {
+        'use strict';
+
         $routeProvider
             .when('/', {
                 templateUrl: 'views/home.html',
