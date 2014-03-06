@@ -1,9 +1,9 @@
 /*global angular, window */
 angular.module('volleyApp')
     .service('gamesService', function () {
-        
+
         'use strict';
-        
+
         //Gestion du storage
         var storage = window.localStorage,
             getTeamName = function (nb) {

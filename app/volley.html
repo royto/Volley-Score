@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="no-js" ng-app='volleyApp'>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>Volley Score</title>
+
+		<link rel="stylesheet" href="styles/style.css" type="text/css" media="screen, projection" />
+        <link rel="stylesheet" href="styles/ics.css" type="text/css" media="screen, projection" />
+        <link href="http://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic" rel="stylesheet">
+
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+        <script src="scripts/app.js" ></script>
+        <!-- Controllers -->
+        <script src="scripts/controllers/home.js"></script>
+        <script src="scripts/controllers/history.js"></script>
+        <script src="scripts/controllers/match.js"></script>
+        <!-- Services -->
+        <script src="scripts/services/gamesService.js" ></script>
+
+	</head>
+	<body>
+		<nav>
+			<ul class="tabs">
+				<li><a id="homeMenu" href="#/">Home</a></li>
+				<li><a id="matchMenu" href="#/match">Match</a></li>
+				<li><a id="matchMenu" href="#/histo">Historique</a></li>
+				<li><a id="todoMenu" href="#/todo">Todo</a></li>
+			</ul>
+		</nav>
+		<div ng-view></div>
+</body>
+</html>

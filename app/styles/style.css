@@ -36,23 +36,23 @@ section, nav {
     background-color : rgba(255,255,255,0.205);
 }
 
-.button[disabled], .button:hover[disabled] 
+.button[disabled], .button:hover[disabled]
 {
-    color: #333; 
+    color: #333;
     border : 1px solid rgba(255,255,255,0.34);
     background-color: rgba(255,255,255,0.205);
-    box-shadow:none;  
+    box-shadow:none;
 }
 
-label 
+label
 {
     display : inline-block;
     padding : 5px 10px;
     border-bottom : 1px solid rgba(0,153,204,1);
-    text-transform : uppercase;   
+    text-transform : uppercase;
 }
 
-@media screen and (max-width:480px) { 
+@media screen and (max-width:480px) {
 
 
 }
