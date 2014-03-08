@@ -34,6 +34,10 @@ angular.module('volleyApp')
         };
 
         //Externalize to stat service ??
+        /**
+        * Description
+        * @param {Array} set
+        */
         var getMaxConsecutivePoints = function(set) {
             //var array = [0, 1, 2, 3, 4, 3, 2, 1, 0, -1, -2, -1, 0, 1, 2, 3];
             //Must return 6 -> Unit Test
@@ -65,8 +69,9 @@ angular.module('volleyApp')
             return max;
         };
 
-        /** Get Max points of difference in a set
-        * @params array set as arrray
+        /**
+        * Get Max points of difference in a set
+        * @param {Array} set as arrray
         */
         var getMaxDifference = function (set) {
             return set.reduce(function(previousValue, currentValue, index, array) {
@@ -77,14 +82,13 @@ angular.module('volleyApp')
             });
         };
 
-
         //public functions
         $scope.startGame = function () {
             $scope.isMatchStarted = true;
         };
 
         $scope.addPoint = function (team) {
-            var isSetOver = $scope.isSetOver();
+
             //Add point to the winning point team
             if (team === 1) {
                 $scope.scoreTeam1[$scope.currentSet - 1]++;
@@ -93,6 +97,9 @@ angular.module('volleyApp')
             }
             //Set service to winning point team
             $scope.currentService = team;
+
+            //Check is set is over
+            var isSetOver = $scope.isSetOver();
 
             //manage points difference history
             manageDifference(team, isSetOver);
@@ -131,18 +138,52 @@ angular.module('volleyApp')
         $scope.saveMatch = function () {
             var i,
                 match = {
-                    teams : [{name : $scope.team1Name}, {name : $scope.team2Name}],
+                    teams : {
+                        "team1" : $scope.team1Name,
+                        "team2" : $scope.team2Name
+                    },
                     sets : []
                 };
 
+            //Set points for each set
             for (i = 0; i < 5; i += 1) {
-                var set = {  points : [
-                        {value : $scope.scoreTeam1[i]},
-                        {value : $scope.scoreTeam2[i]}
-                    ]};
+                var set = {
+                    "team1" : $scope.scoreTeam1[i],
+                    "team2" : $scope.scoreTeam2[i]
+                    };
                 match.sets.push(set);
             }
 
             gamesService.saveGame(match);
         };
+
+        $scope.totalPoints = function() {
+            return $scope.difference.reduce(function(previous, current, index, array) {
+                //difference start at 0 for each set
+                return previous + current.length - 1;
+            }, 0);
+        };
+
+        $scope.totalPointsWinForATeam = function(team) {
+            var total = 0, i, j, set,
+                raise = team === 1;
+
+            for (j = 0; j < $scope.difference.length; j += 1) {
+                set = $scope.difference[j];
+                //loop on values
+                for (i = 0; i < set.length; i += 1) {
+                    //premier element
+                    if (i === 0) {
+                        continue;
+                    }
+                    //Check if same team win
+                    if ((raise && set[i] > set[i-1]) ||
+                        !raise && set[i-1] > set[i]) {
+                        total += 1;
+                    }
+                }
+            }
+            return total;
+        };
+
     }]);

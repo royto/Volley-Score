@@ -1,8 +1,15 @@
 # Volley Score
+Volley score is an web app for managing volley ball score.
 
 ## Ideas
- * Stats
- ** Max difference per set -> with or without sign
- ** difference evolution graph
- ** Max consecutive points win
- * Unit Tests
+* Stats
+ * Max difference per set -> with or without sign
+ * Max difference per set and team
+ * difference evolution graph
+ * Max consecutive points win
+* Total
+ * Total Points of a game
+ * Total Points win by Team 1
+ * Total Ppints win by Team 2
+* Provide Team Name completion as data list with last x name used
+* Unit Tests

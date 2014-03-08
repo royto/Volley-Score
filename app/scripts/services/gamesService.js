@@ -6,40 +6,42 @@ angular.module('volleyApp')
 
         //Gestion du storage
         var storage = window.localStorage,
+            gamesStorageName = 'ngGames',
+            teamPrefixStorageName = 'Team',
             getTeamName = function (nb) {
-                if (storage && storage.getItem('Team' + nb)) {
-                    return storage.getItem('Team' + nb);
+                if (storage && storage.getItem(teamPrefixStorageName + nb)) {
+                    return storage.getItem(teamPrefixStorageName + nb);
                 }
                 return "Equipe " + nb;
             },
             saveTeamName = function (nb, value) {
                 if (storage) {
-                    storage.setItem('Team' + nb, value);
+                    storage.setItem(teamPrefixStorageName + nb, value);
                 }
             },
             saveGame = function (game) {
                 var savedGames;
                 if (storage) {
-                    savedGames = angular.fromJson(storage.getItem('games')) || [];
+                    savedGames = angular.fromJson(storage.getItem(gamesStorageName)) || [];
                     savedGames.push(game);
-                    storage.setItem('games', angular.toJson(savedGames));
+                    storage.setItem(gamesStorageName, angular.toJson(savedGames));
                 }
             },
             getSavedGames = function () {
                 if (storage) {
-                    return angular.fromJson(storage.getItem('games')) || [];
+                    return angular.fromJson(storage.getItem(gamesStorageName)) || [];
                 }
             },
             removeSavedMatch = function (i) {
                 if (storage) {
                     var savedGames = getSavedGames();
                     savedGames.splice(i, 1);
-                    storage.setItem('games', angular.toJson(savedGames));
+                    storage.setItem(gamesStorageName, angular.toJson(savedGames));
                 }
             },
             clearSavedMatch = function () {
                 if (storage) {
-                    storage.removeItem('games');
+                    storage.removeItem(gamesStorageName);
                 }
             };
 
