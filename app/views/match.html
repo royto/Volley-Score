@@ -59,6 +59,23 @@
             <button class="button small" data-bind="click : function(data, event) { askTimeOut(2, event)}, enable: timeOut()[1].value() < 2">TO</button>
         </div>
 
+        <div ng-repeat="set in difference">
+            Set {{$index + 1}}
+            <ul>
+                 <li ng-repeat="diff in set track by $index">
+                   {{diff}}
+                 </li>
+           </ul>
+        </div>
+        <!--
+            Stats Graphs
+            gRaphael ??
+            angular chart
+                -> http://bouil.github.io/angular-google-chart
+                -> http://chinmaymk.github.io/angular-charts/
+                ->https://github.com/pablojim/highcharts-ng ++ permet de gérer des séries avec un nombre de valeurs différentes
+        -->
+
         <p>
             <span class="points">{{scoreTeam1[currentSet -1 ]}}</span>
             <span id="nbSetsTeam1">{{setWinTeam1}}</span>
