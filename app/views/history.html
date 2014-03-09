@@ -1,6 +1,5 @@
 <section id="histo">
-    <p ng-hide="games.length === 0">{{games.length}} matchs sauvegardés<p/>
-    <p ng-hide="games.length > 0">aucun match sauvegardé<p/>
+    <ng-pluralize count="games.length" when="gameForms"></ng-pluralize>
     <a href="" ng-hide="games.length === 0" ng-click="clearGames">Tout supprimer</a>
 
     <div ng-repeat="game in games">
