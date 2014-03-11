@@ -31,7 +31,7 @@
             </tr>
             <tr id="scoreTeam1">
                 <th>{{team1Name}}</th>
-                <td><span ng-show="currentService == 1">S</span></td>
+                <td><span>{{currentService | service:1}}</span></td>
                 <td class="set1"><span>{{scoreTeam1[0]}}</span></td>
                 <td class="set2"><span>{{scoreTeam1[1]}}</span></td>
                 <td class="set3"><span>{{scoreTeam1[2]}}</span></td>
@@ -40,7 +40,7 @@
             </tr>
             <tr id="scoreTeam2">
                 <th>{{team2Name}}</th>
-                <td><span ng-show="currentService == 2">S</span></td>
+                <td><span>{{currentService | service:2}}</span></td>
                 <td class="set1"><span>{{scoreTeam2[0]}}</span></td>
                 <td class="set2"><span>{{scoreTeam2[1]}}</span></td>
                 <td class="set3"><span>{{scoreTeam2[2]}}</span></td>
@@ -78,6 +78,7 @@
                 -> http://bouil.github.io/angular-google-chart
                 -> http://chinmaymk.github.io/angular-charts/
                 ->https://github.com/pablojim/highcharts-ng ++ permet de gérer des séries avec un nombre de valeurs différentes
+                ->http://www.sitepoint.com/creating-visualization-app-using-google-charts-api-angularjs-part4/
         -->
 
         <p>
