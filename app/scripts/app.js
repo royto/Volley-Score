@@ -8,7 +8,8 @@ angular.module('volleyApp', ['ngRoute'])
                 controller: 'HomeCtrl'
             })
             .when('/todo', {
-                templateUrl: 'views/todo.html'
+                templateUrl: 'views/todo.html',
+                controller : 'TodoCtrl'
             })
             .when('/histo', {
                 templateUrl: 'views/history.html',
