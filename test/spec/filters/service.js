@@ -16,6 +16,7 @@ describe('Filter: service', function () {
     expect(service(1,2)).toBe('');
     expect(service(2,1)).toBe('');
     expect(service(2,2)).toBe('S');
+    expect(service(1)).toBe('');
   });
 
 });
