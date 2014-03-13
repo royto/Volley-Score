@@ -1,6 +1,6 @@
 /*global angular, window */
 angular.module('volleyApp')
-    .service('gamesService', function () {
+    .service('gamesService', ['$window', function (window) {
 
         'use strict';
 
@@ -53,4 +53,4 @@ angular.module('volleyApp')
             removeSavedMatch : removeSavedMatch,
             clearSavedMatch : clearSavedMatch
         };
-    });
+    }]);
