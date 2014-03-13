@@ -17,4 +17,3 @@ Volley score is an web app for managing volley ball score.
 ## Technical
 * Unit Tests completion
 * use modernizr via bower (angular-modernizr ?)
-* create Todo controller to manage todo
