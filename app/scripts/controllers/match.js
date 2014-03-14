@@ -1,6 +1,6 @@
 angular.module('volleyApp')
-  .controller('MatchCtrl', ['$scope', '$window', 'gamesService',
-    function ($scope, window, gamesService) {
+  .controller('MatchCtrl', ['$scope', '$window', 'gamesService', 'StatService',
+    function ($scope, window, gamesService, statService) {
 
       'use strict';
       $scope.service = 2;
@@ -18,68 +18,6 @@ angular.module('volleyApp')
       $scope.isMatchOver = false;
       $scope.currentService = 1;
 
-      //private functions
-      var manageDifference = function (team, isSetOver) {
-        //get last value
-        var currentArray = $scope.difference[$scope.currentSet - 1],
-          lastValue = currentArray[currentArray.length - 1];
-
-        if (team === 1) {
-          currentArray.push(lastValue + 1);
-        } else {
-          currentArray.push(lastValue - 1);
-        }
-
-        if (isSetOver) {
-          $scope.difference.push([0]);
-        }
-      };
-
-      //Externalize to stat service ??
-      /**
-       * Description
-       * @param {Array} set
-       */
-      $scope.getMaxConsecutivePoints = function (set) {
-        //var array = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1];
-        //Must return 6 -> Unit Test
-
-        //init vars
-        var max = 0,
-          i, team,
-          current = 0;
-
-        //loop on values
-        for (i = 0; i < set.length; i += 1) {
-          //Check if same team win or 1st point of the set
-          if (angular.isUndefined(team) ||
-              (team === set[i])) {
-            current += 1;
-          } else {
-            current = 1;
-          }
-          //update max if needed
-          if (max < current) {
-            max = current;
-          }
-          //update raise
-          team = set[i];
-        }
-        return max;
-      };
-
-      /**
-       * Get Max points of difference in a set
-       * @param {Array} set as arrray
-       */
-      var getMaxDifference = function (set) {
-        return set.reduce(function (previousValue, currentValue, index, array) {
-          if (Math.abs(currentValue) > Math.abs(previousValue)) {
-            return currentValue;
-          }
-          return previousValue;
-        });
-      };
 
       //public functions
       $scope.startGame = function () {
@@ -101,9 +39,6 @@ angular.module('volleyApp')
 
         //Check is set is over
         var isSetOver = $scope.isSetOver();
-
-        //manage points difference history
-        manageDifference(team, isSetOver);
 
         //manage set change
         if (isSetOver) {
@@ -159,23 +94,10 @@ angular.module('volleyApp')
       };
 
       $scope.totalPoints = function () {
-        return $scope.score.reduce(function (previous, current, index, array) {
-          //sum of legnth of sets score arrays
-          return previous + current.length;
-        }, 0);
+        return statService.totalPoints($scope.score);
       };
 
       $scope.totalPointsWinForATeam = function (team) {
-        return $scope.score.reduce(function (previous, current, index, array) {
-          //sum of points win by team by set
-          return previous + current.reduce(function (previous, current, index, array) {
-            //Add point only if win by team
-            if (team === current) {
-              return previous + 1;
-            }
-            return previous;
-          }, 0);
-        }, 0);
+        return statService.totalPointsWinForATeam($scope.score, team);
       };
-
     }]);
