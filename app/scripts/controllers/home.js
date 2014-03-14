@@ -1,6 +1,6 @@
 angular.module('volleyApp')
-    .controller('HomeCtrl', function ($scope) {
-        'use strict';
+  .controller('HomeCtrl', function ($scope) {
+    'use strict';
 
-        $scope.version = '0.0.1';
-    });
+    $scope.version = '0.0.1';
+  });
