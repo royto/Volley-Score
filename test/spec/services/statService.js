@@ -45,5 +45,12 @@ describe('Service: StatService', function () {
     expect(StatService.getMaxConsecutivePoints(array)).toBe(5);
   });
 
+  it('should return max Difference for a set', function() {
+    var set = [1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2];
+    expect(StatService.getMaxDifference(set)).toBe(4);
+
+    set = [2,2,1,1,2,2,2,1,2,2,2,1,2,2,2,1,1,1,1,1,2];
+    expect(StatService.getMaxDifference(set)).toBe(-7);
+  });
 
 });

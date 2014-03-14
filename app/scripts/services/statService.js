@@ -58,7 +58,8 @@ angular.module('volleyApp')
      * @param {Array} set as arrray
      */
     this.getMaxDifference = function (set) {
-      return set.reduce(function (previousValue, currentValue, index, array) {
+      var setDiff = this.getDifference(set);
+      return setDiff.reduce(function (previousValue, currentValue, index, array) {
         if (Math.abs(currentValue) > Math.abs(previousValue)) {
           return currentValue;
         }
