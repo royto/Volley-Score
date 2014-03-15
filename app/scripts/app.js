@@ -19,6 +19,10 @@ angular.module('volleyApp', ['ngRoute'])
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       })
+      .when('/stat/:matchId', {
+        templateUrl: 'views/stat.html',
+        controller: 'StatCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
