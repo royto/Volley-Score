@@ -3,7 +3,6 @@ angular.module('volleyApp')
     function ($scope, window, gamesService, statService) {
 
       'use strict';
-      $scope.service = 2;
       $scope.team1Name = gamesService.getTeamName(1);
       $scope.team2Name = gamesService.getTeamName(2);
 

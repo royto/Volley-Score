@@ -7,8 +7,8 @@
 
             <p>
                 <label>Service</label>
-                <input type="radio" name="serviceGroup" value="1" ng-checked="service == 1" /> <span>{{team1Name}}</span>
-                <input type="radio" name="serviceGroup" value="2" ng-checked="service == 2" /> <span>{{team2Name}}</span>
+                <input type="radio" name="serviceGroup" ng-value="1" ng-model="currentService" /> <span>{{team1Name}}</span>
+                <input type="radio" name="serviceGroup" ng-value="2" ng-model="currentService" /> <span>{{team2Name}}</span>
             </p>
 
             <input ng-click="startGame()" class="button small" type="button" id="startBtn" value="Start"/>
