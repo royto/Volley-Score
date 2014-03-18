@@ -1,7 +1,6 @@
 <section id="histo">
     <ng-pluralize count="games.length" when="gameForms"></ng-pluralize>
     <a href="" ng-hide="games.length === 0" ng-click="clearGames">Tout supprimer</a>
-
     <div ng-repeat="game in games">
         <table class="score">
             <tbody>
@@ -15,19 +14,19 @@
             </tr>
             <tr id="scoreTeam1">
                 <th><span id="team1Name">{{game.teams.team1}}</span></th>
-                <td class="set1"><span>{{game.sets[0].team1}}</span></td>
-                <td class="set2"><span>{{game.sets[1].team1}}</span></td>
-                <td class="set3"><span>{{game.sets[2].team1}}</span></td>
-                <td class="set4"><span>{{game.sets[3].team1}}</span></td>
-                <td class="set5"><span>{{game.sets[4].team1}}</span></td>
+                <td class="set1"><span>{{scoreSets(0, 0, 1)}}</span></td>
+                <td class="set2"><span>{{scoreSets(0, 1, 1)}}</span></td>
+                <td class="set3"><span>{{scoreSets(0, 2, 1)}}</span></td>
+                <td class="set4"><span>{{scoreSets(0, 3, 1)}}</span></td>
+                <td class="set5"><span>{{scoreSets(0, 4, 1)}}</span></td>
             </tr>
             <tr id="scoreTeam2">
                 <th><span id="team1Name"></span>{{game.teams.team2}}</th>
-                <td class="set1"><span>{{game.sets[0].team2}}</span></td>
-                <td class="set2"><span>{{game.sets[1].team2}}</span></td>
-                <td class="set3"><span>{{game.sets[2].team2}}</span></td>
-                <td class="set4"><span>{{game.sets[3].team2}}</span></td>
-                <td class="set5"><span>{{game.sets[4].team2}}</span></td>
+                <td class="set1"><span>{{scoreSets(0, 0, 2)}}</span></td>
+                <td class="set2"><span>{{scoreSets(0, 1, 2)}}</span></td>
+                <td class="set3"><span>{{scoreSets(0, 2, 2)}}</span></td>
+                <td class="set4"><span>{{scoreSets(0, 3, 2)}}</span></td>
+                <td class="set5"><span>{{scoreSets(0, 4, 2)}}</span></td>
             </tr>
             </tbody>
         </table>

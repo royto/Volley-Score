@@ -59,10 +59,6 @@
             <button class="button small" data-bind="click : function(data, event) { askTimeOut(2, event)}, enable: timeOut()[1].value() < 2">TO</button>
         </div>
 
-        total points : {{totalPoints()}}
-        total points team 1 : {{totalPointsWinForATeam(1)}}
-        total points team 2 : {{totalPointsWinForATeam(2)}}
-
         <!--<div ng-repeat="set in difference">
             Set {{$index + 1}}
             <ul>

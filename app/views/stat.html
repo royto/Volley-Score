@@ -1,5 +1,27 @@
-<p>This is the stat view. {{matchId}}</p>
+<h1>Stats</h1>
 
-<selectnum nb-options="currentGame.sets.length" model="currentSet"></selectnum>
-Score du set {{currentSet}}
-{{currentSetScore()}}
+  <h2>Global Stats</h2>
+
+  <p>total points : {{totalPoints()}}</p>
+  <p>total points team 1 : {{totalPointsWinForATeam(1)}}</p>
+  <p>total points team 2 : {{totalPointsWinForATeam(2)}}</p>
+
+ <h2>Time Machine</h2>
+  <input ng-click="tmSetChanged()" type="button" value="Click me 3" />
+  <p>
+    Set : <selectnum nb-options="currentGame.score.length" start-at-one="true" on-change="tmSetChanged()" model="currentSet"></selectnum>
+  </p>
+  <p>
+    Point : <selectnum nb-options="currentSetPoints()" start-at-one="true" model="currentPoint"></selectnum>
+  </p>
+
+  {{currentSetScore(1)}} - {{currentSetScore(2)}}
+
+  <h2>Evolution points difference</h2>
+  <p>
+    Set : <selectnum nb-options="currentGame.score.length" start-at-one="true" model="diffCurrentSet"></selectnum>
+  </p>
+  {{scoreDifferenceEvolution()}}
+<div>
+<a href="#/histo" class="button small">Back</a>
+</div>

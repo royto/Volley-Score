@@ -22,4 +22,14 @@ angular.module('volleyApp')
         gamesService.clearSavedMatch();
         $scope.games = [];
       };
+
+      $scope.scoreSets = function(index, set, team) {
+        return $scope.games[index].score[set].reduce(function (previous, current, index, array) {
+          //Add point only if win by team
+          if (team === current) {
+            return previous + 1;
+          }
+          return previous;
+        }, 0);
+      };
     }]);

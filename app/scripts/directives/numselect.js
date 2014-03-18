@@ -12,20 +12,33 @@ directive('selectnum', function () {
     restrict: 'E',
     scope: {
       nbOptions: '=nbOptions',
-      model: '=model'
+      model: '=model',
+      onChange : '&'
     },
     link: function (scope, element, attrs, controller) {
-      var i = 0;
-      if (angular.isDefined(attrs.startAtOne)
-          && attrs.startAtOne === "true") {
-        i = 1;
-      }
+
+      //watch to nbOptions Change
+      scope.$watch('nbOptions', function() {
+        updateOptions();
+      }, true);
 
       scope.num = [];
 
-      for (; i <= scope.nbOptions; i += 1) {
-        scope.num.push(i);
-      }
+      var updateOptions = function() {
+        var i = 0;
+        if (angular.isDefined(attrs.startAtOne) &&
+            attrs.startAtOne === 'true') {
+          i = 1;
+        }
+        scope.num = [];
+        for (; i <= scope.nbOptions; i += 1) {
+          scope.num.push(i);
+        }
+      };
+
+      element.bind('change', function() {
+        scope.onChange();
+      });
     },
     template: '<select ng-model="model"><option ng-repeat="n in num">{{n}}</option></select>'
   };

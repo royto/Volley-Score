@@ -10,7 +10,6 @@ angular.module('volleyApp')
       $scope.scoreTeam1 = [0, 0, 0, 0, 0];
       $scope.scoreTeam2 = [0, 0, 0, 0, 0];
       $scope.score = [[], [], [], [], []];
-      $scope.difference = [[0]];
       $scope.setWinTeam1 = 0;
       $scope.setWinTeam2 = 0;
       $scope.isMatchStarted = false;
@@ -71,23 +70,13 @@ angular.module('volleyApp')
       };
 
       $scope.saveMatch = function () {
-        var i,
-          match = {
+        var match = {
             teams: {
               team1: $scope.team1Name,
               team2: $scope.team2Name
             },
-            sets: []
+            score: $scope.score
           };
-
-        //Set points for each set
-        for (i = 0; i < 5; i += 1) {
-          var set = {
-            team1: $scope.scoreTeam1[i],
-            team2: $scope.scoreTeam2[i]
-          };
-          match.sets.push(set);
-        }
 
         gamesService.saveGame(match);
       };
