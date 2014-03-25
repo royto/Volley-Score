@@ -13,7 +13,3 @@ Volley score is an web app for managing volley ball score.
  * Total Points win by Team 2
 * Provide Team Name completion as data list with last x name used
 * Time Machine : View score evolution per set
-
-## Technical
-* Unit Tests completion
-* use modernizr via bower (angular-modernizr ?)

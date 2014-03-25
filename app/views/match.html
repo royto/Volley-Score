@@ -1,24 +1,37 @@
 <section id="match">
     <div ng-hide="isMatchStarted">
         <h1>Accueil</h1>
-        <form>
-            <label>Equipe 1</label> <input type="text" ng-model="team1Name" />
-            <label>Equipe 2</label> <input type="text" ng-model="team2Name" />
-
-            <p>
-                <label>Service</label>
-                <input type="radio" name="serviceGroup" ng-value="1" ng-model="currentService" /> <span>{{team1Name}}</span>
-                <input type="radio" name="serviceGroup" ng-value="2" ng-model="currentService" /> <span>{{team2Name}}</span>
-            </p>
-
-            <input ng-click="startGame()" class="button small" type="button" id="startBtn" value="Start"/>
-
+        <form role="form">
+            <div class="form-group">
+              <label class="control-label">Equipe 1</label>
+              <input class="form-control" type="text" ng-model="team1Name" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Equipe 2</label>
+              <input class="form-control" type="text" ng-model="team2Name" />
+            </div>
+            <div class="form-group">
+                <label control-label>Service</label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="serviceGroup" ng-value="1" ng-model="currentService" /> {{team1Name}}
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="serviceGroup" ng-value="2" ng-model="currentService" /> {{team2Name}}
+              </label>
+            </div>
+            </div>
+            <div>
+              <input ng-click="startGame()" class="btn btn-primary" type="button" id="startBtn" value="Start" />
+            </div>
         </form>
     </div>
 
     <div id="matchScore" ng-show="isMatchStarted">
         <h1>Score</h1>
-        <table id="score">
+        <table class="table table-bordered" id="score">
             <tbody>
             <tr>
                 <th>Team</th>
@@ -49,14 +62,15 @@
             </tr>
             </tbody>
         </table>
-        <div id="AddButton">
-            <button class="button small" ng-disabled="isMatchOver" ng-click="addPoint(1)">Add point</button>
-            <button class="button small" ng-disabled="isMatchOver" ng-click="addPoint(2)">Add point</button>
+
+        <div class="form-group">
+            <button class="btn btn-primary" ng-disabled="isMatchOver" ng-click="addPoint(1)">Add point</button>
+            <button class="btn btn-primary" ng-disabled="isMatchOver" ng-click="addPoint(2)">Add point</button>
         </div>
 
-        <div id="ToButton">
-            <button class="button small" data-bind="click : function(data, event) { askTimeOut(1, event)}, enable: timeOut()[0].value() < 2">TO</button>
-            <button class="button small" data-bind="click : function(data, event) { askTimeOut(2, event)}, enable: timeOut()[1].value() < 2">TO</button>
+        <div class="form-group">
+            <button class="btn btn-primary" data-bind="click : function(data, event) { askTimeOut(1, event)}, enable: timeOut()[0].value() < 2">TO</button>
+            <button class="btn btn-primary" data-bind="click : function(data, event) { askTimeOut(2, event)}, enable: timeOut()[1].value() < 2">TO</button>
         </div>
 
         <!--<div ng-repeat="set in difference">
@@ -78,14 +92,15 @@
         -->
 
         <p>
-            <span class="points">{{scoreTeam1[currentSet -1 ]}}</span>
-            <span id="nbSetsTeam1">{{setWinTeam1}}</span>
-            <span class="points">&nbsp;-&nbsp;</span>
-            <span id="nbSetsTeam2">{{setWinTeam2}}</span>
-            <span class="points">{{scoreTeam2[currentSet -1 ]}}</span>
+            <h1 class="pull-left">{{scoreTeam1[currentSet -1 ]}}</h1>
+            <h3 class="pull-left" id="nbSetsTeam1">{{setWinTeam1}}</h3>
+            <span class="pull-left">&nbsp;-&nbsp;</span>
+            <h3 class="pull-left" id="nbSetsTeam2">{{setWinTeam2}}</h3>
+            <h1 class="pull-left">{{scoreTeam2[currentSet -1 ]}}</h1>
         </p>
-
-          <button class="button small" ng-show="isMatchOver">New Game</button>
-          <button class="button small" ng-show="isMatchOver" ng-click="saveMatch()">Save Match</button>
+        <div class="form-group">
+          <button class="btn btn-primary" ng-show="isMatchOver">New Game</button>
+          <button class="btn btn-success" ng-show="isMatchOver" ng-click="saveMatch()">Save Match</button>
+        </div>
     </div>
 </section>

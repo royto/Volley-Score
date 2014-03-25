@@ -12,9 +12,9 @@ directive('activeLink', ['$location',
         scope.location = location;
         scope.$watch('location.path()', function (newPath) {
           if (path === newPath) {
-            element.addClass(clazz);
+            element.parent().addClass(clazz);
           } else {
-            element.removeClass(clazz);
+            element.parent().removeClass(clazz);
           }
         });
       }

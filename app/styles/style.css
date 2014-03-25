@@ -1,4 +1,8 @@
-section, nav {
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto', sans-serif;
+}
+
+/*section, nav {
 	text-align : center;
 	width : 350px;
 }
@@ -56,5 +60,5 @@ label
 
 
 }
-
+*/
 

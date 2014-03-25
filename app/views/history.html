@@ -1,8 +1,14 @@
 <section id="histo">
-    <ng-pluralize count="games.length" when="gameForms"></ng-pluralize>
-    <a href="" ng-hide="games.length === 0" ng-click="clearGames">Tout supprimer</a>
-    <div ng-repeat="game in games">
-        <table class="score">
+    <p class="lead">
+      <ng-pluralize count="games.length" when="gameForms"></ng-pluralize>
+    </p>
+    <p>
+      <a href="" class="btn btn-danger" ng-hide="games.length === 0" ng-click="clearGames"> <i class="glyphicon glyphicon-trash"></i> Tout supprimer</a>
+    </p>
+
+    <div class="list-group" ng-repeat="game in games">
+        <div class="list-group-item-text">
+            <table class="table table-bordered score">
             <tbody>
             <tr>
                 <th>Team</th>
@@ -30,7 +36,8 @@
             </tr>
             </tbody>
         </table>
-        <a href="#/stat/{{$index}}">Stats</a>
-        <a href="" ng-click="removeGame($index)">Supprimer</a>
+        <a class="btn btn-primary" href="#/stat/{{$index}}"><i class="glyphicon glyphicon-stats"></i> Stats</a>
+        <a class="btn btn-danger" href="" ng-click="removeGame($index)"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
+        </div>
     </div>
 </section>

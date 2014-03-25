@@ -3,7 +3,7 @@ Usage :
     <selectnum nb-options="5" model="point"></selectnum>
     Valeur sélectionnée : {{point}}
     <input type="button" ng-click="point = 3" value="Set to 3">
-    demo : http://jsfiddle.net/6vu7N/9/
+    demo : http://jsfiddle.net/6vu7N/10/
 */
 'use strict';
 angular.module('volleyApp').
@@ -11,8 +11,8 @@ directive('selectnum', function () {
   return {
     restrict: 'E',
     scope: {
-      nbOptions: '=nbOptions',
-      model: '=model',
+      nbOptions: '=',
+      model: '=',
       onChange : '&'
     },
     link: function (scope, element, attrs, controller) {
@@ -37,7 +37,9 @@ directive('selectnum', function () {
       };
 
       element.bind('change', function() {
-        scope.onChange();
+        scope.$apply(function() {
+          scope.onChange();
+        });
       });
     },
     template: '<select ng-model="model"><option ng-repeat="n in num">{{n}}</option></select>'

@@ -1,4 +1,4 @@
-angular.module('volleyApp', ['ngRoute'])
+angular.module('volleyApp', ['ngRoute', 'angularCharts'])
   .config(function ($routeProvider) {
     'use strict';
 
