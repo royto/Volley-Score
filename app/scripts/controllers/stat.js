@@ -35,8 +35,6 @@ angular.module('volleyApp')
 
       $scope.tmSetChanged = function() {
         $scope.currentPoint = $scope.currentGame.score[$scope.currentSet - 1].length;
-        //force refresh
-        $scope.$digest();
       };
 
       $scope.currentSetScore = function(team) {
