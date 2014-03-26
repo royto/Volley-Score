@@ -69,8 +69,8 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary" data-bind="click : function(data, event) { askTimeOut(1, event)}, enable: timeOut()[0].value() < 2">TO</button>
-            <button class="btn btn-primary" data-bind="click : function(data, event) { askTimeOut(2, event)}, enable: timeOut()[1].value() < 2">TO</button>
+            <button class="btn btn-primary" ng-disabled="timeOut1 === 0" ng-click="askTimeOut(1)">TimeOut ({{timeOut1}})</button>
+            <button class="btn btn-primary" ng-disabled="timeOut2 === 0" ng-click="askTimeOut(2)">TimeOut ({{timeOut2}})</button>
         </div>
 
         <!--<div ng-repeat="set in difference">
@@ -100,7 +100,7 @@
         </p>
         <div class="form-group">
           <button class="btn btn-primary" ng-show="isMatchOver">New Game</button>
-          <button class="btn btn-success" ng-show="isMatchOver" ng-click="saveMatch()">Save Match</button>
+          <button class="btn btn-success" ng-disabled="isMatchSaved" ng-show="isMatchOver" ng-click="saveMatch()">Save Match</button>
         </div>
     </div>
 </section>

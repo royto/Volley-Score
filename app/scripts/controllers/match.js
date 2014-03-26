@@ -12,8 +12,11 @@ angular.module('volleyApp')
       $scope.score = [[], [], [], [], []];
       $scope.setWinTeam1 = 0;
       $scope.setWinTeam2 = 0;
+      $scope.timeOut1 = 2;
+      $scope.timeOut2 = 2;
       $scope.isMatchStarted = false;
       $scope.isMatchOver = false;
+      $scope.isMatchSaved = false;
       $scope.currentService = 1;
 
 
@@ -79,6 +82,15 @@ angular.module('volleyApp')
           };
 
         gamesService.saveGame(match);
+        $scope.isMatchSaved = true;
+      };
+
+      $scope.askTimeOut = function(team) {
+        if (team === 1) {
+          $scope.timeOut1 -= 1;
+        } else {
+          $scope.timeOut2 -= 1;
+        }
       };
 
       $scope.totalPoints = function () {
