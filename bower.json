@@ -11,7 +11,8 @@
     "angular-cookies": "1.2.12",
     "angular-sanitize": "1.2.12",
     "angular-route": "1.2.12",
-    "angular-charts": "~0.0.1"
+    "angular-charts": "~0.0.1",
+    "angular-bootstrap": "~0.10.0"
   },
   "devDependencies": {
     "angular-mocks": "1.2.12",

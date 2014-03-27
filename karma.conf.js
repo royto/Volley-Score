@@ -18,6 +18,7 @@ module.exports = function(config) {
       'app/libs/angular-sanitize/angular-sanitize.js',
       'app/libs/angular-route/angular-route.js',
       'app/libs/angular-charts/dist/angular-charts.js',
+      'app/libs/angular-bootstrap/ui-bootstrap.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
@@ -47,11 +48,15 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],// 'Firefox'],
+    browsers: ['Chrome'],  //, 'Firefox'],
 
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: false,
+
+    //Code Coverage
+    reporters: ['progress', 'coverage'],
+    preprocessors: { 'app/scripts/**/*.js': ['coverage'] }
   });
 };
