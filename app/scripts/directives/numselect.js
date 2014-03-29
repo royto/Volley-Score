@@ -7,7 +7,7 @@ Usage :
 */
 'use strict';
 angular.module('volleyApp').
-directive('selectnum', function () {
+directive('numselect', function () {
   return {
     restrict: 'E',
     scope: {
