@@ -1,4 +1,4 @@
-angular.module('volleyApp', ['ngRoute', 'angularCharts'])
+angular.module('volleyApp', ['ngRoute', 'angularCharts', 'ui.bootstrap'])
   .config(function ($routeProvider) {
     'use strict';
 
@@ -19,7 +19,7 @@ angular.module('volleyApp', ['ngRoute', 'angularCharts'])
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       })
-      .when('/stat/:matchId', {
+      .when('/histo/stat/:matchId', {
         templateUrl: 'views/stat.html',
         controller: 'StatCtrl'
       })
