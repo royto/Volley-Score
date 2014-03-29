@@ -49,6 +49,10 @@ angular.module('volleyApp')
           } else {
             $scope.setWinTeam2 += 1;
           }
+          //Manage timeout
+          $scope.timeOut1 = 2;
+          $scope.timeOut2 = 2;
+
           if ($scope.setWinTeam1 === 3 || $scope.setWinTeam2 === 3) {
             $scope.isMatchOver = true;
             window.alert('Match terminé');
