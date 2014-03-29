@@ -63,7 +63,7 @@ angular.module('volleyApp')
       return score.reduce(function(previous, current) {
         return Math.max(previous, self.getMaxConsecutivePoints(current));
       }, 0);
-    }
+    };
 
     /**
      * Get Max points of difference in a set
