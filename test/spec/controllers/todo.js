@@ -16,7 +16,7 @@ describe('Controller: TodoCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.todos.length).toBe(3);
+  it('should attach a list of todos to the scope', function () {
+    expect(angular.isArray(scope.todos)).toBeTruthy();
   });
 });
