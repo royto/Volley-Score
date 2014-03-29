@@ -2,6 +2,18 @@ h1, h2, h3, h4, h5 {
   font-family: 'Roboto', sans-serif;
 }
 
+[id="gameScore"] > * {
+  display: table-cell;
+}
+
+[id="gameScore"] h1 {
+  font-size : 50px;
+}
+
+[id="gameScore"] h3 {
+  font-size : 30px;
+}
+
 /*section, nav {
 	text-align : center;
 	width : 350px;
