@@ -3,13 +3,8 @@
   <h2>Global Stats</h2>
 
   <p>Total points : {{totalPoints()}}</p>
-  <!--
-  <p>total points team 1 : {{totalPointsWinForATeam(1)}}</p>
-  <p>total points team 2 : {{totalPointsWinForATeam(2)}}</p>
-  -->
+
   <div>
-    <!--<div class="sm-4"><progressbar max="totalPoints()" value="totalPointsWinForATeam(1)">{{totalPointsWinForATeam(1)}}</progressbar></div>
-    <div class="sm-4"><progressbar max="totalPoints()" value="totalPointsWinForATeam(2)" type="warning">{{totalPointsWinForATeam(2)}}</progressbar>   </div>-->
 
     <div class="sm-4">
       <progress max="totalPoints()">
@@ -19,7 +14,11 @@
     </div>
   </div>
 
- <h2>Time Machine</h2>
+  <div class="row">
+   <p class="col-md-4 bg-primary">Max consecutives points : {{getMaxConsecutivePointsForMatch()}}</p>
+  </div>
+
+  <h2>Time Machine</h2>
   <p>
     Set : <numselect nb-options="nbSet()" start-at-one="true" on-change="tmSetChanged()" model="currentSet"></numselect>
   </p>
