@@ -4,6 +4,8 @@ angular.module('volleyApp')
   .service('StatService', function StatService() {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
+    var self = this;
+
     this.getDifference = function (set) {
       var diff = [0],
         last = 0,
@@ -54,11 +56,21 @@ angular.module('volleyApp')
     };
 
     /**
+     * Calculates the Max consecutives points win per match
+     * @param {Array} score
+     */
+    this.getMaxConsecutivePointsForMatch = function (score) {
+      return score.reduce(function(previous, current) {
+        return Math.max(previous, self.getMaxConsecutivePoints(current));
+      }, 0);
+    }
+
+    /**
      * Get Max points of difference in a set
      * @param {Array} set as arrray
      */
     this.getMaxDifference = function (set) {
-      var setDiff = this.getDifference(set);
+      var setDiff = self.getDifference(set);
       return setDiff.reduce(function (previousValue, currentValue, index, array) {
         if (Math.abs(currentValue) > Math.abs(previousValue)) {
           return currentValue;
@@ -86,6 +98,5 @@ angular.module('volleyApp')
         }, 0);
       }, 0);
     };
-
 
   });
