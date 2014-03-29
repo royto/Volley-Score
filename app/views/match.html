@@ -91,13 +91,13 @@
                 ->http://www.sitepoint.com/creating-visualization-app-using-google-charts-api-angularjs-part4/
         -->
 
-        <p>
-            <h1 class="pull-left">{{scoreTeam1[currentSet -1 ]}}</h1>
-            <h3 class="pull-left" id="nbSetsTeam1">{{setWinTeam1}}</h3>
-            <span class="pull-left">&nbsp;-&nbsp;</span>
-            <h3 class="pull-left" id="nbSetsTeam2">{{setWinTeam2}}</h3>
-            <h1 class="pull-left">{{scoreTeam2[currentSet -1 ]}}</h1>
-        </p>
+        <div id="gameScore">
+            <h1>{{scoreTeam1[currentSet -1 ]}}</h1>
+            <h3 id="nbSetsTeam1">{{setWinTeam1}}</h3>
+            <span>&nbsp;-&nbsp;</span>
+            <h3 id="nbSetsTeam2">{{setWinTeam2}}</h3>
+            <h1>{{scoreTeam2[currentSet -1 ]}}</h1>
+        </div>
         <div class="form-group">
           <button class="btn btn-primary" ng-show="isMatchOver">New Game</button>
           <button class="btn btn-success" ng-disabled="isMatchSaved" ng-show="isMatchOver" ng-click="saveMatch()">Save Match</button>
