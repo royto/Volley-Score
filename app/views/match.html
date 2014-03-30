@@ -14,12 +14,12 @@
                 <label control-label>Service</label>
             <div class="radio">
               <label>
-                <input type="radio" name="serviceGroup" ng-value="1" ng-model="currentService" /> {{match.team1Name}}
+                <input type="radio" name="serviceGroup" ng-value="1" ng-model="match.startService" /> {{match.team1Name}}
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="serviceGroup" ng-value="2" ng-model="currentService" /> {{match.team2Name}}
+                <input type="radio" name="serviceGroup" ng-value="2" ng-model="match.startService" /> {{match.team2Name}}
               </label>
             </div>
             </div>
@@ -99,7 +99,8 @@
             <h1>{{match.scoreTeam2[match.currentSet -1 ]}}</h1>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" ng-show="match.isMatchOver">New Game</button>
+          <button class="btn btn-primary" ng-click="newGame()">New Game</button>
+          <button class="btn btn-primary" ng-show="match.isMatchOver" ng-click="newGame()">New Game</button>
           <button class="btn btn-success" ng-disabled="match.isMatchSaved" ng-show="match.isMatchOver" ng-click="saveMatch()">Save Match</button>
         </div>
     </div>

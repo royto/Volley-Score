@@ -15,6 +15,10 @@ angular.module('volleyApp')
         matchService.addPoint(team);
       };
 
+      $scope.newGame = function() {
+        $scope.match = matchService.newGame();
+      }
+
       $scope.saveMatch = function () {
         var match = {
             teams: {

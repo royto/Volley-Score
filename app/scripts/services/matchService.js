@@ -6,22 +6,32 @@ angular.module('volleyApp')
 
     var self = this;
 
-    var match = {
-      currentSet : 1,
-      team1Name : '',
-      team2Name : '',
-      scoreTeam1 : [0, 0, 0, 0, 0],
-      scoreTeam2 : [0, 0, 0, 0, 0],
-      score :  [[], [], [], [], []],
-      setWinTeam1 : 0,
-      setWinTeam2 : 0,
-      timeOut1 : 2,
-      timeOut2 : 2,
-      isMatchStarted : false,
-      isMatchOver : false,
-      isMatchSaved : false,
-      currentService : 1
+    this.initGame = function() {
+      return {
+        currentSet : 1,
+        team1Name : '',
+        team2Name : '',
+        scoreTeam1 : [0, 0, 0, 0, 0],
+        scoreTeam2 : [0, 0, 0, 0, 0],
+        score :  [[], [], [], [], []],
+        setWinTeam1 : 0,
+        setWinTeam2 : 0,
+        timeOut1 : 2,
+        timeOut2 : 2,
+        isMatchStarted : false,
+        isMatchOver : false,
+        isMatchSaved : false,
+        currentService : 1,
+        startService : 1
+      };
     };
+
+    var match = self.initGame();
+
+    this.newGame = function() {
+      match = self.initGame();
+      return self.getMatch();
+    }
 
     this.getMatch = function() {
       return match;
@@ -29,6 +39,7 @@ angular.module('volleyApp')
 
     this.startGame = function () {
       match.isMatchStarted = true;
+      match.currentService = match.startService;
     };
 
     this.addPoint = function (team) {
@@ -49,6 +60,8 @@ angular.module('volleyApp')
 
         //manage set change
         if (isSetOver) {
+          //calculate teams which will start service alternate service
+          match.currentService = ((match.startService + match.currentSet + 1) % 2) + 1;
           match.currentSet += 1;
           if (team === 1) {
             match.setWinTeam1 += 1;
