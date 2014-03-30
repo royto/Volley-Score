@@ -17,23 +17,23 @@ describe('Controller: MatchCtrl', function () {
   }));
 
   it('should add points to team 1', function () {
-    scope.score = [[1,1,2,1,2,1,1,2,1,2]];
-    scope.scoreTeam1[0] = 6;
+    scope.match.score = [[1,1,2,1,2,1,1,2,1,2]];
+    scope.match.scoreTeam1[0] = 6;
 
     scope.addPoint(1);
-    expect(scope.score[0].length).toBe(11);
-    expect(scope.score[0][scope.score[0].length -1]).toBe(1);
-    expect(scope.scoreTeam1[0]).toBe(7);
+    expect(scope.match.score[0].length).toBe(11);
+    expect(scope.match.score[0][scope.match.score[0].length -1]).toBe(1);
+    expect(scope.match.scoreTeam1[0]).toBe(7);
   });
 
   it('should add points and change current set', function () {
-    scope.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
-    scope.scoreTeam1[0] = 24;
-    scope.scoreTeam2[0] = 4;
+    scope.match.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
+    scope.match.scoreTeam1[0] = 24;
+    scope.match.scoreTeam2[0] = 4;
 
     scope.addPoint(1);
-    expect(scope.score[0].length).toBe(29);
-    expect(scope.score[0][scope.score[0].length -1]).toBe(1);
-    expect(scope.currentSet).toBe(2);
+    expect(scope.match.score[0].length).toBe(29);
+    expect(scope.match.score[0][scope.match.score[0].length -1]).toBe(1);
+    expect(scope.match.currentSet).toBe(2);
   });
 });
