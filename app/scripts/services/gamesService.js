@@ -33,6 +33,13 @@ angular.module('volleyApp')
             return angular.fromJson(storage.getItem(gamesStorageName)) || [];
           }
         },
+        getSavedGame = function (index) {
+          var games = getSavedGames();
+          if (games.length >= index) {
+            return games[index];
+          }
+          return null;
+        },
         removeSavedMatch = function (i) {
           if (storage) {
             var savedGames = getSavedGames();
@@ -51,6 +58,7 @@ angular.module('volleyApp')
         saveTeamName: saveTeamName,
         saveGame: saveGame,
         getSavedGames: getSavedGames,
+        getSavedGame: getSavedGame,
         removeSavedMatch: removeSavedMatch,
         clearSavedMatch: clearSavedMatch
       };

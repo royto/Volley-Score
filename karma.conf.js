@@ -11,6 +11,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/jasmine-expect/dist/jasmine-matchers.js',
       'app/libs/angular/angular.js',
       'app/libs/angular-mocks/angular-mocks.js',
       'app/libs/angular-resource/angular-resource.js',
@@ -58,5 +59,7 @@ module.exports = function(config) {
     //Code Coverage
     reporters: ['progress', 'coverage'],
     preprocessors: { 'app/scripts/**/*.js': ['coverage'] }
+
+
   });
 };

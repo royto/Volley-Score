@@ -17,7 +17,7 @@ angular.module('volleyApp')
 
       $scope.newGame = function() {
         $scope.match = matchService.newGame();
-      }
+      };
 
       $scope.saveMatch = function () {
         var match = {
