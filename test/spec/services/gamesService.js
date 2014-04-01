@@ -117,6 +117,27 @@ describe('Service: gamesService', function () {
     expect(gamesService.getSavedGames().length).toBe(4);
   });
 
+  it('should save game if no game exist', function () {
+    //Clear games
+    gamesService.clearSavedMatch();
+
+    var game = {
+        teams:{
+          team1 : 'Grenoble',
+          team2 : 'Marseille'
+        },
+        score:[[1,1,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2],
+              [2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1],
+              [1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,1,1,2],
+              [],[]]
+      };
+    //Save Game
+    gamesService.saveGame(game);
+
+    //Asserts
+    expect(gamesService.getSavedGames().length).toBe(1);
+  });
+
   it('should remove game', function () {
     gamesService.removeSavedMatch(1);
     var games = gamesService.getSavedGames();
