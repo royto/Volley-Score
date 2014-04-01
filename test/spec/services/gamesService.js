@@ -89,6 +89,17 @@ describe('Service: gamesService', function () {
     expect(gamesService.getSavedGames().length).toBe(3);
   });
 
+  it('should return game if saved game exists at index', function () {
+    var game = gamesService.getSavedGame(2);
+    expect(game).toBeDefined();
+    expect(game.teams.team1).toBe('Madrid');
+  });
+
+  it('should return null if no saved game at index', function () {
+    expect(gamesService.getSavedGame(1000000)).toBeNull();
+
+  });
+
   it('should save game', function () {
 
     var game = {
