@@ -1,15 +1,15 @@
 # Volley Score
-Volley score is an web app for managing volley ball score.
+Volley score is a web app for managing volley ball matches.
 
-## Ideas
-* Stats
- * Max difference per set -> with or without sign
- * Max difference per set and team
- * Difference evolution graph
- * Max consecutive points win
-* Total
- * Total Points of a game
- * Total Points win by Team 1
- * Total Points win by Team 2
-* Provide Team Name completion as data list with last x name used
-* Time Machine : View score evolution per set
+The app is developped with the amazing framework [Angular JS](http://angularjs.org/).
+
+##Functionalities 
+* Manage score of a match
+* History : possibility to save match and consult them
+* See statistics about saved match
+ * Total
+   * Total Points of a game
+   * Total Points win by Team 1
+   * Total Points win by Team 2
+  * Time Machine : See score at a precise time (set / point)
+  * Watch difference evolution per set
