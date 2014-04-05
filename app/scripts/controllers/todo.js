@@ -5,7 +5,6 @@ angular.module('volleyApp')
     $scope.todos = [
       'Retrieve point button',
       'Reset',
-      'Technical TimeOut',
-      'Stats'
+      'Technical TimeOut'
     ];
   });
