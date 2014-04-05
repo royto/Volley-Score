@@ -1,4 +1,3 @@
-
 # Volley Score
 Volley score is a web app for managing volley ball matches.
 
