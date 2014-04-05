@@ -5,18 +5,94 @@ describe('Controller: HistoryCtrl', function () {
   // load the controller's module
   beforeEach(module('volleyApp'));
 
+  var store = [
+      {
+        teams: {
+          team1:'Barcelona',
+          team2:'Madrid'
+        },
+        score:[
+          [1,1,1,1,2,2,2,1,1,1,1,2,2,2,1,1,1,1,1,1,2,2,2,2,2,1,1,1,2,2,2,1,1,1,1,1,1,1,1],
+          [1,1,1,1,1,1,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,1,1,1,1,1,1,2,2,2,1,1],
+          [1,1,1,1,1,1,1,1,1,1,2,2,2,2,1,1,2,2,2,1,1,1,2,2,2,2,1,1,1,1,1,1,1,1,1,1],
+          [],
+          []
+        ]
+      },
+      {
+        teams:{
+          team1:'Barcelona',
+          team2:'Equipe 2'
+        },
+        score:[[1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1],
+              [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,2,2,1,1,1,1,1],
+              [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+              [],
+              []]
+      },
+      {
+        teams:{
+          team1 :'Barcelona',
+          team2:'Equipe 2'
+        },
+        score:[[1,1,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2],
+                [2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1],
+                [1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,1,1,2],
+                [1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,2,2,2,2,2,1,1,1,1,1,2,2,2,2,2,1,1,1,1,1,2,2,2,2,2,1,1,1,2,1,1],
+                [2,2,2,2,1,1,1,2,2,2,2,1,1,1,1,2,2,2,2,2,1,1,2,2]]
+      }
+    ];
+
   var HistoryCtrl,
+      _matchsStorageService,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, matchsStorageService) {
     scope = $rootScope.$new();
+    _matchsStorageService = matchsStorageService;
+
+    //Register Spy
+    spyOn(window.localStorage, 'getItem').andCallFake(function(key) {
+      if (key === 'ngMatchs') {
+        return angular.toJson(store);
+      }
+      return {};
+    });
+
+    spyOn(_matchsStorageService, 'clearSavedMatch');
+
+    spyOn(_matchsStorageService, 'removeSavedMatch').andCallFake(function(index) {
+      store.splice(index, 1);
+    });
+
     HistoryCtrl = $controller('HistoryCtrl', {
       $scope: scope
     });
   }));
 
-  /*it('should attach a version to the scope', function () {
-    expect(scope.version).toBe('0.0.1');
-  });*/
+  it('should attach a macthes to the scope', function () {
+    expect(scope.matchs.length).toBe(3);
+  });
+
+  it('should clear saved matches', function() {
+    scope.clearMatchs();
+    expect(_matchsStorageService.clearSavedMatch).toHaveBeenCalled();
+    expect(scope.matchs.length).toBe(0);
+  });
+
+  it('should remove match at specified index', function() {
+    scope.removeMatch(1);
+    expect(_matchsStorageService.removeSavedMatch).toHaveBeenCalled();
+    var args = _matchsStorageService.removeSavedMatch.mostRecentCall.args;
+
+    expect(args.length).toBe(1);
+    expect(args[0]).toBe(1);
+    expect(scope.matchs.length).toBe(2);
+  });
+
+  it('should return the right score for a team / set / macthes', function () {
+    expect(scope.scoreSets(0,0,1)).toBe(25);
+    expect(scope.scoreSets(0,0,2)).toBe(14);
+  });
 });

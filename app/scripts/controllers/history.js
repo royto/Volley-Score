@@ -15,7 +15,7 @@ angular.module('volleyApp')
 
       $scope.removeMatch = function (index) {
         matchsStorageService.removeSavedMatch(index);
-        $scope.matchs = gamesService.getSavedMatchs();
+        $scope.matchs = matchsStorageService.getSavedMatchs();
       };
 
       $scope.clearMatchs = function () {
