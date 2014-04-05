@@ -1,12 +1,12 @@
 <section id="histo">
     <p class="lead">
-      <ng-pluralize count="games.length" when="gameForms"></ng-pluralize>
+      <ng-pluralize count="matchs.length" when="matchForms"></ng-pluralize>
     </p>
     <p>
-      <a href="" class="btn btn-danger" ng-hide="games.length === 0" ng-click="clearGames"> <i class="glyphicon glyphicon-trash"></i> Tout supprimer</a>
+      <a href="" class="btn btn-danger" ng-hide="matchs.length === 0" ng-click="clearGames"> <i class="glyphicon glyphicon-trash"></i> Tout supprimer</a>
     </p>
 
-    <div class="list-group" ng-repeat="game in games">
+    <div class="list-group" ng-repeat="match in matchs">
         <div class="list-group-item-text">
             <table class="table table-bordered score">
             <tbody>
@@ -19,7 +19,7 @@
                 <th>Set 5</th>
             </tr>
             <tr id="scoreTeam1">
-                <th><span id="team1Name">{{game.teams.team1}}</span></th>
+                <th><span id="team1Name">{{match.teams.team1}}</span></th>
                 <td class="set1"><span>{{scoreSets(0, 0, 1)}}</span></td>
                 <td class="set2"><span>{{scoreSets(0, 1, 1)}}</span></td>
                 <td class="set3"><span>{{scoreSets(0, 2, 1)}}</span></td>
@@ -27,7 +27,7 @@
                 <td class="set5"><span>{{scoreSets(0, 4, 1)}}</span></td>
             </tr>
             <tr id="scoreTeam2">
-                <th><span id="team1Name"></span>{{game.teams.team2}}</th>
+                <th><span id="team1Name"></span>{{match.teams.team2}}</th>
                 <td class="set1"><span>{{scoreSets(0, 0, 2)}}</span></td>
                 <td class="set2"><span>{{scoreSets(0, 1, 2)}}</span></td>
                 <td class="set3"><span>{{scoreSets(0, 2, 2)}}</span></td>
@@ -37,7 +37,7 @@
             </tbody>
         </table>
         <a class="btn btn-primary" href="#/histo/stat/{{$index}}"><i class="glyphicon glyphicon-stats"></i> Stats</a>
-        <a class="btn btn-danger" href="" ng-click="removeGame($index)"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
+        <a class="btn btn-danger" href="" ng-click="removeMatch($index)"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
         </div>
     </div>
 </section>

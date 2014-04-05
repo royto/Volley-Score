@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Service: gamesService', function () {
+describe('Service: matchsStorageService', function () {
 
   // load the service's module
   beforeEach(module('volleyApp'));
 
   // instantiate service
-  var gamesService,
+  var matchsStorageService,
       window,
       team1Name,
       store;
 
-  beforeEach(inject(function (_gamesService_, $window) {
+  beforeEach(inject(function (_matchsStorageService_, $window) {
     window = $window;
 
     store = [
@@ -56,7 +56,7 @@ describe('Service: gamesService', function () {
 
     //Register Spy
     spyOn(window.localStorage, 'getItem').andCallFake(function(key) {
-      if (key === 'ngGames') {
+      if (key === 'ngMatchs') {
         return angular.toJson(store);
       }
       if (key === 'Team1') {
@@ -66,13 +66,13 @@ describe('Service: gamesService', function () {
     });
 
     spyOn(window.localStorage, 'removeItem').andCallFake(function(key) {
-      if (key === 'ngGames') {
+      if (key === 'ngMatchs') {
         store = null;
       }
     });
 
     spyOn(window.localStorage, 'setItem').andCallFake(function(key, value) {
-      if (key === 'ngGames') {
+      if (key === 'ngMatchs') {
         store = angular.fromJson(value);
       }
       if (key === 'Team1') {
@@ -80,29 +80,28 @@ describe('Service: gamesService', function () {
       }
     });
 
-    gamesService = _gamesService_;
+    matchsStorageService = _matchsStorageService_;
   }));
 
-  it('should return saved games', function () {
-    expect(!!gamesService).toBe(true);
-    expect(angular.isArray(gamesService.getSavedGames())).toBeTruthy();
-    expect(gamesService.getSavedGames().length).toBe(3);
+  it('should return saved matchs', function () {
+    expect(!!matchsStorageService).toBe(true);
+    expect(angular.isArray(matchsStorageService.getSavedMatchs())).toBeTruthy();
+    expect(matchsStorageService.getSavedMatchs().length).toBe(3);
   });
 
-  it('should return game if saved game exists at index', function () {
-    var game = gamesService.getSavedGame(2);
-    expect(game).toBeDefined();
-    expect(game.teams.team1).toBe('Madrid');
+  it('should return match if saved match exists at index', function () {
+    var match = matchsStorageService.getSavedMatch(2);
+    expect(match).toBeDefined();
+    expect(match.teams.team1).toBe('Madrid');
   });
 
-  it('should return null if no saved game at index', function () {
-    expect(gamesService.getSavedGame(1000000)).toBeNull();
-
+  it('should return null if no saved match at index', function () {
+    expect(matchsStorageService.getSavedMatch(1000000)).toBeNull();
   });
 
-  it('should save game', function () {
+  it('should save match', function () {
 
-    var game = {
+    var match = {
         teams:{
           team1 : 'Grenoble',
           team2 : 'Marseille'
@@ -113,15 +112,15 @@ describe('Service: gamesService', function () {
               [],[]]
       };
 
-    gamesService.saveGame(game);
-    expect(gamesService.getSavedGames().length).toBe(4);
+    matchsStorageService.saveMatch(match);
+    expect(matchsStorageService.getSavedMatchs().length).toBe(4);
   });
 
-  it('should save game if no game exist', function () {
-    //Clear games
-    gamesService.clearSavedMatch();
+  it('should save match if no match exist', function () {
+    //Clear matchs
+    matchsStorageService.clearSavedMatch();
 
-    var game = {
+    var match = {
         teams:{
           team1 : 'Grenoble',
           team2 : 'Marseille'
@@ -131,41 +130,41 @@ describe('Service: gamesService', function () {
               [1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,1,1,2],
               [],[]]
       };
-    //Save Game
-    gamesService.saveGame(game);
+    //Save Match
+    matchsStorageService.saveMatch(match);
 
     //Asserts
-    expect(gamesService.getSavedGames().length).toBe(1);
+    expect(matchsStorageService.getSavedMatchs().length).toBe(1);
   });
 
-  it('should remove game', function () {
-    gamesService.removeSavedMatch(1);
-    var games = gamesService.getSavedGames();
+  it('should remove specfied match', function () {
+    matchsStorageService.removeSavedMatch(1);
+    var matchs = matchsStorageService.getSavedMatchs();
 
-    expect(games.length).toBe(2);
-    expect(games[1].teams.team1).toBe('Madrid');
+    expect(matchs.length).toBe(2);
+    expect(matchs[1].teams.team1).toBe('Madrid');
   });
 
-  it('should remove all game', function () {
+  it('should remove all matchs', function () {
 
-    gamesService.clearSavedMatch();
-    var games = gamesService.getSavedGames();
+    matchsStorageService.clearSavedMatch();
+    var matchs = matchsStorageService.getSavedMatchs();
 
-    expect(games.length).toBe(0);
+    expect(matchs.length).toBe(0);
   });
 
   it('should returns team Name', function () {
     //Return name if exists
-    expect(gamesService.getTeamName(1)).toBe('MockTeamName1');
+    expect(matchsStorageService.getTeamName(1)).toBe('MockTeamName1');
     //return default name if undefined
-    expect(gamesService.getTeamName(2)).toBe('Equipe 2');
+    expect(matchsStorageService.getTeamName(2)).toBe('Equipe 2');
   });
 
   it('should save team Name', function () {
-    gamesService.saveTeamName(1, 'TestName');
+    matchsStorageService.saveTeamName(1, 'TestName');
 
     //Return name if exists
-    expect(gamesService.getTeamName(1)).toBe('TestName');
+    expect(matchsStorageService.getTeamName(1)).toBe('TestName');
   });
 
 });

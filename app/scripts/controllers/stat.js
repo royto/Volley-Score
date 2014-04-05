@@ -2,12 +2,12 @@
 
 angular.module('volleyApp')
   .controller('StatCtrl', ['$scope', '$routeParams',
-      'gamesService', 'StatService',
-    function ($scope, $routeParams, gamesService, statService) {
+      'matchsStorageService', 'StatService',
+    function ($scope, $routeParams, matchsStorageService, statService) {
 
       $scope.matchId = $routeParams.matchId;
 
-      $scope.currentGame = gamesService.getSavedGame($routeParams.matchId);
+      $scope.currentGame = matchsStorageService.getSavedMatch($routeParams.matchId);
 
       $scope.currentSet = 1;
       $scope.currentPoint = 1;

@@ -58,7 +58,7 @@ describe('Controller: StatCtrl', function () {
 
     //Register Spy
     spyOn(window.localStorage, 'getItem').andCallFake(function(key) {
-      if (key === 'ngGames') {
+      if (key === 'ngMatchs') {
         return angular.toJson(store);
       }
       return {};

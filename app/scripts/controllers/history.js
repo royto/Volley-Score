@@ -1,30 +1,30 @@
 angular.module('volleyApp')
-  .controller('HistoryCtrl', ['$scope', '$locale', 'gamesService',
-    function ($scope, $locale, gamesService) {
+  .controller('HistoryCtrl', ['$scope', '$locale', 'matchsStorageService',
+    function ($scope, $locale, matchsStorageService) {
 
       'use strict';
 
-      //Pluralize nb games saved
-      $scope.gameForms = {
+      //Pluralize nb match saved
+      $scope.matchForms = {
         0: 'aucun match sauvegardé',
         one: '{} match sauvegardé',
         other: '{} matchs sauvegardés'
       };
 
-      $scope.games = gamesService.getSavedGames();
+      $scope.matchs = matchsStorageService.getSavedMatchs();
 
-      $scope.removeGame = function (index) {
-        gamesService.removeSavedMatch(index);
-        $scope.games = gamesService.getSavedGames();
+      $scope.removeMatch = function (index) {
+        matchsStorageService.removeSavedMatch(index);
+        $scope.matchs = gamesService.getSavedMatchs();
       };
 
-      $scope.clearGames = function () {
-        gamesService.clearSavedMatch();
-        $scope.games = [];
+      $scope.clearMatchs = function () {
+        matchsStorageService.clearSavedMatch();
+        $scope.matchs = [];
       };
 
       $scope.scoreSets = function(index, set, team) {
-        return $scope.games[index].score[set].reduce(function (previous, current, index, array) {
+        return $scope.matchs[index].score[set].reduce(function (previous, current, index, array) {
           //Add point only if win by team
           if (team === current) {
             return previous + 1;

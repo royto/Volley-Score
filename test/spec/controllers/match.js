@@ -6,19 +6,19 @@ describe('Controller: MatchCtrl', function () {
   beforeEach(module('volleyApp'));
 
   var MatchCtrl,
-    _gamesService,
+    _matchsStorageService,
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, gamesService) {
+  beforeEach(inject(function ($controller, $rootScope, matchsStorageService) {
     scope = $rootScope.$new();
-    _gamesService = gamesService;
+    _matchsStorageService = matchsStorageService;
 
-    spyOn(_gamesService, 'getTeamName').andCallFake(function(team) {
+    spyOn(_matchsStorageService, 'getTeamName').andCallFake(function(team) {
       return 'mockNameTeam' + team;
     });
 
-    spyOn(_gamesService, 'saveGame');
+    spyOn(_matchsStorageService, 'saveMatch');
 
     MatchCtrl = $controller('MatchCtrl', {
       $scope: scope
@@ -59,6 +59,16 @@ describe('Controller: MatchCtrl', function () {
     expect(scope.match.scoreTeam1[0]).toBe(7);
   });
 
+  it('should add points to team 2', function () {
+    scope.match.score = [[1,1,2,1,2,1,1,2,1,2]];
+    scope.match.scoreTeam2[0] = 4;
+
+    scope.addPoint(2);
+    expect(scope.match.score[0].length).toBe(11);
+    expect(scope.match.score[0][scope.match.score[0].length -1]).toBe(2);
+    expect(scope.match.scoreTeam2[0]).toBe(5);
+  });
+
   it('should add points and change current set', function () {
     scope.match.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
     scope.match.scoreTeam1[0] = 24;
@@ -77,10 +87,10 @@ describe('Controller: MatchCtrl', function () {
     scope.match.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
 
     scope.saveMatch();
-    expect(_gamesService.saveGame).toHaveBeenCalled();
+    expect(_matchsStorageService.saveMatch).toHaveBeenCalled();
 
     //Get function last called args
-    var args = _gamesService.saveGame.mostRecentCall.args;
+    var args = _matchsStorageService.saveMatch.mostRecentCall.args;
 
     //Verifiy args are correct
     expect(args.length).toBe(1);

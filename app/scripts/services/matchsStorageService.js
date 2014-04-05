@@ -1,13 +1,13 @@
 /*global angular */
 angular.module('volleyApp')
-  .service('gamesService', ['$window',
+  .service('matchsStorageService', ['$window',
     function ($window) {
 
       'use strict';
 
       //Gestion du storage
       var storage = $window.localStorage,
-        gamesStorageName = 'ngGames',
+        matchsStorageName = 'ngMatchs',
         teamPrefixStorageName = 'Team',
         getTeamName = function (nb) {
           if (storage && storage.getItem(teamPrefixStorageName + nb)) {
@@ -20,45 +20,45 @@ angular.module('volleyApp')
             storage.setItem(teamPrefixStorageName + nb, value);
           }
         },
-        saveGame = function (game) {
-          var savedGames;
+        saveMatch = function (match) {
+          var savedMatchs;
           if (storage) {
-            savedGames = angular.fromJson(storage.getItem(gamesStorageName)) || [];
-            savedGames.push(game);
-            storage.setItem(gamesStorageName, angular.toJson(savedGames));
+            savedMatchs = angular.fromJson(storage.getItem(matchsStorageName)) || [];
+            savedMatchs.push(match);
+            storage.setItem(matchsStorageName, angular.toJson(savedMatchs));
           }
         },
-        getSavedGames = function () {
+        getSavedMatchs = function () {
           if (storage) {
-            return angular.fromJson(storage.getItem(gamesStorageName)) || [];
+            return angular.fromJson(storage.getItem(matchsStorageName)) || [];
           }
         },
-        getSavedGame = function (index) {
-          var games = getSavedGames();
-          if (games.length >= index) {
-            return games[index];
+        getSavedMatch = function (index) {
+          var matchs = getSavedMatchs();
+          if (matchs.length >= index) {
+            return matchs[index];
           }
           return null;
         },
         removeSavedMatch = function (i) {
           if (storage) {
-            var savedGames = getSavedGames();
-            savedGames.splice(i, 1);
-            storage.setItem(gamesStorageName, angular.toJson(savedGames));
+            var savedMatchs = getSavedMatchs();
+            savedMatchs.splice(i, 1);
+            storage.setItem(matchsStorageName, angular.toJson(savedMatchs));
           }
         },
         clearSavedMatch = function () {
           if (storage) {
-            storage.removeItem(gamesStorageName);
+            storage.removeItem(matchsStorageName);
           }
         };
 
       return {
         getTeamName: getTeamName,
         saveTeamName: saveTeamName,
-        saveGame: saveGame,
-        getSavedGames: getSavedGames,
-        getSavedGame: getSavedGame,
+        saveMatch: saveMatch,
+        getSavedMatchs: getSavedMatchs,
+        getSavedMatch: getSavedMatch,
         removeSavedMatch: removeSavedMatch,
         clearSavedMatch: clearSavedMatch
       };

@@ -1,6 +1,6 @@
 angular.module('volleyApp')
-  .controller('MatchCtrl', ['$scope', '$window', 'gamesService', 'MatchService',
-    function ($scope, window, gamesService, matchService) {
+  .controller('MatchCtrl', ['$scope', '$window', 'matchsStorageService', 'MatchService',
+    function ($scope, window, matchsStorageService, matchService) {
 
       'use strict';
 
@@ -28,7 +28,7 @@ angular.module('volleyApp')
             score: $scope.match.score
           };
 
-        gamesService.saveGame(match);
+        matchsStorageService.saveMatch(match);
         $scope.match.isMatchSaved = true;
       };
 
@@ -41,8 +41,8 @@ angular.module('volleyApp')
       };
 
       if (!$scope.match.isMatchStarted) {
-        $scope.match.team1Name = gamesService.getTeamName(1);
-        $scope.match.team2Name = gamesService.getTeamName(2);
+        $scope.match.team1Name = matchsStorageService.getTeamName(1);
+        $scope.match.team2Name = matchsStorageService.getTeamName(2);
       }
 
     }]);
