@@ -41,6 +41,17 @@ describe('Service: MatchService', function () {
       expect(match.score[0].length).toBe(1);
       expect(match.score[0][0]).toBe(2);
     });
+
+    it('should add point to team 2 and change set', function () {
+      var match = MatchService.getMatch();
+      //configure set to be the set winning point
+      match.scoreTeam2[0] = 24;
+
+      MatchService.addPoint(2);
+      expect(match.currentSet).toBe(2);
+      expect(match.scoreTeam1[0]).toBe(0);
+      expect(match.scoreTeam2[0]).toBe(25);
+    });
   });
 
   describe('isSetOver', function () {
