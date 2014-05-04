@@ -23,6 +23,26 @@ describe('Service: MatchService', function () {
     });
   });
 
+  describe('addPoint', function () {
+    it('should add point to team 1', function () {
+      var match = MatchService.getMatch();
+      MatchService.addPoint(1);
+      expect(match.scoreTeam1[0]).toBe(1);
+      expect(match.scoreTeam2[0]).toBe(0);
+      expect(match.score[0].length).toBe(1);
+      expect(match.score[0][0]).toBe(1);
+    });
+
+     it('should add point to team 2', function () {
+      var match = MatchService.getMatch();
+      MatchService.addPoint(2);
+      expect(match.scoreTeam1[0]).toBe(0);
+      expect(match.scoreTeam2[0]).toBe(1);
+      expect(match.score[0].length).toBe(1);
+      expect(match.score[0][0]).toBe(2);
+    });
+  });
+
   describe('isSetOver', function () {
     var match;
 
