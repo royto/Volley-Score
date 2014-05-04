@@ -15,6 +15,14 @@ describe('Service: MatchService', function () {
     expect(!!MatchService).toBe(true);
   });
 
+  describe('startGame', function () {
+    it('should start game', function () {
+      var match = MatchService.getMatch();
+      MatchService.startGame();
+      expect(match.isMatchStarted).toBeTruthy();
+    });
+  });
+
   describe('isSetOver', function () {
     var match;
 
