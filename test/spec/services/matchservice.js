@@ -33,7 +33,7 @@ describe('Service: MatchService', function () {
       expect(match.score[0][0]).toBe(1);
     });
 
-     it('should add point to team 2', function () {
+    it('should add point to team 2', function () {
       var match = MatchService.getMatch();
       MatchService.addPoint(2);
       expect(match.scoreTeam1[0]).toBe(0);
@@ -54,12 +54,57 @@ describe('Service: MatchService', function () {
     });
   });
 
+  describe('isTechinicalTimeOut', function(){
+    var match;
+
+    beforeEach(function () {
+        match = MatchService.getMatch();
+      });
+
+    it('should not return timeOut if max team point not 8 nor 16', function() {
+      match.scoreTeam1[0] = 7;
+      match.scoreTeam2[0] = 12;
+      expect(MatchService.isTechinicalTimeOut()).toBeFalsy();
+    });
+
+    it('should return timeOut on first team at 8', function() {
+      match.scoreTeam1[0] = 7;
+      match.scoreTeam2[0] = 8;
+      expect(MatchService.isTechinicalTimeOut()).toBeTruthy();
+    });
+
+    it('should return timeOut on first team at 16', function() {
+      match.scoreTeam1[0] = 16;
+      match.scoreTeam2[0] = 8;
+      expect(MatchService.isTechinicalTimeOut()).toBeTruthy();
+    });
+
+    it('should not return timeOut on second team at 8', function() {
+      match.scoreTeam1[0] = 9;
+      match.scoreTeam2[0] = 8;
+      expect(MatchService.isTechinicalTimeOut()).toBeFalsy();
+    });
+
+    it('should not return timeOut on second team at 16', function() {
+      match.scoreTeam1[0] = 17;
+      match.scoreTeam2[0] = 16;
+      expect(MatchService.isTechinicalTimeOut()).toBeFalsy();
+    });
+
+    it('should not return timeOut on 5th Set', function() {
+      match.currentSet = 5;
+      match.scoreTeam1[0] = 7;
+      match.scoreTeam2[0] = 8;
+      expect(MatchService.isTechinicalTimeOut()).toBeFalsy();
+    });
+  });
+
   describe('isSetOver', function () {
     var match;
 
     describe('normal Set', function () {
 
-       beforeEach(function () {
+      beforeEach(function () {
         match = MatchService.getMatch();
         match.currentSet = 1;
       });

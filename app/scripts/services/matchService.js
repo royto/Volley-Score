@@ -79,6 +79,16 @@ angular.module('volleyApp')
       }
     };
 
+    this.isTechinicalTimeOut = function() {
+      //No Technical TimeOut on 5th set
+      if (match.currentSet === 5) {
+        return false;
+      }
+      var maxWinPoints = Math.max(match.scoreTeam1[match.currentSet - 1], match.scoreTeam2[match.currentSet - 1]);
+      //TimeOut on point 8 and 16
+      return maxWinPoints === 8 || maxWinPoints === 16;
+    }
+
     this.isSetOver = function () {
       var setMinimumPoint = 25;
       if (match.currentSet === 5) {
