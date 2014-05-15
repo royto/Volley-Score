@@ -1,14 +1,14 @@
 <section id="match">
     <div ng-hide="match.isMatchStarted">
         <h1>Accueil</h1>
-        <form role="form">
+        <form role="form" name="startMatchForm">
             <div class="form-group">
               <label class="control-label">Equipe 1</label>
-              <input class="form-control" type="text" ng-model="match.team1Name" />
+              <input class="form-control" required type="text" ng-model="match.team1Name" />
             </div>
             <div class="form-group">
               <label class="control-label">Equipe 2</label>
-              <input class="form-control" type="text" ng-model="match.team2Name" />
+              <input class="form-control" required type="text" ng-model="match.team2Name" />
             </div>
             <div class="form-group">
                 <label control-label>Service</label>
@@ -24,7 +24,7 @@
             </div>
             </div>
             <div>
-              <input ng-click="startGame()" class="btn btn-primary" type="button" id="startBtn" value="Start" />
+              <input ng-click="startGame()" class="btn btn-primary" type="submit" id="startBtn" value="Start" />
             </div>
         </form>
     </div>

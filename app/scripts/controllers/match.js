@@ -8,7 +8,9 @@ angular.module('volleyApp')
 
       //public functions
       $scope.startGame = function () {
-        matchService.startGame();
+        if ($startMatchForm.$valid) {
+          matchService.startGame();
+        }
       };
 
       $scope.addPoint = function (team) {
