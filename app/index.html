@@ -21,10 +21,10 @@
 	<body>
 		<nav>
 			<ul class="nav nav-pills black">
-				<li><a active-link="active" id="homeMenu" href="#/"><i class="glyphicon glyphicon-home"></i> Home</a></li>
-				<li><a active-link="active" id="matchMenu" href="#/match">Match</a></li>
-				<li><a active-link="active" id="matchMenu" href="#/histo">Historique</a></li>
-				<li><a active-link="active" id="todoMenu" href="#/todo"><i class="glyphicon glyphicon-list"></i> Todo</a></li>
+				<li ui-sref-active="active"><a id="homeMenu" ui-sref="home" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+				<li ui-sref-active="active"><a id="matchMenu" ui-sref="match">Match</a></li>
+				<li ui-sref-active="active"><a id="matchMenu" ui-sref="histo">Historique</a></li>
+				<li ui-sref-active="active"><a id="todoMenu" ui-sref="todo"><i class="glyphicon glyphicon-list"></i> Todo</a></li>
 			</ul>
 		</nav>
 		<div class="container" ui-view></div>

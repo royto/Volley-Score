@@ -1,5 +1,5 @@
 angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap'])
-  .config(function ($stateProvider, $urlRouterProvider) { //$routeProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
     'use strict';
 
     //Set default route
@@ -7,29 +7,30 @@ angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap'])
 
     //Declare state
     $stateProvider
-      .state('/', {
+      .state('home', {
         url : '/',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       })
-      .state('/todo', {
+      .state('todo', {
         url : '/todo',
         templateUrl: 'views/todo.html',
         controller: 'TodoCtrl'
       })
-      .state('/histo', {
+      .state('histo', {
         url : '/histo',
         templateUrl: 'views/history.html',
         controller: 'HistoryCtrl'
       })
-      .state('/match', {
-        url : '/match',
-        templateUrl: 'views/match.html',
-        controller: 'MatchCtrl'
-      })
-      .state('/histo/stat/:matchId', {
+      .state('stat', {
         url : '/histo/stat/:matchId',
         templateUrl: 'views/stat.html',
         controller: 'StatCtrl'
+      })
+      .state('match', {
+        url : '/match',
+        templateUrl: 'views/match.html',
+        controller: 'MatchCtrl'
       });
+
   });
