@@ -1,29 +1,35 @@
-angular.module('volleyApp', ['ngRoute', 'angularCharts', 'ui.bootstrap'])
-  .config(function ($routeProvider) {
+angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap'])
+  .config(function ($stateProvider, $urlRouterProvider) { //$routeProvider) {
     'use strict';
 
-    $routeProvider
-      .when('/', {
+    //Set default route
+    $urlRouterProvider.otherwise('/');
+
+    //Declare state
+    $stateProvider
+      .state('/', {
+        url : '/',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl'
       })
-      .when('/todo', {
+      .state('/todo', {
+        url : '/todo',
         templateUrl: 'views/todo.html',
         controller: 'TodoCtrl'
       })
-      .when('/histo', {
+      .state('/histo', {
+        url : '/histo',
         templateUrl: 'views/history.html',
         controller: 'HistoryCtrl'
       })
-      .when('/match', {
+      .state('/match', {
+        url : '/match',
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       })
-      .when('/histo/stat/:matchId', {
+      .state('/histo/stat/:matchId', {
+        url : '/histo/stat/:matchId',
         templateUrl: 'views/stat.html',
         controller: 'StatCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
   });

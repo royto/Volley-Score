@@ -17,7 +17,7 @@ module.exports = function(config) {
       'app/libs/angular-resource/angular-resource.js',
       'app/libs/angular-cookies/angular-cookies.js',
       'app/libs/angular-sanitize/angular-sanitize.js',
-      'app/libs/angular-route/angular-route.js',
+      'app/libs/angular-ui-router/release/angular-ui-router.min.js',
       'app/libs/angular-charts/dist/angular-charts.js',
       'app/libs/angular-bootstrap/ui-bootstrap.min.js',
       'app/scripts/*.js',

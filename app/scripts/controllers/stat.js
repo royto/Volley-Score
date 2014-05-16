@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('volleyApp')
-  .controller('StatCtrl', ['$scope', '$routeParams',
+  .controller('StatCtrl', ['$scope', '$stateParams',
       'matchsStorageService', 'StatService',
-    function ($scope, $routeParams, matchsStorageService, statService) {
+    function ($scope, $stateParams, matchsStorageService, statService) {
 
-      $scope.matchId = $routeParams.matchId;
+      $scope.matchId = $stateParams.matchId;
 
-      $scope.currentGame = matchsStorageService.getSavedMatch($routeParams.matchId);
+      $scope.currentGame = matchsStorageService.getSavedMatch($stateParams.matchId);
 
       $scope.currentSet = 1;
       $scope.currentPoint = 1;

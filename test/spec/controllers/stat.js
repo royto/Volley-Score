@@ -66,7 +66,7 @@ describe('Controller: StatCtrl', function () {
 
     StatCtrl = $controller('StatCtrl', {
       $scope: scope,
-      $routeParams : { matchId : 1 }
+      $stateParams : { matchId : 1 }
     });
   }));
 
