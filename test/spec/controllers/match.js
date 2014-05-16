@@ -13,6 +13,7 @@ describe('Controller: MatchCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope, matchsStorageService) {
     scope = $rootScope.$new();
     _matchsStorageService = matchsStorageService;
+    scope.startMatchForm = {};
 
     spyOn(_matchsStorageService, 'getTeamName').andCallFake(function(team) {
       return 'mockNameTeam' + team;
@@ -34,6 +35,8 @@ describe('Controller: MatchCtrl', function () {
   });
 
   it('should start the game', function () {
+    scope.startMatchForm.$valid = true;
+
     scope.startGame();
     expect(scope.match.isMatchStarted).toBeTruthy();
   });
