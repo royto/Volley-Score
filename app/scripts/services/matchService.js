@@ -87,7 +87,7 @@ angular.module('volleyApp')
       var maxWinPoints = Math.max(match.scoreTeam1[match.currentSet - 1], match.scoreTeam2[match.currentSet - 1]);
       //TimeOut on point 8 and 16
       return maxWinPoints === 8 || maxWinPoints === 16;
-    }
+    };
 
     this.isSetOver = function () {
       var setMinimumPoint = 25;
