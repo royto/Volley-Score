@@ -4,7 +4,7 @@
 module.exports = function(config) {
   config.set({
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: './',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
@@ -23,7 +23,10 @@ module.exports = function(config) {
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+
+      //load directives templates
+      'app/views/directives/*.html'
     ],
 
     // list of files / patterns to exclude
@@ -34,12 +37,25 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
+    // Plugins
+    plugins: [
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-coverage',
+      'karma-ng-html2js-preprocessor'
+    ],
+
+    ngHtml2JsPreprocessor: {
+      // strip this from the file path
+      stripPrefix: 'app/'
+    },
 
     // Start these browsers, currently available:
     // - Chrome
@@ -58,8 +74,10 @@ module.exports = function(config) {
 
     //Code Coverage
     reporters: ['progress', 'coverage'],
-    preprocessors: { 'app/scripts/**/*.js': ['coverage'] }
-
+    preprocessors: {
+      'app/scripts/**/*.js': ['coverage'],
+      'app/views/directives/*.html': 'ng-html2js'
+    }
 
   });
 };

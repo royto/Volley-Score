@@ -42,6 +42,6 @@ directive('numselect', function () {
         });
       });
     },
-    template: '<select ng-model="model"><option ng-repeat="n in num">{{n}}</option></select>'
+    templateUrl: 'views/directives/num-select.html'
   };
 });

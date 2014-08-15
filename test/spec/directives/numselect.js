@@ -4,6 +4,8 @@ describe('Directive: numselect', function () {
 
   // load the directive's module
   beforeEach(module('volleyApp'));
+  // load the template
+  beforeEach(module('views/directives/num-select.html'));
 
   var element,
     scope;
