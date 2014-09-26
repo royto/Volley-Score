@@ -3,60 +3,59 @@
 describe('View: Login', function () {
   var ptor;
 
+  var MatchPage = require('./pages/match.page.js');
+  var page;
+
   beforeEach(function () {
     //Open Match page
-    browser.get('http://localhost:9000/#/match');
+    page = new MatchPage();
     ptor = protractor.getInstance();
   });
 
   it('should not submit if team name not filled', function () {
-    var team1Input = by.model('match.team1Name');
-    var submitBtn = by.id('startBtn');
-    var matchScoreDiv = by.id('matchScore');
-
     //Verify all elements are present
-    expect(ptor.isElementPresent(team1Input)).toBe(true);
-    expect(ptor.isElementPresent(submitBtn)).toBe(true);
-    expect(ptor.isElementPresent(matchScoreDiv)).toBe(true);
+    expect(page.team1Input.isPresent()).toBe(true);
+    expect(page.submitBtn.isPresent()).toBe(true);
+    expect(page.matchScoreDiv.isPresent()).toBe(true);
 
-    expect(element(matchScoreDiv).isDisplayed()).toBe(false);
+    expect(page.isMatchScoreDisplayed()).toBe(false);
 
+    page.startMatch('', '');
 
-    //Clear team 1 input
-    element(team1Input).clear();
-
-    //submit form
-    element(submitBtn).click();
-
-    expect(element(matchScoreDiv).isDisplayed()).toBe(false);
+    expect(page.isMatchScoreDisplayed()).toBe(false);
   });
 
 
-  it('should not submit if team names are  filled', function () {
-    var team1Input = by.model('match.team1Name');
-    var team2Input = by.model('match.team2Name');
-    var submitBtn = by.id('startBtn');
-    var matchScoreDiv = by.id('matchScore');
+  it('should submit if team names are filled', function () {
+    expect(page.isMatchScoreDisplayed()).toBe(false);
 
-    //Verify all elements are present
-    expect(ptor.isElementPresent(team1Input)).toBe(true);
-    expect(ptor.isElementPresent(team2Input)).toBe(true);
-    expect(ptor.isElementPresent(submitBtn)).toBe(true);
-    expect(ptor.isElementPresent(matchScoreDiv)).toBe(true);
+    page.startMatch('unit test team name 1', 'unit test team name 2');
 
-    expect(element(matchScoreDiv).isDisplayed()).toBe(false);
+    expect(page.isMatchScoreDisplayed()).toBe(true);
+  });
 
+  describe('Score Management', function () {
+    beforeEach(function () {
+      page.startMatch('Paris Volley', 'Avignon Volley Ball')
+    });
 
-    //Clear team name inputs and set new names
-    element(team1Input).clear();
-    element(team1Input).sendKeys('unit test team name 1');
-    element(team2Input).clear();
-    element(team2Input).sendKeys('unit test team name 2');
+    it('should add point to team1', function () {
+      page.addPointToTeam1();
 
-    //submit form
-    element(submitBtn).click();
+      expect(page.scoreTeam1Set1).toBe('1');
+    });
 
-    expect(element(matchScoreDiv).isDisplayed()).toBe(true);
+    it('should add point to team2', function () {
+      page.addPointToTeam2();
+
+      expect(page.scoreTeam2Set1).toBe('1');
+    });
+
+    it('should disable timeOut button after 2 timeout', function () {
+      page.askTimeOutForTeam1();
+      expect(page.timeOutTeam1BtnEnabled).toBe(true);
+      page.askTimeOutForTeam1();
+      expect(page.timeOutTeam1BtnEnabled).toBe(false);
+    });
   });
 });
-
