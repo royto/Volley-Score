@@ -315,6 +315,45 @@ module.exports = function (grunt) {
       dist: {}
     },
 
+    shell: {
+      updateSeleniumWebDriver: {
+        command: 'node node_modules/protractor/bin/webdriver-manager update',
+        options: {
+          stdout: true
+        }
+      }
+    },
+
+    'protractor_webdriver': {
+      options: {
+        // Task-specific options go here.
+      },
+      run: {
+        // Target-specific file lists and/or options go here.
+      }
+    },
+
+    protractor: {
+      options: {
+        configFile: 'node_modules/protractor/referenceConf.js', // Default config file
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
+        args: {
+          // Arguments passed to the command
+        }
+      },
+      local: {
+        options: {
+          configFile: 'protractor.conf.js', // Target-specific config file
+          args: {
+            // Target-specific arguments
+            seleniumPort : 9000
+          }
+        }
+      }
+    },
+
+
     // Test settings
     karma: {
       unit: {
@@ -323,6 +362,7 @@ module.exports = function (grunt) {
       }
     }
   });
+
 
 
   grunt.registerTask('serve', function (target) {
@@ -350,7 +390,17 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma',
+    'shell:updateSeleniumWebDriver',
+    'protractor_webdriver:run',
+    'protractor:local'
+  ]);
+
+  grunt.registerTask('e2e', [
+    'connect:dist',
+    'shell:updateSeleniumWebDriver',
+    'protractor_webdriver:run',
+    'protractor:local'
   ]);
 
   grunt.registerTask('build', [
