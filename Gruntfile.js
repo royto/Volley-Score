@@ -42,6 +42,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
+      less: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less:default']
+      },
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -51,7 +55,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
+          '.tmp/styles/{,*/}*.{css,less}',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
@@ -147,10 +151,6 @@ module.exports = function (grunt) {
       }
     },
 
-
-
-
-
     // Renames files for browser caching purposes
     rev: {
       dist: {
@@ -239,6 +239,19 @@ module.exports = function (grunt) {
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
+      }
+    },
+
+    //less
+    less: {
+      default: {
+        options: {
+          paths: ["app/styles"],
+          cleancss: true,
+        },
+        files: {
+          "<%= yeoman.app %>/styles/style.css": "<%= yeoman.app %>/styles/style.less"
+        }
       }
     },
 
@@ -411,6 +424,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     'concat',
     'ngmin',
+    'less',
     'copy:dist',
     'cdnify',
     'cssmin',
