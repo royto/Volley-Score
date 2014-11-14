@@ -246,11 +246,11 @@ module.exports = function (grunt) {
     less: {
       default: {
         options: {
-          paths: ["app/styles"],
+          paths: ['app/styles'],
           cleancss: true,
         },
         files: {
-          "<%= yeoman.app %>/styles/style.css": "<%= yeoman.app %>/styles/style.less"
+          '<%= yeoman.app %>/styles/style.css': '<%= yeoman.app %>/styles/style.less'
         }
       }
     },
