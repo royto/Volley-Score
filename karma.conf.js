@@ -20,6 +20,8 @@ module.exports = function(config) {
       'app/libs/angular-ui-router/release/angular-ui-router.min.js',
       'app/libs/angular-charts/dist/angular-charts.js',
       'app/libs/angular-bootstrap/ui-bootstrap.min.js',
+      'app/libs/lodash/dist/lodash.min.js',
+      'app/libs/angular-lodash/angular-lodash.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

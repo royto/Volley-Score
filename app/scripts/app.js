@@ -1,4 +1,4 @@
-angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap'])
+angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap', 'angular-lodash'])
   .config(function ($stateProvider, $urlRouterProvider) {
     'use strict';
 
