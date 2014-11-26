@@ -26,7 +26,10 @@ describe('Service: StatService', function () {
     it('should return valid difference array', function () {
       var set = [1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2];
 
-      expect(StatService.getDifference(set)).toEqual([0,1,2,1,2,3,4,3,2,3,4,3,2,1,2,1,0,1,2,1]);
+      var diffs = StatService.getDifference(set);
+      expect(diffs.length).toEqual(set.length + 1);
+      expect(diffs[0]).toEqual(0);
+      expect(diffs).toEqual([0,1,2,1,2,3,4,3,2,3,4,3,2,1,2,1,0,1,2,1]);
     });
   });
 
