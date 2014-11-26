@@ -1,4 +1,5 @@
 angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap', 'angular-lodash'])
+  .constant('_', window._)
   .config(function ($stateProvider, $urlRouterProvider) {
     'use strict';
 
@@ -32,5 +33,4 @@ angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap', 'angu
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       });
-
   });
