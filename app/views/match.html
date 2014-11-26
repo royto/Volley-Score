@@ -2,30 +2,25 @@
     <div ng-hide="matchCtrl.match.isMatchStarted">
         <h1>Accueil</h1>
         <form role="form" name="matchCtrl.startMatchForm">
-            <div class="form-group">
-              <label class="control-label">Equipe 1</label>
-              <input class="form-control" required type="text" ng-model="matchCtrl.match.team1Name" />
-            </div>
-            <div class="form-group">
-              <label class="control-label">Equipe 2</label>
-              <input class="form-control" required type="text" ng-model="matchCtrl.match.team2Name" />
-            </div>
-            <div class="form-group">
-                <label control-label>Service</label>
-            <div class="radio">
-              <label>
-                <input type="radio" name="serviceGroup" ng-value="1" ng-model="matchCtrl.match.startService" /> {{matchCtrl.match.team1Name}}
-              </label>
-            </div>
-            <div class="radio">
-              <label>
-                <input type="radio" name="serviceGroup" ng-value="2" ng-model="matchCtrl.match.startService" /> {{matchCtrl.match.team2Name}}
-              </label>
-            </div>
-            </div>
-            <div>
-              <input ng-click="matchCtrl.startGame()" class="btn btn-primary" type="submit" id="startBtn" value="Start" />
-            </div>
+
+       <!--<md-content>-->
+            <md-input-container>
+              <label>Equipe 1</label>
+              <input ng-model="matchCtrl.match.team1Name" required>
+            </md-input-container>
+            <md-input-container>
+              <label>Equipe 2</label>
+              <input ng-model="matchCtrl.match.team2Name"required>
+            </md-input-container>
+
+            <p>Service :</p>
+            <md-radio-group ng-model="matchCtrl.match.startService">
+              <md-radio-button value="1">{{matchCtrl.match.team1Name}}</md-radio-button>
+              <md-radio-button value="2">{{matchCtrl.match.team2Name}}</md-radio-button>
+            </md-radio-group>
+            <md-button ng-click="matchCtrl.startGame()" class="md-raised md-primary">Start</md-button>
+
+        <!--</md-content>-->
         </form>
     </div>
 
