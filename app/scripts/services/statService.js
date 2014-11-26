@@ -1,26 +1,23 @@
 'use strict';
 
 angular.module('volleyApp')
-  .service('StatService', function StatService() {
+  .service('StatService', ['_', function StatService(_) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     var self = this;
 
     this.getDifference = function (set) {
-      var diff = [0],
-        last = 0,
-        i;
-
-      for (i = 0; i < set.length; i += 1) {
-        if (set[i] === 1) {
-          last += 1;
-        } else {
-          last -= 1;
-        }
-        diff.push(last);
-      }
-
-      return diff;
+      return _.chain(set)
+              .transform(function(result, val, index, arr) {
+              var diff = val === 1 ? 1 : -1;
+              if (index === 0) {
+                result.push(diff);
+              } else {
+                result.push(result[index - 1] + diff);
+              }
+            })
+            .unshift(0)
+            .value();
     };
 
     /**
@@ -31,28 +28,16 @@ angular.module('volleyApp')
       //var array = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1];
       //Must return 6 -> Unit Test
 
-      //init vars
-      var max = 0,
-        i, team,
-        current = 0;
-
-      //loop on values
-      for (i = 0; i < set.length; i += 1) {
-        //Check if same team win or 1st point of the set
-        if (angular.isUndefined(team) ||
-          (team === set[i])) {
-          current += 1;
-        } else {
-          current = 1;
-        }
-        //update max if needed
-        if (max < current) {
-          max = current;
-        }
-        //update raise
-        team = set[i];
-      }
-      return max;
+      return _.chain(set)
+               .transform(function(result, val, index, arr) {
+                if (index > 0 && val === arr[index-1]) {
+                  result[result.length -1] ++;
+                } else {
+                  result.push(1);
+                }
+              })
+              .max()
+              .value();
     };
 
     /**
@@ -99,4 +84,4 @@ angular.module('volleyApp')
       }, 0);
     };
 
-  });
+  }]);
