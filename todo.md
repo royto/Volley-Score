@@ -1,3 +1,9 @@
+##ES6 Migration
+* source maps
+* fix rev
+* fix tests
+* clean grunt tasks
+
 ## Technical
 * use modernizr via bower (angular-modernizr ?)
 * display progression for set -> http://angular-ui.github.io/bootstrap/

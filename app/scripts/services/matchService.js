@@ -26,16 +26,14 @@ angular.module('volleyApp')
       };
     };
 
-    var match = self.initGame();
+    var match = self.initGame();  
 
     this.newGame = function() {
       match = self.initGame();
       return self.getMatch();
     };
 
-    this.getMatch = function() {
-      return match;
-    };
+    this.getMatch = () => match;
 
     this.startGame = function () {
       match.isMatchStarted = true;
@@ -43,7 +41,7 @@ angular.module('volleyApp')
     };
 
     this.addPoint = function (team) {
-
+      
       //Add point to the winning point team
       if (team === 1) {
         match.scoreTeam1[match.currentSet - 1] += 1;

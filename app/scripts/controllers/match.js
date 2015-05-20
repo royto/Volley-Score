@@ -7,19 +7,15 @@ angular.module('volleyApp')
       $scope.match = matchService.getMatch();
 
       //public functions
-      $scope.startGame = function () {
+      $scope.startGame = () => {
         if ($scope.startMatchForm.$valid) {
           matchService.startGame();
         }
       };
 
-      $scope.addPoint = function (team) {
-        matchService.addPoint(team);
-      };
+      $scope.addPoint = team => matchService.addPoint(team);
 
-      $scope.newGame = function() {
-        $scope.match = matchService.newGame();
-      };
+      $scope.newGame = () => { $scope.match = matchService.newGame()};
 
       $scope.saveMatch = function () {
         var match = {
