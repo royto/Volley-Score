@@ -26,7 +26,7 @@ module.exports = function (grunt) {
       tmp: '.tmp',
       test: '.test'
     },
-    
+
     //transpilation to ES5
     babel: {
       options: {
@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       dev: {
         files: [{
           expand : true,
-          cwd: '<%= yeoman.dist %>/scripts/',
+          cwd: '<%= yeoman.app %>/scripts/',
           src: ['**/*.js'],
           dest: '<%= yeoman.dist %>/scripts/',
           ext: '.js'
@@ -57,10 +57,14 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:eslint:all', 'newer:copy:dist','newer:babel:dev'],
+        tasks: ['newer:eslint:all', 'newer:babel:dev'],
         options: {
           livereload: true
         }
+      },
+      html : {
+        files: ['<%= yeoman.app %>/views/{,*/}*.html'],
+        tasks: ['newer:copy:dist'],
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -112,7 +116,7 @@ module.exports = function (grunt) {
           base: [
             '.tmp',
             'test',
-            '<%= yeoman.app %>'
+            '<%= yeoman.dist %>'
           ]
         }
       },
@@ -123,7 +127,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Make sure code styles are up to par and there are no obvious mistakes    
+    // Make sure code styles are up to par and there are no obvious mistakes
     eslint: {
       options: {
         config: '.eslintrc'
@@ -430,6 +434,7 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
+    'babel:dev',
     'connect:test',
     'karma',
     'shell:updateSeleniumWebDriver',
