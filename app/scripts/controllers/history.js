@@ -1,35 +1,33 @@
-angular.module('volleyApp')
-  .controller('HistoryCtrl', ['$scope', '$locale', 'matchsStorageService',
-    function ($scope, $locale, matchsStorageService) {
+class HistoCtrl {
+  constructor($locale, matchsStorageService) {
+    this.locale = $locale;
+    this.matchsStorageService = matchsStorageService;
 
-      'use strict';
-
-      //Pluralize nb match saved
-      $scope.matchForms = {
+    this.matchForms = {
         0: 'aucun match sauvegardé',
         one: '{} match sauvegardé',
         other: '{} matchs sauvegardés'
       };
 
-      $scope.matchs = matchsStorageService.getSavedMatchs();
+    this.matchs = matchsStorageService.getSavedMatchs();
+  }
+  clearMatchs () {
+    this.matchsStorageService.clearSavedMatch();
+    this.matchs = [];
+  }
+  removeMatch (index) {
+    this.matchsStorageService.removeSavedMatch(index);
+    this.matchs = this.matchsStorageService.getSavedMatchs();
+  }
+  scoreSets (index, set, team) {
+    return this.matchs[index].score[set].reduce(function (previous, current, index, array) {
+      //Add point only if win by team
+      if (team === current) {
+        return previous + 1;
+      }
+      return previous;
+    }, 0);
+  }
+}
 
-      $scope.removeMatch = function (index) {
-        matchsStorageService.removeSavedMatch(index);
-        $scope.matchs = matchsStorageService.getSavedMatchs();
-      };
-
-      $scope.clearMatchs = function () {
-        matchsStorageService.clearSavedMatch();
-        $scope.matchs = [];
-      };
-
-      $scope.scoreSets = function(index, set, team) {
-        return $scope.matchs[index].score[set].reduce(function (previous, current, index, array) {
-          //Add point only if win by team
-          if (team === current) {
-            return previous + 1;
-          }
-          return previous;
-        }, 0);
-      };
-    }]);
+angular.module('volleyApp').controller('HistoryCtrl', ['$locale', 'matchsStorageService', HistoCtrl]);

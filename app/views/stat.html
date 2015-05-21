@@ -2,38 +2,37 @@
 
   <h2>Global Stats</h2>
 
-  <p>Total points : {{totalPoints()}}</p>
+  <p>Total points : {{stat.totalPoints()}}</p>
 
   <div>
 
     <div class="sm-4">
-      <progress max="totalPoints()">
-        <bar value="totalPointsWinForATeam(1)">{{currentGame.teams.team1}} {{totalPointsWinForATeam(1)}}</bar>
-        <bar value="totalPointsWinForATeam(2)" type="danger">{{currentGame.teams.team2}} {{totalPointsWinForATeam(2)}}</bar>
+      <progress max="stat.totalPoints()">
+        <bar value="stat.totalPointsWinForATeam(1)">{{stat.currentGame.teams.team1}} {{stat.totalPointsWinForATeam(1)}}</bar>
+        <bar value="stat.totalPointsWinForATeam(2)" type="danger">{{stat.currentGame.teams.team2}} {{stat.totalPointsWinForATeam(2)}}</bar>
       </progress>
     </div>
   </div>
 
   <div class="row">
-   <p class="col-md-4 bg-primary">Max consecutives points : {{getMaxConsecutivePointsForMatch()}}</p>
+   <p class="col-md-4 bg-primary">Max consecutives points : {{stat.getMaxConsecutivePointsForMatch()}}</p>
   </div>
 
   <h2>Time Machine</h2>
   <p>
-    Set : <numselect nb-options="nbSet()" start-at-one="true" on-change="tmSetChanged()" model="currentSet"></numselect>
+    Set : <numselect nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" model="stat.currentSet"></numselect>
   </p>
   <p>
-    Point : <numselect nb-options="currentSetPoints()" start-at-one="true" model="currentPoint"></numselect>
+    Point : <numselect nb-options="stat.currentSetPoints()" start-at-one="true" model="stat.currentPoint"></numselect>
   </p>
-
-  {{currentSetScore(1)}} - {{currentSetScore(2)}}
+  {{stat.currentSetScore(1)}} - {{stat.currentSetScore(2)}}
 
   <h2>Evolution points difference</h2>
   <p>
-    Set : <numselect nb-options="nbSet()" start-at-one="true" on-change="scoreDifferenceEvolution()" model="diffCurrentSet"></numselect>
+    Set : <numselect nb-options="stat.nbSet()" start-at-one="true" on-change="stat.scoreDifferenceEvolution()" model="stat.diffCurrentSet"></numselect>
   </p>
 
-  <div ac-chart="chartType" ac-data="data" ac-config="config" id='chart' class='chart' style="width: 90%; height:250px;"></div>
+<!--  <div ac-chart="stat.chartType" ac-data="stat.data" ac-config="stat.config" id='chart' class='chart' style="width: 90%; height:250px;"></div>-->
 <div>
 
 <p>

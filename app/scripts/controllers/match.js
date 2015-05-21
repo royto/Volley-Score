@@ -1,46 +1,46 @@
-angular.module('volleyApp')
-  .controller('MatchCtrl', ['$scope', '$window', 'matchsStorageService', 'MatchService',
-    function ($scope, window, matchsStorageService, matchService) {
+class MatchCtrl {
+  constructor($window, matchsStorageService, MatchService) {
+    this.window = $window;
+    this.matchsStorageService = matchsStorageService;
+    this.matchService = MatchService;
 
-      'use strict';
+    this.match = this.matchService.getMatch();
 
-      $scope.match = matchService.getMatch();
-
-      //public functions
-      $scope.startGame = () => {
-        if ($scope.startMatchForm.$valid) {
-          matchService.startGame();
-        }
+    if (!this.match.isMatchStarted) {
+      this.match.team1Name = this.matchsStorageService.getTeamName(1);
+      this.match.team2Name = this.matchsStorageService.getTeamName(2);
+    }
+  }
+  startGame () {
+    if (this.startMatchForm.$valid) {
+      this.matchService.startGame();
+    }
+  }
+  addPoint (team) {
+    this.matchService.addPoint(team);
+  }
+  newGame () {
+    this.match = this.matchService.newGame();
+  }
+  saveMatch () {
+    var match = {
+        teams: {
+          team1: this.match.team1Name,
+          team2: this.match.team2Name
+        },
+        score: this.match.score
       };
 
-      $scope.addPoint = team => matchService.addPoint(team);
+    this.matchsStorageService.saveMatch(this.match);
+    this.match.isMatchSaved = true;
+  }
+  askTimeOut (team) {
+    if (team === 1) {
+      this.match.timeOut1 -= 1;
+    } else {
+      this.match.timeOut2 -= 1;
+    }
+  }
+}
 
-      $scope.newGame = () => { $scope.match = matchService.newGame()};
-
-      $scope.saveMatch = function () {
-        var match = {
-            teams: {
-              team1: $scope.match.team1Name,
-              team2: $scope.match.team2Name
-            },
-            score: $scope.match.score
-          };
-
-        matchsStorageService.saveMatch(match);
-        $scope.match.isMatchSaved = true;
-      };
-
-      $scope.askTimeOut = function(team) {
-        if (team === 1) {
-          $scope.match.timeOut1 -= 1;
-        } else {
-          $scope.match.timeOut2 -= 1;
-        }
-      };
-
-      if (!$scope.match.isMatchStarted) {
-        $scope.match.team1Name = matchsStorageService.getTeamName(1);
-        $scope.match.team2Name = matchsStorageService.getTeamName(2);
-      }
-
-    }]);
+angular.module('volleyApp').controller('MatchCtrl', ['$window', 'matchsStorageService', 'MatchService', MatchCtrl]);

@@ -11,26 +11,31 @@ angular.module('volleyApp', ['ui.router', 'angularCharts', 'ui.bootstrap', 'angu
       .state('home', {
         url : '/',
         templateUrl: 'views/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        controllerAs : 'home'
       })
       .state('todo', {
         url : '/todo',
         templateUrl: 'views/todo.html',
-        controller: 'TodoCtrl'
+        controller: 'TodoCtrl',
+        controllerAs : 'todo'
       })
       .state('histo', {
         url : '/histo',
         templateUrl: 'views/history.html',
-        controller: 'HistoryCtrl'
+        controller: 'HistoryCtrl',
+        controllerAs : 'history'
       })
       .state('stat', {
         url : '/histo/stat/:matchId',
         templateUrl: 'views/stat.html',
-        controller: 'StatCtrl'
+        controller: 'StatCtrl',
+        controllerAs : 'stat'
       })
       .state('match', {
         url : '/match',
         templateUrl: 'views/match.html',
-        controller: 'MatchCtrl'
+        controller: 'MatchCtrl',
+        controllerAs : 'matchCtrl'
       });
   });
