@@ -46,13 +46,8 @@ class StatCtrl {
   currentSetScore (team) {
     return this.currentGame.score[this.currentSet - 1]
       .slice(0, this.currentPoint)
-      .reduce(function (previous, current, index, array) {
-      //Add point only if win by team
-      if (team === current) {
-        return previous + 1;
-      }
-      return previous;
-    }, 0);
+      .filter(val => val === team)
+      .length;
   }
 
   //Evolution of the score difference
