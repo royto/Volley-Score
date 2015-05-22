@@ -1,65 +1,54 @@
 /*global angular */
+class MatchsStorageService {
+  constructor($window) {
+    this.storage = $window.localStorage;
+    this.matchsStorageName = 'ngMatchs';
+    this.teamPrefixStorageName = 'Team';
+  }
+  getTeamName(nb) {
+    if (this.storage && this.storage.getItem(this.teamPrefixStorageName + nb)) {
+      return this.storage.getItem(this.teamPrefixStorageName + nb);
+    }
+    return 'Equipe ' + nb;
+  }
+  saveTeamName (nb, value) {
+    if (storage) {
+      this.storage.setItem(this.teamPrefixStorageName + nb, value);
+    }
+  }
+  saveMatch (match) {
+    var savedMatchs;
+    if (this.storage) {
+      savedMatchs = angular.fromJson(this.storage.getItem(this.matchsStorageName)) || [];
+      savedMatchs.push(match);
+      this.storage.setItem(this.matchsStorageName, angular.toJson(savedMatchs));
+    }
+  }
+  getSavedMatchs () {
+    if (this.storage) {
+      return angular.fromJson(this.storage.getItem(this.matchsStorageName)) || [];
+    }
+  }
+  getSavedMatch (index) {
+    var matchs = this.getSavedMatchs();
+    if (matchs.length >= index) {
+      return matchs[index];
+    }
+    return null;
+  }
+  removeSavedMatch (i) {
+    if (this.storage) {
+      var savedMatchs = this.getSavedMatchs();
+      savedMatchs.splice(i, 1);
+      this.storage.setItem(this.matchsStorageName, angular.toJson(savedMatchs));
+    }
+  }
+  clearSavedMatch () {
+    if (this.storage) {
+      this.storage.removeItem(matchsStorageName);
+    }
+  }
+}
+
 angular.module('volleyApp')
-  .service('matchsStorageService', ['$window',
-    function ($window) {
-
-      'use strict';
-
-      //Gestion du storage
-      var storage = $window.localStorage,
-        matchsStorageName = 'ngMatchs',
-        teamPrefixStorageName = 'Team',
-        getTeamName = function (nb) {
-          if (storage && storage.getItem(teamPrefixStorageName + nb)) {
-            return storage.getItem(teamPrefixStorageName + nb);
-          }
-          return 'Equipe ' + nb;
-        },
-        saveTeamName = function (nb, value) {
-          if (storage) {
-            storage.setItem(teamPrefixStorageName + nb, value);
-          }
-        },
-        saveMatch = function (match) {
-          var savedMatchs;
-          if (storage) {
-            savedMatchs = angular.fromJson(storage.getItem(matchsStorageName)) || [];
-            savedMatchs.push(match);
-            storage.setItem(matchsStorageName, angular.toJson(savedMatchs));
-          }
-        },
-        getSavedMatchs = function () {
-          if (storage) {
-            return angular.fromJson(storage.getItem(matchsStorageName)) || [];
-          }
-        },
-        getSavedMatch = function (index) {
-          var matchs = getSavedMatchs();
-          if (matchs.length >= index) {
-            return matchs[index];
-          }
-          return null;
-        },
-        removeSavedMatch = function (i) {
-          if (storage) {
-            var savedMatchs = getSavedMatchs();
-            savedMatchs.splice(i, 1);
-            storage.setItem(matchsStorageName, angular.toJson(savedMatchs));
-          }
-        },
-        clearSavedMatch = function () {
-          if (storage) {
-            storage.removeItem(matchsStorageName);
-          }
-        };
-
-      return {
-        getTeamName: getTeamName,
-        saveTeamName: saveTeamName,
-        saveMatch: saveMatch,
-        getSavedMatchs: getSavedMatchs,
-        getSavedMatch: getSavedMatch,
-        removeSavedMatch: removeSavedMatch,
-        clearSavedMatch: clearSavedMatch
-      };
-    }]);
+  .service('matchsStorageService', ['$window', MatchsStorageService]);

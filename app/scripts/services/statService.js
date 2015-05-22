@@ -1,14 +1,8 @@
-'use strict';
+class StatService {
 
-angular.module('volleyApp')
-  .service('StatService', ['_', function StatService(_) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-
-    var self = this;
-
-    this.getDifference = function (set) {
-      return _.chain(set)
-              .transform(function(result, val, index, arr) {
+  getDifference (set) {
+    return _.chain(set)
+            .transform(function(result, val, index, arr) {
               var diff = val === 1 ? 1 : -1;
               if (index === 0) {
                 result.push(diff);
@@ -18,70 +12,71 @@ angular.module('volleyApp')
             })
             .unshift(0)
             .value();
-    };
+  }
 
-    /**
-     * Calculates the Max consecutives points win per set
-     * @param {Array} set
-     */
-    this.getMaxConsecutivePoints = function (set) {
-      //var array = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1];
-      //Must return 6 -> Unit Test
+  /**
+   * Calculates the Max consecutives points win per set
+   * @param {Array} set
+   */
+  getMaxConsecutivePoints (set) {
+    //var array = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1];
+    //Must return 6 -> Unit Test
+    return _.chain(set)
+             .transform(function(result, val, index, arr) {
+              if (index > 0 && val === arr[index-1]) {
+                result[result.length -1] ++;
+              } else {
+                result.push(1);
+              }
+            })
+            .max()
+            .value();
+  }
 
-      return _.chain(set)
-               .transform(function(result, val, index, arr) {
-                if (index > 0 && val === arr[index-1]) {
-                  result[result.length -1] ++;
-                } else {
-                  result.push(1);
-                }
-              })
-              .max()
-              .value();
-    };
+  /**
+   * Calculates the Max consecutives points win per match
+   * @param {Array} score
+   */
+  getMaxConsecutivePointsForMatch (score) {
+    let self = this;
+    return score.reduce(function(previous, current) {
+      return Math.max(previous, self.getMaxConsecutivePoints(current));
+    }, 0);
+  }
 
-    /**
-     * Calculates the Max consecutives points win per match
-     * @param {Array} score
-     */
-    this.getMaxConsecutivePointsForMatch = function (score) {
-      return score.reduce(function(previous, current) {
-        return Math.max(previous, self.getMaxConsecutivePoints(current));
-      }, 0);
-    };
+  /**
+   * Get Max points of difference in a set
+   * @param {Array} set as arrray
+   */
+  getMaxDifference (set) {
+    var setDiff = this.getDifference(set);
+    return setDiff.reduce(function (previousValue, currentValue, index, array) {
+      if (Math.abs(currentValue) > Math.abs(previousValue)) {
+        return currentValue;
+      }
+      return previousValue;
+    });
+  }
 
-    /**
-     * Get Max points of difference in a set
-     * @param {Array} set as arrray
-     */
-    this.getMaxDifference = function (set) {
-      var setDiff = self.getDifference(set);
-      return setDiff.reduce(function (previousValue, currentValue, index, array) {
-        if (Math.abs(currentValue) > Math.abs(previousValue)) {
-          return currentValue;
+  totalPoints (score) {
+    return score.reduce(function (previous, current, index, array) {
+      //sum of legnth of sets score arrays
+      return previous + current.length;
+    }, 0);
+  }
+
+  totalPointsWinForATeam (score, team) {
+    return score.reduce(function (previous, current, index, array) {
+      //sum of points win by team by set
+      return previous + current.reduce(function (previous, current, index, array) {
+        //Add point only if win by team
+        if (team === current) {
+          return previous + 1;
         }
-        return previousValue;
-      });
-    };
-
-    this.totalPoints = function (score) {
-      return score.reduce(function (previous, current, index, array) {
-        //sum of legnth of sets score arrays
-        return previous + current.length;
+        return previous;
       }, 0);
-    };
+    }, 0);
+  }
+}
 
-    this.totalPointsWinForATeam = function (score, team) {
-      return score.reduce(function (previous, current, index, array) {
-        //sum of points win by team by set
-        return previous + current.reduce(function (previous, current, index, array) {
-          //Add point only if win by team
-          if (team === current) {
-            return previous + 1;
-          }
-          return previous;
-        }, 0);
-      }, 0);
-    };
-
-  }]);
+angular.module('volleyApp').service('StatService', ['_', StatService]);
