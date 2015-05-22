@@ -40,6 +40,21 @@ class StatService {
             .value();
   }
 
+  getMaxConsecutivePointForTeam (match, team) {
+    //Predicate : we take into account consecutive points win on different sets
+    return _.chain(match.score)
+            .flatten()
+             .transform(function(result, val, index, arr) {
+              if (index > 0 && val === team) {
+                result[result.length -1] ++;
+              } else {
+                result.push(1);
+              }
+            })
+            .max()
+            .value();
+  }
+
   /**
    * Calculates the Max consecutives points win per match
    * @param {Array} score

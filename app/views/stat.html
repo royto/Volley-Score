@@ -18,6 +18,10 @@
    <p class="col-md-4 bg-primary">Max consecutives points : {{stat.getMaxConsecutivePointsForMatch()}}</p>
   </div>
 
+  <h3>Team 1</h3>
+  max Consecutives Points : {{ stat.team1.maxConsecutivesPoints }}
+  <h3>Team 2</h3>
+  max Consecutives Points : {{ stat.team2.maxConsecutivesPoints }}
   <h2>Time Machine</h2>
   <p>
     Set : <numselect nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" model="stat.currentSet"></numselect>

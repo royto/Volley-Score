@@ -11,6 +11,7 @@ class StatCtrl {
     this.currentSet = 1;
     this.currentPoint = 1;
 
+    this.initTeamsStats();
     this.initEvolutionChart();
   }
   nbSet () {
@@ -32,6 +33,15 @@ class StatCtrl {
 
   getMaxConsecutivePointsForMatch () {
     return this.statService.getMaxConsecutivePointsForMatch(this.currentGame.score);
+  }
+
+  initTeamsStats () {
+    this.team1 = {
+      maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 1)
+    }
+    this.team2 = {
+      maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 2)
+    }
   }
 
   //Time Machine
