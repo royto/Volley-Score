@@ -1,5 +1,8 @@
 class StatService {
-
+  /**
+   * Calculates the history of point diff for a set
+   * @param {Array} set
+   */
   getDifference (set) {
     return _.chain(set)
             .transform(function(result, val, index, arr) {
@@ -12,6 +15,10 @@ class StatService {
             })
             .unshift(0)
             .value();
+  }
+
+  getSetMaxDifference (set) {
+    return _.max(this.getDifference(set));
   }
 
   /**

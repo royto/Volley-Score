@@ -54,6 +54,7 @@ class StatCtrl {
   scoreDifferenceEvolution () {
     var setScore = this.currentGame.score[this.diffCurrentSet - 1];
     var diff = this.statService.getDifference(setScore);
+    this.maxDiff = this.statService.getSetMaxDifference(setScore);
     var tmpData = [];
     diff.forEach(function(element, index, array) {
       tmpData.push({x : index, y : [element] });
