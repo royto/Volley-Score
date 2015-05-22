@@ -20,8 +20,11 @@
 
   <h3>Team 1</h3>
   max Consecutives Points : {{ stat.team1.maxConsecutivesPoints }}
+  points win on service : {{ stat.team1.nbPointsWinOnService }}
+
   <h3>Team 2</h3>
   max Consecutives Points : {{ stat.team2.maxConsecutivesPoints }}
+  points win on service : {{ stat.team2.nbPointsWinOnService }}
   <h2>Time Machine</h2>
   <p>
     Set : <numselect nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" model="stat.currentSet"></numselect>

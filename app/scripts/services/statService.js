@@ -41,6 +41,7 @@ class StatService {
   }
 
   getMaxConsecutivePointForTeam (match, team) {
+    //TODO Add Tests
     //Predicate : we take into account consecutive points win on different sets
     return _.chain(match.score)
             .flatten()
@@ -53,6 +54,25 @@ class StatService {
             })
             .max()
             .value();
+  }
+
+  getNbPointsWinOnServiceForTeam (match, team) {
+    //TODO Add Tests
+    //MapReduce ?
+    return match.score
+             .map((setScore, setNumber) => setScore
+              .reduce((result, val, index, arr) => {
+                //special case of 1st point
+                if (index === 0 && val === team && match.startService + setNumber % 2 === team) {
+                   return result += 1;
+                }
+                //Other points
+                if (index > 0 && val === team && arr[index -1] === team) {
+                  return result += 1;
+                }
+                return result;
+              }, 0)
+             ).reduce((res, val) => val + res);
   }
 
   /**
