@@ -6,111 +6,108 @@ describe('Controller: MatchCtrl', function () {
   beforeEach(module('volleyApp'));
 
   var MatchCtrl,
-    _matchsStorageService,
-    scope;
+    _matchsStorageService;
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, matchsStorageService) {
-    scope = $rootScope.$new();
+  // Initialize the controller
+  beforeEach(inject(function ($controller, matchsStorageService) {
     _matchsStorageService = matchsStorageService;
-    scope.startMatchForm = {};
 
-    spyOn(_matchsStorageService, 'getTeamName').andCallFake(function(team) {
+    spyOn(_matchsStorageService, 'getTeamName').and.callFake(function(team) {
       return 'mockNameTeam' + team;
     });
 
     spyOn(_matchsStorageService, 'saveMatch');
 
-    MatchCtrl = $controller('MatchCtrl', {
-      $scope: scope
-    });
+    MatchCtrl = $controller('MatchCtrl');
+    MatchCtrl.startMatchForm = {};
+
   }));
 
   it('should init the game', function () {
-    expect(scope.match.isMatchStarted).toBeFalsy();
-    expect(scope.match.currentSet).toBe(1);
-    expect(scope.match.score).toEqual([[], [], [], [], []]);
-    expect(scope.match.team1Name).toBe('mockNameTeam1');
-    expect(scope.match.team2Name).toBe('mockNameTeam2');
+    expect(MatchCtrl.match.isMatchStarted).toBeFalsy();
+    expect(MatchCtrl.match.currentSet).toBe(1);
+    expect(MatchCtrl.match.score).toEqual([[], [], [], [], []]);
+    expect(MatchCtrl.match.team1Name).toBe('mockNameTeam1');
+    expect(MatchCtrl.match.team2Name).toBe('mockNameTeam2');
   });
 
   it('should start the game', function () {
-    scope.startMatchForm.$valid = true;
+    MatchCtrl.startMatchForm.$valid = true;
 
-    scope.startGame();
-    expect(scope.match.isMatchStarted).toBeTruthy();
+    MatchCtrl.startGame();
+    expect(MatchCtrl.match.isMatchStarted).toBeTruthy();
   });
 
   it('should decrease timeOut for the specfied team', function () {
-    scope.askTimeOut(1);
-    expect(scope.match.timeOut1).toBe(1);
-    expect(scope.match.timeOut2).toBe(2);
+    MatchCtrl.askTimeOut(1);
+    expect(MatchCtrl.match.timeOut1).toBe(1);
+    expect(MatchCtrl.match.timeOut2).toBe(2);
 
-    scope.askTimeOut(2);
-    expect(scope.match.timeOut1).toBe(1);
-    expect(scope.match.timeOut2).toBe(1);
+    MatchCtrl.askTimeOut(2);
+    expect(MatchCtrl.match.timeOut1).toBe(1);
+    expect(MatchCtrl.match.timeOut2).toBe(1);
 
   });
 
   it('should add points to team 1', function () {
-    scope.match.score = [[1,1,2,1,2,1,1,2,1,2]];
-    scope.match.scoreTeam1[0] = 6;
+    MatchCtrl.match.score = [[1,1,2,1,2,1,1,2,1,2]];
+    MatchCtrl.match.scoreTeam1[0] = 6;
 
-    scope.addPoint(1);
-    expect(scope.match.score[0].length).toBe(11);
-    expect(scope.match.score[0][scope.match.score[0].length -1]).toBe(1);
-    expect(scope.match.scoreTeam1[0]).toBe(7);
+    MatchCtrl.addPoint(1);
+    expect(MatchCtrl.match.score[0].length).toBe(11);
+    expect(MatchCtrl.match.score[0][MatchCtrl.match.score[0].length -1]).toBe(1);
+    expect(MatchCtrl.match.scoreTeam1[0]).toBe(7);
   });
 
   it('should add points to team 2', function () {
-    scope.match.score = [[1,1,2,1,2,1,1,2,1,2]];
-    scope.match.scoreTeam2[0] = 4;
+    MatchCtrl.match.score = [[1,1,2,1,2,1,1,2,1,2]];
+    MatchCtrl.match.scoreTeam2[0] = 4;
 
-    scope.addPoint(2);
-    expect(scope.match.score[0].length).toBe(11);
-    expect(scope.match.score[0][scope.match.score[0].length -1]).toBe(2);
-    expect(scope.match.scoreTeam2[0]).toBe(5);
+    MatchCtrl.addPoint(2);
+    expect(MatchCtrl.match.score[0].length).toBe(11);
+    expect(MatchCtrl.match.score[0][MatchCtrl.match.score[0].length -1]).toBe(2);
+    expect(MatchCtrl.match.scoreTeam2[0]).toBe(5);
   });
 
   it('should add points and change current set', function () {
-    scope.match.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
-    scope.match.scoreTeam1[0] = 24;
-    scope.match.scoreTeam2[0] = 4;
+    MatchCtrl.match.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
+    MatchCtrl.match.scoreTeam1[0] = 24;
+    MatchCtrl.match.scoreTeam2[0] = 4;
 
-    scope.addPoint(1);
-    expect(scope.match.score[0].length).toBe(29);
-    expect(scope.match.score[0][scope.match.score[0].length -1]).toBe(1);
-    expect(scope.match.currentSet).toBe(2);
+    MatchCtrl.addPoint(1);
+    expect(MatchCtrl.match.score[0].length).toBe(29);
+    expect(MatchCtrl.match.score[0][MatchCtrl.match.score[0].length -1]).toBe(1);
+    expect(MatchCtrl.match.currentSet).toBe(2);
   });
 
   it('should call save match', function () {
-    scope.match.team1Name = 'foo';
-    scope.match.team2Name = 'bar';
+    MatchCtrl.match.team1Name = 'foo';
+    MatchCtrl.match.team2Name = 'bar';
 
-    scope.match.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
+    MatchCtrl.match.score = [[1,1,2,1,2,1,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
 
-    scope.saveMatch();
+    MatchCtrl.saveMatch();
     expect(_matchsStorageService.saveMatch).toHaveBeenCalled();
 
     //Get function last called args
-    var args = _matchsStorageService.saveMatch.mostRecentCall.args;
+    var args = _matchsStorageService.saveMatch.calls.mostRecent().args;
 
     //Verifiy args are correct
     expect(args.length).toBe(1);
-    expect(args[0].teams.team1).toBe('foo');
-    expect(args[0].teams.team2).toBe('bar');
-    expect(args[0].score).toEqual(scope.match.score);
+    expect(args[0].team1Name).toBe('foo');
+    expect(args[0].team2Name).toBe('bar');
+    expect(args[0].score).toEqual(MatchCtrl.match.score);
     expect(args[0].score).toBeArray();
 
     //Must set match as saved
-    expect(scope.match.isMatchSaved).toBeTruthy();
+    expect(MatchCtrl.match.isMatchSaved).toBeTruthy();
   });
 
   it('should create a new game', function () {
-    scope.newGame();
+    MatchCtrl.newGame();
 
-    expect(scope.match.isMatchStarted).toBeFalsy();
-    expect(scope.match.currentSet).toBe(1);
-    expect(scope.match.score).toEqual([[], [], [], [], []]);
+    expect(MatchCtrl.match.isMatchStarted).toBeFalsy();
+    expect(MatchCtrl.match.currentSet).toBe(1);
+    expect(MatchCtrl.match.score).toEqual([[], [], [], [], []]);
   });
 });

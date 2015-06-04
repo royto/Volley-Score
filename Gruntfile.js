@@ -434,6 +434,7 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
+    'copy:dist',
     'babel:dev',
     'connect:test',
     'karma',
