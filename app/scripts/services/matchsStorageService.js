@@ -12,7 +12,7 @@ class MatchsStorageService {
     return 'Equipe ' + nb;
   }
   saveTeamName (nb, value) {
-    if (storage) {
+    if (this.storage) {
       this.storage.setItem(this.teamPrefixStorageName + nb, value);
     }
   }
@@ -45,10 +45,9 @@ class MatchsStorageService {
   }
   clearSavedMatch () {
     if (this.storage) {
-      this.storage.removeItem(matchsStorageName);
+      this.storage.removeItem(this.matchsStorageName);
     }
   }
 }
 
-angular.module('volleyApp')
-  .service('matchsStorageService', ['$window', MatchsStorageService]);
+angular.module('volleyApp').service('matchsStorageService', ['$window', MatchsStorageService]);
