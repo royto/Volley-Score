@@ -19,7 +19,7 @@
                 <th>Set 5</th>
             </tr>
             <tr id="scoreTeam1">
-                <th><span id="team1Name">{{match.team1Name}}</span></th>
+                <th><span id="team1Name">{{match.teams.team1}}</span></th>
                 <td class="set1"><span>{{history.scoreSets($index, 0, 1)}}</span></td>
                 <td class="set2"><span>{{history.scoreSets($index, 1, 1)}}</span></td>
                 <td class="set3"><span>{{history.scoreSets($index, 2, 1)}}</span></td>
@@ -27,7 +27,7 @@
                 <td class="set5"><span>{{history.scoreSets($index, 4, 1)}}</span></td>
             </tr>
             <tr id="scoreTeam2">
-                <th><span id="team1Name"></span>{{match.team2Name}}</th>
+                <th><span id="team1Name"></span>{{match.teams.team2}}</th>
                 <td class="set1"><span>{{history.scoreSets($index, 0, 2)}}</span></td>
                 <td class="set2"><span>{{history.scoreSets($index, 1, 2)}}</span></td>
                 <td class="set3"><span>{{history.scoreSets($index, 2, 2)}}</span></td>

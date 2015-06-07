@@ -23,7 +23,7 @@ class MatchCtrl {
     this.match = this.matchService.newGame();
   }
   saveMatch () {
-    var match = {
+    var matchToSave = {
         teams: {
           team1: this.match.team1Name,
           team2: this.match.team2Name
@@ -31,7 +31,7 @@ class MatchCtrl {
         score: this.match.score
       };
 
-    this.matchsStorageService.saveMatch(this.match);
+    this.matchsStorageService.saveMatch(matchToSave);
     this.match.isMatchSaved = true;
   }
   askTimeOut (team) {
