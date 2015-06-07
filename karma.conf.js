@@ -22,13 +22,13 @@ module.exports = function(config) {
       'app/libs/angular-bootstrap/ui-bootstrap.min.js',
       'app/libs/lodash/dist/lodash.min.js',
       'app/libs/angular-lodash/angular-lodash.js',
-      'app/scripts/*.js',
-      'app/scripts/**/*.js',
+      'dist/scripts/*.js',
+      'dist/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js',
 
       //load directives templates
-      'app/views/directives/*.html'
+      'dist/views/directives/*.html'
     ],
 
     // list of files / patterns to exclude
@@ -56,7 +56,7 @@ module.exports = function(config) {
 
     ngHtml2JsPreprocessor: {
       // strip this from the file path
-      stripPrefix: 'app/'
+      stripPrefix: 'dist/'
     },
 
     // Start these browsers, currently available:
@@ -77,8 +77,8 @@ module.exports = function(config) {
     //Code Coverage
     reporters: ['progress', 'coverage'],
     preprocessors: {
-      'app/scripts/**/*.js': ['coverage'],
-      'app/views/directives/*.html': 'ng-html2js'
+      'dist/scripts/**/*.js': ['coverage'],
+      'dist/views/directives/*.html': 'ng-html2js'
     }
 
   });

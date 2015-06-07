@@ -1,91 +1,105 @@
-'use strict';
+class StatCtrl {
+  constructor($stateParams, matchsStorageService, statService) {
+    this.$stateParams = $stateParams;
+    this.matchsStorageService = matchsStorageService;
+    this.statService = statService;
 
-angular.module('volleyApp')
-  .controller('StatCtrl', ['$scope', '$stateParams',
-      'matchsStorageService', 'StatService',
-    function ($scope, $stateParams, matchsStorageService, statService) {
+    this.matchId = this.$stateParams.matchId;
 
-      $scope.matchId = $stateParams.matchId;
+    this.currentGame = this.matchsStorageService.getSavedMatch(this.matchId);
 
-      $scope.currentGame = matchsStorageService.getSavedMatch($stateParams.matchId);
+    this.currentSet = 1;
+    this.currentPoint = 1;
 
-      $scope.currentSet = 1;
-      $scope.currentPoint = 1;
-
-      $scope.nbSet = function() {
-        return $scope.currentGame.score.reduce(function(previous, current, index, array) {
+    this.initTeamsStats();
+    this.initEvolutionChart();
+  }
+  nbSet () {
+    return this.currentGame.score.reduce(function(previous, current, index, array) {
           if (angular.isArray(current) && current.length > 0) {
             return previous + 1;
           }
           return previous;
         }, 0);
-      };
+  }
 
-      $scope.totalPoints = function () {
-        return statService.totalPoints($scope.currentGame.score);
-      };
+  totalPoints () {
+    return this.statService.totalPoints(this.currentGame.score);
+  }
 
-      $scope.totalPointsWinForATeam = function (team) {
-        return statService.totalPointsWinForATeam($scope.currentGame.score, team);
-      };
+  totalPointsWinForATeam (team) {
+    return this.statService.totalPointsWinForATeam(this.currentGame.score, team);
+  }
 
-      $scope.getMaxConsecutivePointsForMatch = function() {
-        return statService.getMaxConsecutivePointsForMatch($scope.currentGame.score);
-      };
+  getMaxConsecutivePointsForMatch () {
+    return this.statService.getMaxConsecutivePointsForMatch(this.currentGame.score);
+  }
 
-      //Time Machine
-      $scope.tmSetChanged = function() {
-        $scope.currentPoint = $scope.currentGame.score[$scope.currentSet - 1].length;
-      };
+  initTeamsStats () {
+    this.team1 = {
+      name : this.currentGame.teams.team1,
+      maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 1),
+      nbPointsWinOnService : this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 1)
+    }
+    this.team2 = {
+      name : this.currentGame.teams.team2,
+      maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 2),
+      nbPointsWinOnService : this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 2)
+    }
+  }
 
-      $scope.currentSetPoints = function() {
-        return $scope.currentGame.score[$scope.currentSet - 1].length;
-      };
+  //Time Machine
+  tmSetChanged () {
+    this.currentPoint = this.currentGame.score[this.currentSet - 1].length;
+  }
 
-      $scope.currentSetScore = function(team) {
-        return $scope.currentGame.score[$scope.currentSet - 1].reduce(function (previous, current, index, array) {
-          if (index >= $scope.currentPoint) {
-            return previous;
-          }
-          //Add point only if win by team
-          if (team === current) {
-            return previous + 1;
-          }
-          return previous;
-        }, 0);
-      };
+  currentSetPoints () {
+    return this.currentGame.score[this.currentSet - 1].length;
+  }
 
-      //Evolution of the score difference
-      $scope.scoreDifferenceEvolution = function() {
-        var setScore = $scope.currentGame.score[$scope.diffCurrentSet - 1];
-        var diff = statService.getDifference(setScore);
-        var tmpData = [];
-        diff.forEach(function(element, index, array) {
-          tmpData.push({x : index, y : [element] });
-        });
+  currentSetScore (team) {
+    return this.currentGame.score[this.currentSet - 1]
+      .slice(0, this.currentPoint)
+      .filter(val => val === team)
+      .length;
+  }
 
-        $scope.data = {
-          series: [''],
-          data : tmpData
-        };
-      };
+  //Evolution of the score difference
+  scoreDifferenceEvolution () {
+    var setScore = this.currentGame.score[this.diffCurrentSet - 1];
+    var diff = this.statService.getDifference(setScore);
+    this.maxDiff = this.statService.getSetMaxDifference(setScore);
+    var tmpData = [];
+    diff.forEach(function(element, index, array) {
+      tmpData.push({x : index, y : [element] });
+    });
 
-      $scope.diffCurrentSet = 1;
+    this.data = {
+      series: [''],
+      data : tmpData
+    };
+  };
 
-      $scope.data = {
-        series: [''],
-        data : []
-      };
+  initEvolutionChart () {
+    this.diffCurrentSet = 1;
 
-      $scope.scoreDifferenceEvolution();
+    this.data = {
+      series: [''],
+      data : []
+    };
 
-      $scope.chartType = 'line';
-      $scope.config = {
-        labels: false,
-        title : 'Evolution',
-        legend : {
-          display: true,
-          position:'right'
-        }
-      };
-    }]);
+    this.scoreDifferenceEvolution();
+
+    this.chartType = 'line';
+    this.config = {
+      labels: false,
+      title : 'Evolution',
+      legend : {
+        display: true,
+        position:'right'
+      }
+    }
+  }
+}
+
+angular.module('volleyApp').controller('StatCtrl', ['$stateParams', 'matchsStorageService', 'StatService', StatCtrl]);

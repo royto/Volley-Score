@@ -1,35 +1,35 @@
 <section id="match">
-    <div ng-hide="match.isMatchStarted">
+    <div ng-hide="matchCtrl.match.isMatchStarted">
         <h1>Accueil</h1>
-        <form role="form" name="startMatchForm">
+        <form role="form" name="matchCtrl.startMatchForm">
             <div class="form-group">
               <label class="control-label">Equipe 1</label>
-              <input class="form-control" required type="text" ng-model="match.team1Name" />
+              <input class="form-control" required type="text" ng-model="matchCtrl.match.team1Name" />
             </div>
             <div class="form-group">
               <label class="control-label">Equipe 2</label>
-              <input class="form-control" required type="text" ng-model="match.team2Name" />
+              <input class="form-control" required type="text" ng-model="matchCtrl.match.team2Name" />
             </div>
             <div class="form-group">
                 <label control-label>Service</label>
             <div class="radio">
               <label>
-                <input type="radio" name="serviceGroup" ng-value="1" ng-model="match.startService" /> {{match.team1Name}}
+                <input type="radio" name="serviceGroup" ng-value="1" ng-model="matchCtrl.match.startService" /> {{matchCtrl.match.team1Name}}
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="serviceGroup" ng-value="2" ng-model="match.startService" /> {{match.team2Name}}
+                <input type="radio" name="serviceGroup" ng-value="2" ng-model="matchCtrl.match.startService" /> {{matchCtrl.match.team2Name}}
               </label>
             </div>
             </div>
             <div>
-              <input ng-click="startGame()" class="btn btn-primary" type="submit" id="startBtn" value="Start" />
+              <input ng-click="matchCtrl.startGame()" class="btn btn-primary" type="submit" id="startBtn" value="Start" />
             </div>
         </form>
     </div>
 
-    <div id="matchScore" ng-show="match.isMatchStarted">
+    <div id="matchScore" ng-show="matchCtrl.match.isMatchStarted">
         <h1>Score</h1>
         <table class="table table-bordered" id="score">
             <tbody>
@@ -43,34 +43,34 @@
                 <th>Set 5</th>
             </tr>
             <tr id="scoreTeam1">
-                <th>{{match.team1Name}}</th>
-                <td><span>{{match.currentService | service:1}}</span></td>
-                <td class="set1"><span>{{match.scoreTeam1[0]}}</span></td>
-                <td class="set2"><span>{{match.scoreTeam1[1]}}</span></td>
-                <td class="set3"><span>{{match.scoreTeam1[2]}}</span></td>
-                <td class="set4"><span>{{match.scoreTeam1[3]}}</span></td>
-                <td class="set5"><span>{{match.scoreTeam1[4]}}</span></td>
+                <th>{{matchCtrl.match.team1Name}}</th>
+                <td><span>{{matchCtrl.match.currentService | service:1}}</span></td>
+                <td class="set1"><span>{{matchCtrl.match.scoreTeam1[0]}}</span></td>
+                <td class="set2"><span>{{matchCtrl.match.scoreTeam1[1]}}</span></td>
+                <td class="set3"><span>{{matchCtrl.match.scoreTeam1[2]}}</span></td>
+                <td class="set4"><span>{{matchCtrl.match.scoreTeam1[3]}}</span></td>
+                <td class="set5"><span>{{matchCtrl.match.scoreTeam1[4]}}</span></td>
             </tr>
             <tr id="scoreTeam2">
-                <th>{{match.team2Name}}</th>
-                <td><span>{{match.currentService | service:2}}</span></td>
-                <td class="set1"><span>{{match.scoreTeam2[0]}}</span></td>
-                <td class="set2"><span>{{match.scoreTeam2[1]}}</span></td>
-                <td class="set3"><span>{{match.scoreTeam2[2]}}</span></td>
-                <td class="set4"><span>{{match.scoreTeam2[3]}}</span></td>
-                <td class="set5"><span>{{match.scoreTeam2[4]}}</span></td>
+                <th>{{matchCtrl.match.team2Name}}</th>
+                <td><span>{{matchCtrl.match.currentService | service:2}}</span></td>
+                <td class="set1"><span>{{matchCtrl.match.scoreTeam2[0]}}</span></td>
+                <td class="set2"><span>{{matchCtrl.match.scoreTeam2[1]}}</span></td>
+                <td class="set3"><span>{{matchCtrl.match.scoreTeam2[2]}}</span></td>
+                <td class="set4"><span>{{matchCtrl.match.scoreTeam2[3]}}</span></td>
+                <td class="set5"><span>{{matchCtrl.match.scoreTeam2[4]}}</span></td>
             </tr>
             </tbody>
         </table>
 
         <div class="form-group">
-            <button class="btn btn-primary" ng-disabled="isMatchOver" ng-click="addPoint(1)">Add point</button>
-            <button class="btn btn-primary" ng-disabled="isMatchOver" ng-click="addPoint(2)">Add point</button>
+            <button class="btn btn-primary" ng-disabled="matchCtrl.isMatchOver" ng-click="matchCtrl.addPoint(1)">Add point</button>
+            <button class="btn btn-primary" ng-disabled="matchCtrl.isMatchOver" ng-click="matchCtrl.addPoint(2)">Add point</button>
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary" ng-disabled="match.timeOut1 === 0" ng-click="askTimeOut(1)">TimeOut ({{match.timeOut1}})</button>
-            <button class="btn btn-primary" ng-disabled="match.timeOut2 === 0" ng-click="askTimeOut(2)">TimeOut ({{match.timeOut2}})</button>
+            <button class="btn btn-primary" ng-disabled="matchCtrl.match.timeOut1 === 0" ng-click="matchCtrl.askTimeOut(1)">TimeOut ({{matchCtrl.match.timeOut1}})</button>
+            <button class="btn btn-primary" ng-disabled="matchCtrl.match.timeOut2 === 0" ng-click="matchCtrl.askTimeOut(2)">TimeOut ({{matchCtrl.match.timeOut2}})</button>
         </div>
 
         <!--<div ng-repeat="set in difference">
@@ -92,15 +92,15 @@
         -->
 
         <div id="gameScore">
-            <h1>{{match.scoreTeam1[match.currentSet -1 ]}}</h1>
-            <h3 id="nbSetsTeam1">{{match.setWinTeam1}}</h3>
+            <h1>{{matchCtrl.match.scoreTeam1[matchCtrl.match.currentSet -1 ]}}</h1>
+            <h3 id="nbSetsTeam1">{{matchCtrl.match.setWinTeam1}}</h3>
             <span>&nbsp;-&nbsp;</span>
-            <h3 id="nbSetsTeam2">{{match.setWinTeam2}}</h3>
-            <h1>{{match.scoreTeam2[match.currentSet -1 ]}}</h1>
+            <h3 id="nbSetsTeam2">{{matchCtrl.match.setWinTeam2}}</h3>
+            <h1>{{matchCtrl.match.scoreTeam2[matchCtrl.match.currentSet -1 ]}}</h1>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" ng-show="match.isMatchOver" ng-click="newGame()">New Game</button>
-          <button class="btn btn-success" ng-disabled="match.isMatchSaved" ng-show="match.isMatchOver" ng-click="saveMatch()">Save Match</button>
+          <button class="btn btn-primary" ng-show="matchCtrl.match.isMatchOver" ng-click="matchCtrl.newGame()">New Game</button>
+          <button class="btn btn-success" ng-disabled="matchCtrl.match.isMatchSaved" ng-show="matchCtrl.match.isMatchOver" ng-click="matchCtrl.saveMatch()">Save Match</button>
         </div>
     </div>
 </section>

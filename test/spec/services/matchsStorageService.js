@@ -53,9 +53,8 @@ describe('Service: matchsStorageService', function () {
     ];
 
     team1Name = 'MockTeamName1';
-
     //Register Spy
-    spyOn(window.localStorage, 'getItem').andCallFake(function(key) {
+    spyOn(window.localStorage, 'getItem').and.callFake(function(key) {
       if (key === 'ngMatchs') {
         return angular.toJson(store);
       }
@@ -65,13 +64,13 @@ describe('Service: matchsStorageService', function () {
       return undefined;
     });
 
-    spyOn(window.localStorage, 'removeItem').andCallFake(function(key) {
+    spyOn(window.localStorage, 'removeItem').and.callFake(function(key) {
       if (key === 'ngMatchs') {
         store = null;
       }
     });
 
-    spyOn(window.localStorage, 'setItem').andCallFake(function(key, value) {
+    spyOn(window.localStorage, 'setItem').and.callFake(function(key, value) {
       if (key === 'ngMatchs') {
         store = angular.fromJson(value);
       }
@@ -79,7 +78,6 @@ describe('Service: matchsStorageService', function () {
         team1Name = value;
       }
     });
-
     matchsStorageService = _matchsStorageService_;
   }));
 

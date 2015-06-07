@@ -7,9 +7,7 @@ describe('Controller: StatCtrl', function () {
 
   var StatCtrl,
     location,
-    rootScope,
-    window,
-    scope;
+    window;
 
   var store = [
       {
@@ -50,14 +48,12 @@ describe('Controller: StatCtrl', function () {
     ];
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, $location, $window) {
-    scope = $rootScope.$new();
+  beforeEach(inject(function ($controller, $location, $window) {
     location = $location;
-    rootScope = $rootScope;
     window = $window;
 
     //Register Spy
-    spyOn(window.localStorage, 'getItem').andCallFake(function(key) {
+    spyOn(window.localStorage, 'getItem').and.callFake(function(key) {
       if (key === 'ngMatchs') {
         return angular.toJson(store);
       }
@@ -65,40 +61,39 @@ describe('Controller: StatCtrl', function () {
     });
 
     StatCtrl = $controller('StatCtrl', {
-      $scope: scope,
       $stateParams : { matchId : 1 }
     });
   }));
 
   it('init scope with the game relative to params', function () {
 
-    expect(scope.nbSet()).toBe(3);
-    expect(scope.totalPoints()).toBe(97);
-    expect(scope.totalPointsWinForATeam(2)).toBe(22);
-    expect(scope.getMaxConsecutivePointsForMatch()).toBe(25);
+    expect(StatCtrl.nbSet()).toBe(3);
+    expect(StatCtrl.totalPoints()).toBe(97);
+    expect(StatCtrl.totalPointsWinForATeam(2)).toBe(22);
+    expect(StatCtrl.getMaxConsecutivePointsForMatch()).toBe(25);
 
   });
 
   it('should return valid current score', function () {
-    scope.currentSet = 2;
-    scope.currentPoint = 18;
+    StatCtrl.currentSet = 2;
+    StatCtrl.currentPoint = 18;
 
-    expect(scope.currentSetScore(1)).toBe(16);
-    expect(scope.currentSetScore(2)).toBe(2);
+    expect(StatCtrl.currentSetScore(1)).toBe(16);
+    expect(StatCtrl.currentSetScore(2)).toBe(2);
 
   });
 
   it('should return nb points of current set', function () {
-    expect(scope.currentSetPoints()).toBe(store[1].score[0].length);
+    expect(StatCtrl.currentSetPoints()).toBe(store[1].score[0].length);
     //change set
-    scope.currentSet = 3;
-    expect(scope.currentSetPoints()).toBe(store[1].score[2].length);
+    StatCtrl.currentSet = 3;
+    expect(StatCtrl.currentSetPoints()).toBe(store[1].score[2].length);
   });
 
   it('should assign currentPoint to nb points of current set', function () {
     //change set
-    scope.currentSet = 3;
-    scope.tmSetChanged();
-    expect(scope.currentPoint).toBe(store[1].score[2].length);
+    StatCtrl.currentSet = 3;
+    StatCtrl.tmSetChanged();
+    expect(StatCtrl.currentPoint).toBe(store[1].score[2].length);
   });
 });

@@ -22,21 +22,53 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: 'dist',
+      tmp: '.tmp',
+      test: '.test'
+    },
+
+    //transpilation to ES5
+    babel: {
+      options: {
+        sourceMap: true,
+        blacklist: ["strict"]
+      },
+      dev: {
+        files: [{
+          expand : true,
+          cwd: '<%= yeoman.app %>/scripts/',
+          src: ['**/*.js'],
+          dest: '<%= yeoman.dist %>/scripts/',
+          ext: '.js'
+        }]
+      },
+      dist: {
+        files: [{
+          expand : true,
+          cwd: '<%= yeoman.tmp %>/concat/scripts',
+          src: '*.js',
+          dest: '<%= yeoman.tmp %>/concat/scripts',
+          ext: '.js'
+        }]
+      }
     },
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['newer:eslint:all', 'newer:babel:dev'],
         options: {
           livereload: true
         }
       },
+      html : {
+        files: ['<%= yeoman.app %>/views/{,*/}*.html'],
+        tasks: ['newer:copy:dist'],
+      },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: ['newer:eslint:test', 'karma']
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
@@ -74,7 +106,7 @@ module.exports = function (grunt) {
           open: true,
           base: [
             '.tmp',
-            '<%= yeoman.app %>'
+            '<%= yeoman.dist %>'
           ]
         }
       },
@@ -84,7 +116,7 @@ module.exports = function (grunt) {
           base: [
             '.tmp',
             'test',
-            '<%= yeoman.app %>'
+            '<%= yeoman.dist %>'
           ]
         }
       },
@@ -96,19 +128,15 @@ module.exports = function (grunt) {
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
+    eslint: {
       options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        config: '.eslintrc'
       },
       all: [
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js'
       ],
       test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
         src: ['test/spec/{,*/}*.js']
       }
     },
@@ -144,9 +172,9 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the app
-    'bower-install': {
-      app: {
-        html: '<%= yeoman.app %>/index.html',
+    bowerInstall: {
+        app: {
+        src: '<%= yeoman.app %>/index.html',
         ignorePath: '<%= yeoman.app %>/'
       }
     },
@@ -267,6 +295,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
+            '/scripts/{,*/}*.js',
             'views/{,*/}*.html',
             'libs/**/*',
             'images/{,*/}*.{webp}',
@@ -290,7 +319,8 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
+        'copy:styles',
+        'svgmin'
       ],
       test: [
         'copy:styles'
@@ -377,7 +407,7 @@ module.exports = function (grunt) {
   });
 
 
-
+  // TASK CONFIGURATION //
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -385,9 +415,11 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'bower-install',
+      'bowerInstall',
       'concurrent:server',
       'autoprefixer',
+      'copy:dist',
+      'babel:dev',
       'connect:livereload',
       'watch'
     ]);
@@ -402,6 +434,8 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
+    'copy:dist',
+    'babel:dev',
     'connect:test',
     'karma',
     'shell:updateSeleniumWebDriver',
@@ -418,11 +452,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'bower-install',
+    'bowerInstall',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'concat',
+    'babel:dist',
     'ngmin',
     'less',
     'copy:dist',
@@ -435,7 +470,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
+    'newer:eslint',
     'test',
     'build'
   ]);

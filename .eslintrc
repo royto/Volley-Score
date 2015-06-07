@@ -1,0 +1,10 @@
+settings:
+  ecmascript: 6
+ecmaFeatures:
+  jsx: false
+env:
+  browser: true
+rules:
+  quotes : 'single'
+globals
+  angular:true
