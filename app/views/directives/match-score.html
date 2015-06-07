@@ -1,0 +1,29 @@
+<div class="list-group-item-text">
+    <table class="table table-bordered score">
+    <tbody>
+    <tr>
+        <th>Team</th>
+        <th>Set 1</th>
+        <th>Set 2</th>
+        <th>Set 3</th>
+        <th>Set 4</th>
+        <th>Set 5</th>
+    </tr>
+    <tr id="scoreTeam1">
+        <th><span id="team1Name">{{matchScore.match.teams.team1}}</span></th>
+        <td class="set1"><span>{{matchScore.scoreSets(0, 1)}}</span></td>
+        <td class="set2"><span>{{matchScore.scoreSets(1, 1)}}</span></td>
+        <td class="set3"><span>{{matchScore.scoreSets(2, 1)}}</span></td>
+        <td class="set4"><span>{{matchScore.scoreSets(3, 1)}}</span></td>
+        <td class="set5"><span>{{matchScore.scoreSets(4, 1)}}</span></td>
+    </tr>
+    <tr id="scoreTeam2">
+        <th><span id="team1Name"></span>{{matchScore.match.teams.team2}}</th>
+        <td class="set1"><span>{{matchScore.scoreSets(0, 2)}}</span></td>
+        <td class="set2"><span>{{matchScore.scoreSets(1, 2)}}</span></td>
+        <td class="set3"><span>{{matchScore.scoreSets(2, 2)}}</span></td>
+        <td class="set4"><span>{{matchScore.scoreSets(3, 2)}}</span></td>
+        <td class="set5"><span>{{matchScore.scoreSets(4, 2)}}</span></td>
+    </tr>
+    </tbody>
+</table>

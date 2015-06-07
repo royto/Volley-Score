@@ -86,9 +86,4 @@ describe('Controller: HistoryCtrl', function () {
     expect(args[0]).toBe(1);
     expect(HistoryCtrl.matchs.length).toBe(2);
   });
-
-  it('should return the right score for a team / set / macthes', function () {
-    expect(HistoryCtrl.scoreSets(0,0,1)).toBe(25);
-    expect(HistoryCtrl.scoreSets(0,0,2)).toBe(14);
-  });
 });
