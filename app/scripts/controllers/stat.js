@@ -37,10 +37,12 @@ class StatCtrl {
 
   initTeamsStats () {
     this.team1 = {
+      name : this.currentGame.teams.team1,
       maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 1),
       nbPointsWinOnService : this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 1)
     }
     this.team2 = {
+      name : this.currentGame.teams.team2,
       maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 2),
       nbPointsWinOnService : this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 2)
     }
