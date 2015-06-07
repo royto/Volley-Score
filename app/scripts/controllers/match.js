@@ -14,6 +14,8 @@ class MatchCtrl {
   startGame () {
     if (this.startMatchForm.$valid) {
       this.matchService.startGame();
+      this.matchsStorageService.saveTeamName(1, this.match.team1Name);
+      this.matchsStorageService.saveTeamName(2, this.match.team2Name);
     }
   }
   addPoint (team) {
