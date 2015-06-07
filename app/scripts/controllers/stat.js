@@ -15,12 +15,7 @@ class StatCtrl {
     this.initEvolutionChart();
   }
   nbSet () {
-    return this.currentGame.score.reduce(function(previous, current, index, array) {
-          if (angular.isArray(current) && current.length > 0) {
-            return previous + 1;
-          }
-          return previous;
-        }, 0);
+    return this.statService.nbSetsPlayed(this.currentGame.score);
   }
 
   totalPoints () {

@@ -119,6 +119,15 @@ class StatService {
       }, 0);
     }, 0);
   }
+
+  nbSetsPlayed (score) {
+    return score.reduce(function(previous, current, index, array) {
+          if (angular.isArray(current) && current.length > 0) {
+            return previous + 1;
+          }
+          return previous;
+        }, 0);
+  }
 }
 
 angular.module('volleyApp').service('StatService', ['_', StatService]);
