@@ -10,16 +10,12 @@ class matchScore {
     this.controller = () => {
       return {
         scoreSets : function (set, team) {
-          return this.match.score[set].reduce(function (previous, current, index, array) {
-            //Add point only if win by team
-            if (team === current) {
-              return previous + 1;
-            }
-            return previous;
-          }, 0);
+          return this.match.score[set]
+          .filter(val => val === team)
+          .length;
         }
-      }
-    }
+      };
+    };
   }
 }
 

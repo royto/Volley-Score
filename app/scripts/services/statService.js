@@ -110,13 +110,7 @@ class StatService {
   totalPointsWinForATeam (score, team) {
     return score.reduce(function (previous, current, index, array) {
       //sum of points win by team by set
-      return previous + current.reduce(function (previous, current, index, array) {
-        //Add point only if win by team
-        if (team === current) {
-          return previous + 1;
-        }
-        return previous;
-      }, 0);
+      return previous + current.filter(val => val === team).length;
     }, 0);
   }
 
