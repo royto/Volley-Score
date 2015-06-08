@@ -94,8 +94,8 @@ describe('Controller: MatchCtrl', function () {
 
     //Verifiy args are correct
     expect(args.length).toBe(1);
-    expect(args[0].team1Name).toBe('foo');
-    expect(args[0].team2Name).toBe('bar');
+    expect(args[0].teams.team1).toBe('foo');
+    expect(args[0].teams.team2).toBe('bar');
     expect(args[0].score).toEqual(MatchCtrl.match.score);
     expect(args[0].score).toBeArray();
 
