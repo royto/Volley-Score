@@ -6,7 +6,7 @@ class StatService {
   getDifference (set) {
     return _.chain(set)
             .transform(function(result, val, index, arr) {
-              var diff = val === 1 ? 1 : -1;
+              let diff = val === 1 ? 1 : -1;
               if (index === 0) {
                 result.push(diff);
               } else {
@@ -91,7 +91,7 @@ class StatService {
    * @param {Array} set as arrray
    */
   getMaxDifference (set) {
-    var setDiff = this.getDifference(set);
+    let setDiff = this.getDifference(set);
     return setDiff.reduce(function (previousValue, currentValue, index, array) {
       if (Math.abs(currentValue) > Math.abs(previousValue)) {
         return currentValue;
@@ -101,26 +101,15 @@ class StatService {
   }
 
   totalPoints (score) {
-    return score.reduce(function (previous, current, index, array) {
-      //sum of legnth of sets score arrays
-      return previous + current.length;
-    }, 0);
+    return _(score).flatten().value().length;
   }
 
   totalPointsWinForATeam (score, team) {
-    return score.reduce(function (previous, current, index, array) {
-      //sum of points win by team by set
-      return previous + current.filter(val => val === team).length;
-    }, 0);
+    return _(score).flatten().filter(val => val === team).value().length;
   }
 
   nbSetsPlayed (score) {
-    return score.reduce(function(previous, current, index, array) {
-          if (angular.isArray(current) && current.length > 0) {
-            return previous + 1;
-          }
-          return previous;
-        }, 0);
+    return score.filter(set => angular.isArray(set) && set.length > 0).length;
   }
 }
 

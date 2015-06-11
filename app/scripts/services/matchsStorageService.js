@@ -30,7 +30,7 @@ class MatchsStorageService {
     }
   }
   getSavedMatch (index) {
-    var matchs = this.getSavedMatchs();
+    let matchs = this.getSavedMatchs();
     if (matchs.length >= index) {
       return matchs[index];
     }
@@ -38,7 +38,7 @@ class MatchsStorageService {
   }
   removeSavedMatch (i) {
     if (this.storage) {
-      var savedMatchs = this.getSavedMatchs();
+      let savedMatchs = this.getSavedMatchs();
       savedMatchs.splice(i, 1);
       this.storage.setItem(this.matchsStorageName, angular.toJson(savedMatchs));
     }

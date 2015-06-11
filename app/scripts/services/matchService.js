@@ -48,7 +48,7 @@ class MatchService {
     this.match.score[this.match.currentSet - 1].push(team);
 
     //Check is set is over
-    var isSetOver = this.isSetOver();
+    let isSetOver = this.isSetOver();
 
     //manage set change
     if (isSetOver) {
@@ -76,13 +76,13 @@ class MatchService {
     if (this.match.currentSet === 5) {
       return false;
     }
-    var maxWinPoints = Math.max(this.match.scoreTeam1[this.match.currentSet - 1], this.match.scoreTeam2[this.match.currentSet - 1]);
+    let maxWinPoints = Math.max(this.match.scoreTeam1[this.match.currentSet - 1], this.match.scoreTeam2[this.match.currentSet - 1]);
     //TimeOut on point 8 and 16
     return maxWinPoints === 8 || maxWinPoints === 16;
   }
 
   isSetOver () {
-    var setMinimumPoint = 25;
+    let setMinimumPoint = 25;
     if (this.match.currentSet === 5) {
       setMinimumPoint = 15;
     }
