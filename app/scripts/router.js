@@ -8,31 +8,31 @@ angular.module('volleyApp')
     //Declare state
     $stateProvider
       .state('home', {
-        url : '/',
+        url: '/',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
         controllerAs : 'home'
       })
       .state('todo', {
-        url : '/todo',
+        url: '/todo',
         templateUrl: 'views/todo.html',
         controller: 'TodoCtrl',
         controllerAs : 'todo'
       })
       .state('histo', {
-        url : '/histo',
+        url: '/histo',
         templateUrl: 'views/history.html',
         controller: 'HistoryCtrl',
         controllerAs : 'history'
       })
       .state('stat', {
-        url : '/histo/stat/:matchId',
+        url: '/histo/stat/:matchId',
         templateUrl: 'views/stat.html',
         controller: 'StatCtrl',
         controllerAs : 'stat'
       })
       .state('match', {
-        url : '/match',
+        url: '/match',
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl',
         controllerAs : 'matchCtrl'

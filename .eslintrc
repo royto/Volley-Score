@@ -1,10 +1,21 @@
-settings:
-  ecmascript: 6
-ecmaFeatures:
-  jsx: false
-env:
-  browser: true
-rules:
-  quotes : 'single'
-globals
-  angular:true
+{
+  "ecmaFeatures": {
+    "jsx": false
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "brace-style": 2,
+    "camelcase": 2,
+    "curly": 2,
+    "eqeqeq": 2,
+    "no-trailing-spaces": 2,
+    "quotes": "single",
+    "semi": [2, "always"]
+  },
+  "globals": {
+    "angular": true
+  }
+}
