@@ -32,15 +32,15 @@ class StatCtrl {
 
   initTeamsStats () {
     this.team1 = {
-      name : this.currentGame.teams.team1,
-      maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 1),
-      nbPointsWinOnService : this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 1)
-    }
+      name: this.currentGame.teams.team1,
+      maxConsecutivesPoints: this.statService.getMaxConsecutivePointForTeam(this.currentGame, 1),
+      nbPointsWinOnService: this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 1)
+    };
     this.team2 = {
-      name : this.currentGame.teams.team2,
-      maxConsecutivesPoints : this.statService.getMaxConsecutivePointForTeam(this.currentGame, 2),
-      nbPointsWinOnService : this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 2)
-    }
+      name: this.currentGame.teams.team2,
+      maxConsecutivesPoints: this.statService.getMaxConsecutivePointForTeam(this.currentGame, 2),
+      nbPointsWinOnService: this.statService.getNbPointsWinOnServiceForTeam(this.currentGame, 2)
+    };
   }
 
   //Time Machine
@@ -66,21 +66,21 @@ class StatCtrl {
     this.maxDiff = this.statService.getSetMaxDifference(setScore);
     var tmpData = [];
     diff.forEach(function(element, index, array) {
-      tmpData.push({x : index, y : [element] });
+      tmpData.push({x: index, y: [element] });
     });
 
     this.data = {
       series: [''],
-      data : tmpData
+      data: tmpData
     };
-  };
+  }
 
   initEvolutionChart () {
     this.diffCurrentSet = 1;
 
     this.data = {
       series: [''],
-      data : []
+      data: []
     };
 
     this.scoreDifferenceEvolution();
@@ -88,12 +88,12 @@ class StatCtrl {
     this.chartType = 'line';
     this.config = {
       labels: false,
-      title : 'Evolution',
-      legend : {
+      title: 'Evolution',
+      legend: {
         display: true,
-        position:'right'
+        position: 'right'
       }
-    }
+    };
   }
 }
 

@@ -17,19 +17,21 @@ describe('Service: StatService', function () {
 
   describe('total Points', function () {
     it('should return correct total points', function () {
-      var score = [[1,1,2,1,2,1,1,2,1,1], [1,1,2,2,2,2,1,1,1,2], [1,1,2,1,2,1,2,2,2,1,2]];
+      var score = [[1, 1, 2, 1, 2, 1, 1, 2, 1, 1],
+                   [1, 1, 2, 2, 2, 2, 1, 1, 1, 2],
+                   [1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2]];
       expect(StatService.totalPoints(score)).toBe(31);
     });
   });
 
   describe('getDifference', function () {
     it('should return valid difference array', function () {
-      var set = [1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2];
+      var set = [1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 1, 1, 2];
 
       var diffs = StatService.getDifference(set);
       expect(diffs.length).toEqual(set.length + 1);
       expect(diffs[0]).toEqual(0);
-      expect(diffs).toEqual([0,1,2,1,2,3,4,3,2,3,4,3,2,1,2,1,0,1,2,1]);
+      expect(diffs).toEqual([0, 1, 2, 1, 2, 3, 4, 3, 2, 3, 4, 3, 2, 1, 2, 1, 0, 1, 2, 1]);
     });
   });
 
@@ -37,11 +39,11 @@ describe('Service: StatService', function () {
     var match;
     beforeEach(function () {
       match = {
-        score : [
-          [1,1,2,1,1,1,1,2,1,1,2,2,2,1,2,2,1,1,2],
-          [2,2,2,2,2,1,2,2,1,1,2,2,2,1,2,2,1,1,2],
-          [1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2],
-          [1,1,2,1,1,1,1,1,1,1,1,2,2,1,2,2,1,1,2],
+        score: [
+          [1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 2, 2, 1, 1, 2],
+          [2, 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 1, 1, 2],
+          [1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 1, 1, 2],
+          [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 1, 1, 2]
         ]
       };
     });
@@ -59,12 +61,16 @@ describe('Service: StatService', function () {
 
   describe('totalPointsWinForATeam', function () {
     it('should return correct total points win by team 1', function () {
-      var score = [[1,1,2,1,2,1,1,2,1,1], [1,1,2,2,2,2,1,1,1,2], [1,1,2,1,2,1,2,2,2,1,2]];
+      var score = [[1, 1, 2, 1, 2, 1, 1, 2, 1, 1],
+                   [1, 1, 2, 2, 2, 2, 1, 1, 1, 2],
+                   [1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2]];
       expect(StatService.totalPointsWinForATeam(score, 1)).toBe(17);
     });
 
     it('should return correct total points win by team 2', function () {
-      var score = [[1,1,2,1,2,1,1,2,1,1], [1,1,2,2,2,2,1,1,1,2], [1,1,2,1,2,1,2,2,2,1,2]];
+      var score = [[1, 1, 2, 1, 2, 1, 1, 2, 1, 1],
+                   [1, 1, 2, 2, 2, 2, 1, 1, 1, 2],
+                   [1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2]];
       expect(StatService.totalPointsWinForATeam(score, 2)).toBe(14);
     });
   });
@@ -95,20 +101,25 @@ describe('Service: StatService', function () {
 
   describe('getMaxDifference', function () {
     it('should return max Difference for a set', function() {
-      var set = [1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2];
+      var set = [1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 1, 1, 2];
       expect(StatService.getMaxDifference(set)).toBe(4);
 
-      set = [2,2,1,1,2,2,2,1,2,2,2,1,2,2,2,1,1,1,1,1,2];
+      set = [2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2];
       expect(StatService.getMaxDifference(set)).toBe(-7);
     });
   });
 
   describe('nbSetsPlayed', function () {
     it('should return max Difference for a set', function() {
-      var score = [[1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2], [1,2,1,1,2,1], [1,2,2,2], [], []];
+      var score = [[1, 1, 2, 1, 1, 1, 2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 1, 1, 2],
+                   [1, 2, 1, 1, 2, 1],
+                   [1, 2, 2, 2], [], []];
       expect(StatService.nbSetsPlayed(score)).toBe(3);
 
-      score = [[2,2,1,1,2,2,2,1,2,2,2,1,2], [1,2,1,1,2,1], [1,2,2,2], [2, 1, 2], []];
+      score = [[2, 2, 1, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2],
+               [1, 2, 1, 1, 2, 1], [1, 2, 2, 2],
+               [2, 1, 2],
+               []];
       expect(StatService.nbSetsPlayed(score)).toBe(4);
     });
   });

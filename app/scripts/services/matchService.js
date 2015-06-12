@@ -5,21 +5,21 @@ class MatchService {
 
   initGame () {
     return {
-      currentSet : 1,
-      team1Name : '',
-      team2Name : '',
-      scoreTeam1 : [0, 0, 0, 0, 0],
-      scoreTeam2 : [0, 0, 0, 0, 0],
-      score :  [[], [], [], [], []],
-      setWinTeam1 : 0,
-      setWinTeam2 : 0,
-      timeOut1 : 2,
-      timeOut2 : 2,
-      isMatchStarted : false,
-      isMatchOver : false,
-      isMatchSaved : false,
-      currentService : 1,
-      startService : 1
+      currentSet: 1,
+      team1Name: '',
+      team2Name: '',
+      scoreTeam1: [0, 0, 0, 0, 0],
+      scoreTeam2: [0, 0, 0, 0, 0],
+      score:  [[], [], [], [], []],
+      setWinTeam1: 0,
+      setWinTeam2: 0,
+      timeOut1: 2,
+      timeOut2: 2,
+      isMatchStarted: false,
+      isMatchOver: false,
+      isMatchSaved: false,
+      currentService: 1,
+      startService: 1
     };
   }
 
@@ -28,7 +28,9 @@ class MatchService {
     return this.getMatch();
   }
 
-  getMatch () { return this.match; }
+  getMatch () {
+    return this.match;
+  }
 
   startGame () {
     this.match.isMatchStarted = true;

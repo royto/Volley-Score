@@ -11,30 +11,30 @@ angular.module('volleyApp')
         url: '/',
         templateUrl: 'views/home.html',
         controller: 'HomeCtrl',
-        controllerAs : 'home'
+        controllerAs: 'home'
       })
       .state('todo', {
         url: '/todo',
         templateUrl: 'views/todo.html',
         controller: 'TodoCtrl',
-        controllerAs : 'todo'
+        controllerAs: 'todo'
       })
       .state('histo', {
         url: '/histo',
         templateUrl: 'views/history.html',
         controller: 'HistoryCtrl',
-        controllerAs : 'history'
+        controllerAs: 'history'
       })
       .state('stat', {
         url: '/histo/stat/:matchId',
         templateUrl: 'views/stat.html',
         controller: 'StatCtrl',
-        controllerAs : 'stat'
+        controllerAs: 'stat'
       })
       .state('match', {
         url: '/match',
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl',
-        controllerAs : 'matchCtrl'
+        controllerAs: 'matchCtrl'
       });
   });

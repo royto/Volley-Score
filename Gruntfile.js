@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       dev: {
         files: [{
-          expand : true,
+          expand: true,
           cwd: '<%= yeoman.app %>/scripts/',
           src: ['**/*.js'],
           dest: '<%= yeoman.dist %>/scripts/',
@@ -44,7 +44,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: [{
-          expand : true,
+          expand: true,
           cwd: '<%= yeoman.tmp %>/concat/scripts',
           src: '*.js',
           dest: '<%= yeoman.tmp %>/concat/scripts',
@@ -62,9 +62,9 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
-      html : {
+      html: {
         files: ['<%= yeoman.app %>/views/{,*/}*.html'],
-        tasks: ['newer:copy:dist'],
+        tasks: ['newer:copy:dist']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -275,7 +275,7 @@ module.exports = function (grunt) {
       default: {
         options: {
           paths: ['app/styles'],
-          cleancss: true,
+          cleancss: true
         },
         files: {
           '<%= yeoman.app %>/styles/style.css': '<%= yeoman.app %>/styles/style.less'
@@ -390,7 +390,7 @@ module.exports = function (grunt) {
           configFile: 'protractor.conf.js', // Target-specific config file
           args: {
             // Target-specific arguments
-            seleniumPort : 9000
+            seleniumPort: 9000
           }
         }
       }
