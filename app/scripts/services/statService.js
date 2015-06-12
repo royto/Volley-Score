@@ -30,8 +30,8 @@ class StatService {
     //Must return 6 -> Unit Test
     return _.chain(set)
              .transform(function(result, val, index, arr) {
-              if (index > 0 && val === arr[index-1]) {
-                result[result.length -1] ++;
+              if (index > 0 && val === arr[index - 1]) {
+                result[result.length - 1] ++;
               } else {
                 result.push(1);
               }
@@ -41,15 +41,14 @@ class StatService {
   }
 
   getMaxConsecutivePointForTeam (match, team) {
-    //TODO Add Tests
     //Predicate : we take into account consecutive points win on different sets
     return _.chain(match.score)
             .flatten()
              .transform(function(result, val, index, arr) {
               if (index > 0 && val === team) {
-                result[result.length -1] ++;
+                result[result.length - 1] ++;
               } else {
-                result.push(1);
+                result.push(0);
               }
             })
             .max()
@@ -67,7 +66,7 @@ class StatService {
                    return result += 1;
                 }
                 //Other points
-                if (index > 0 && val === team && arr[index -1] === team) {
+                if (index > 0 && val === team && arr[index - 1] === team) {
                   return result += 1;
                 }
                 return result;

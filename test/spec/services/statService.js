@@ -33,6 +33,30 @@ describe('Service: StatService', function () {
     });
   });
 
+  describe('getMaxConsecutivePointForTeam', function () {
+    var match;
+    beforeEach(function () {
+      match = {
+        score : [
+          [1,1,2,1,1,1,1,2,1,1,2,2,2,1,2,2,1,1,2],
+          [2,2,2,2,2,1,2,2,1,1,2,2,2,1,2,2,1,1,2],
+          [1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2],
+          [1,1,2,1,1,1,1,1,1,1,1,2,2,1,2,2,1,1,2],
+        ]
+      };
+    });
+
+    it('should max consecutive points for team 1', function () {
+      var nbPoints = StatService.getMaxConsecutivePointForTeam(match, 1);
+      expect(nbPoints).toEqual(8);
+    });
+
+    it('should max consecutive points for team 2', function () {
+      var nbPoints = StatService.getMaxConsecutivePointForTeam(match, 2);
+      expect(nbPoints).toEqual(6);
+    });
+  });
+
   describe('totalPointsWinForATeam', function () {
     it('should return correct total points win by team 1', function () {
       var score = [[1,1,2,1,2,1,1,2,1,1], [1,1,2,2,2,2,1,1,1,2], [1,1,2,1,2,1,2,2,2,1,2]];
@@ -76,6 +100,16 @@ describe('Service: StatService', function () {
 
       set = [2,2,1,1,2,2,2,1,2,2,2,1,2,2,2,1,1,1,1,1,2];
       expect(StatService.getMaxDifference(set)).toBe(-7);
+    });
+  });
+
+  describe('nbSetsPlayed', function () {
+    it('should return max Difference for a set', function() {
+      var score = [[1,1,2,1,1,1,2,2,1,1,2,2,2,1,2,2,1,1,2], [1,2,1,1,2,1], [1,2,2,2], [], []];
+      expect(StatService.nbSetsPlayed(score)).toBe(3);
+
+      score = [[2,2,1,1,2,2,2,1,2,2,2,1,2], [1,2,1,1,2,1], [1,2,2,2], [2, 1, 2], []];
+      expect(StatService.nbSetsPlayed(score)).toBe(4);
     });
   });
 
