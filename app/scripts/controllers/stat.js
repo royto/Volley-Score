@@ -12,7 +12,7 @@ class StatCtrl {
     this.currentPoint = 1;
 
     this.initTeamsStats();
-    this.initEvolutionChart();
+    this.diffCurrentSet = 1;
   }
   nbSet () {
     return this.statService.nbSetsPlayed(this.currentGame.score);
@@ -62,38 +62,7 @@ class StatCtrl {
   //Evolution of the score difference
   scoreDifferenceEvolution () {
     var setScore = this.currentGame.score[this.diffCurrentSet - 1];
-    var diff = this.statService.getDifference(setScore);
     this.maxDiff = this.statService.getSetMaxDifference(setScore);
-    var tmpData = [];
-    diff.forEach(function(element, index, array) {
-      tmpData.push({x: index, y: [element] });
-    });
-
-    this.data = {
-      series: [''],
-      data: tmpData
-    };
-  }
-
-  initEvolutionChart () {
-    this.diffCurrentSet = 1;
-
-    this.data = {
-      series: [''],
-      data: []
-    };
-
-    this.scoreDifferenceEvolution();
-
-    this.chartType = 'line';
-    this.config = {
-      labels: false,
-      title: 'Evolution',
-      legend: {
-        display: true,
-        position: 'right'
-      }
-    };
   }
 }
 
