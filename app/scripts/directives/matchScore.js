@@ -1,15 +1,15 @@
-class matchScore {
+class MatchScore {
   constructor() {
     this.templateUrl = 'views/directives/match-score.html';
     this.restrict = 'E';
     this.scope = true;
     this.bindToController = {
-        match : '='
+        match: '='
     };
     this.controllerAs = 'matchScore';
     this.controller = () => {
       return {
-        scoreSets : function (set, team) {
+        scoreSets: function (set, team) {
           return this.match.score[set]
           .filter(val => val === team)
           .length;
@@ -19,4 +19,4 @@ class matchScore {
   }
 }
 
-angular.module('volleyApp').directive('matchScore', () => new matchScore());
+angular.module('volleyApp').directive('matchScore', () => new MatchScore());

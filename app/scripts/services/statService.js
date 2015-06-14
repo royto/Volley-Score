@@ -1,10 +1,13 @@
 class StatService {
+  constructor(_) {
+    this._ = _;
+  }
   /**
    * Calculates the history of point diff for a set
    * @param {Array} set
    */
   getDifference (set) {
-    return _.chain(set)
+    return this._.chain(set)
             .transform(function(result, val, index, arr) {
               let diff = val === 1 ? 1 : -1;
               if (index === 0) {
@@ -18,7 +21,7 @@ class StatService {
   }
 
   getSetMaxDifference (set) {
-    return _.max(this.getDifference(set));
+    return this._.max(this.getDifference(set));
   }
 
   /**
@@ -28,7 +31,7 @@ class StatService {
   getMaxConsecutivePoints (set) {
     //var array = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1];
     //Must return 6 -> Unit Test
-    return _.chain(set)
+    return this._.chain(set)
              .transform(function(result, val, index, arr) {
               if (index > 0 && val === arr[index - 1]) {
                 result[result.length - 1] ++;
@@ -42,9 +45,9 @@ class StatService {
 
   getMaxConsecutivePointForTeam (match, team) {
     //Predicate : we take into account consecutive points win on different sets
-    return _.chain(match.score)
+    return this._.chain(match.score)
             .flatten()
-             .transform(function(result, val, index, arr) {
+            .transform(function(result, val, index) {
               if (index > 0 && val === team) {
                 result[result.length - 1] ++;
               } else {
@@ -59,19 +62,20 @@ class StatService {
     //TODO Add Tests
     //MapReduce ?
     return match.score
-             .map((setScore, setNumber) => setScore
-              .reduce((result, val, index, arr) => {
-                //special case of 1st point
-                if (index === 0 && val === team && match.startService + setNumber % 2 === team) {
-                   return result += 1;
-                }
-                //Other points
-                if (index > 0 && val === team && arr[index - 1] === team) {
-                  return result += 1;
-                }
-                return result;
-              }, 0)
-             ).reduce((res, val) => val + res);
+              .map((setScore, setNumber) => setScore
+                .reduce((result, val, index, arr) => {
+                  //special case of 1st point
+                  if (index === 0 && val === team && match.startService + setNumber % 2 === team) {
+                    return result += 1;
+                  }
+                  //Other points
+                  if (index > 0 && val === team && arr[index - 1] === team) {
+                    return result += 1;
+                  }
+                  return result;
+                }, 0)
+              )
+              .reduce((res, val) => val + res);
   }
 
   /**
@@ -80,9 +84,7 @@ class StatService {
    */
   getMaxConsecutivePointsForMatch (score) {
     let self = this;
-    return score.reduce(function(previous, current) {
-      return Math.max(previous, self.getMaxConsecutivePoints(current));
-    }, 0);
+    return score.reduce((previous, current) => Math.max(previous, self.getMaxConsecutivePoints(current)), 0);
   }
 
   /**
@@ -91,7 +93,7 @@ class StatService {
    */
   getMaxDifference (set) {
     let setDiff = this.getDifference(set);
-    return setDiff.reduce(function (previousValue, currentValue, index, array) {
+    return setDiff.reduce((previousValue, currentValue) => {
       if (Math.abs(currentValue) > Math.abs(previousValue)) {
         return currentValue;
       }
@@ -100,11 +102,11 @@ class StatService {
   }
 
   totalPoints (score) {
-    return _(score).flatten().value().length;
+    return this._(score).flatten().value().length;
   }
 
   totalPointsWinForATeam (score, team) {
-    return _(score).flatten().filter(val => val === team).value().length;
+    return this._(score).flatten().filter(val => val === team).value().length;
   }
 
   nbSetsPlayed (score) {

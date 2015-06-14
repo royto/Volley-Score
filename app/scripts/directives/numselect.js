@@ -13,18 +13,11 @@ directive('numselect', function () {
     scope: {
       nbOptions: '=',
       model: '=',
-      onChange : '&'
+      onChange: '&'
     },
     link: function (scope, element, attrs, controller) {
 
-      //watch to nbOptions Change
-      scope.$watch('nbOptions', function() {
-        updateOptions();
-      }, true);
-
-      scope.num = [];
-
-      var updateOptions = function() {
+      var updateOptions = function () {
         var i = 0;
         if (angular.isDefined(attrs.startAtOne) &&
             attrs.startAtOne === 'true') {
@@ -36,8 +29,15 @@ directive('numselect', function () {
         }
       };
 
-      element.bind('change', function() {
-        scope.$apply(function() {
+      //watch to nbOptions Change
+      scope.$watch('nbOptions', function () {
+        updateOptions();
+      }, true);
+
+      scope.num = [];
+
+      element.bind('change', function () {
+        scope.$apply(function () {
           scope.onChange();
         });
       });

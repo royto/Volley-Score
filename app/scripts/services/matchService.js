@@ -10,7 +10,7 @@ class MatchService {
       team2Name: '',
       scoreTeam1: [0, 0, 0, 0, 0],
       scoreTeam2: [0, 0, 0, 0, 0],
-      score:  [[], [], [], [], []],
+      score: [[], [], [], [], []],
       setWinTeam1: 0,
       setWinTeam2: 0,
       timeOut1: 2,

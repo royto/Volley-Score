@@ -1,16 +1,11 @@
-class teamStats {
+class TeamStats {
     constructor() {
         this.templateUrl = 'views/directives/team-stats.html';
         this.restrict = 'E';
         this.scope = {
-			stats : '='
+			stats: '='
 		};
-    }
-
-    // optional link function
-    link(scope, element) {
-
     }
 }
 
-angular.module('volleyApp').directive('teamStats', () => new teamStats());
+angular.module('volleyApp').directive('teamStats', () => new TeamStats());
