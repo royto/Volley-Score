@@ -26,16 +26,16 @@
 
   <h2>Time Machine</h2>
   <p>
-    Set : <numselect nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" model="stat.currentSet"></numselect>
+    Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" ng-model="stat.currentSet"></num-select>
   </p>
   <p>
-    Point : <numselect nb-options="stat.currentSetPoints()" start-at-one="true" model="stat.currentPoint"></numselect>
+    Point : <num-select nb-options="stat.currentSetPoints()" start-at-one="true" ng-model="stat.currentPoint"></num-select>
   </p>
   {{stat.currentSetScore(1)}} - {{stat.currentSetScore(2)}}
 
   <h2>Evolution points difference</h2>
   <p>
-    Set : <numselect nb-options="stat.nbSet()" start-at-one="true" on-change="stat.scoreDifferenceEvolution()" model="stat.diffCurrentSet"></numselect>
+    Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.scoreDifferenceEvolution()" ng-model="stat.diffCurrentSet"></num-select>
   </p>
   Max difference in the set : {{stat.maxDiff}}
 

@@ -13,10 +13,11 @@ describe('Directive: numselect', function () {
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
     scope.options = 5;
+    scope.selected = 1;
   }));
 
   it('should create select with 4 options', inject(function ($compile) {
-    element = angular.element('<numselect nb-options="options"></numselect>');
+    element = angular.element('<num-select ng-model="selected" nb-options="options"></num-select>');
     element = $compile(element)(scope);
 
     scope.$digest();
@@ -26,7 +27,7 @@ describe('Directive: numselect', function () {
   }));
 
   it('should create select with 3 options with start at one option enabled', inject(function ($compile) {
-    element = angular.element('<numselect nb-options="options" start-at-one="true"></numselect>');
+    element = angular.element('<num-select  ng-model="selected" nb-options="options" start-at-one="true"></num-select>');
     element = $compile(element)(scope);
 
     scope.$digest();
@@ -36,7 +37,7 @@ describe('Directive: numselect', function () {
   }));
 
   it('should update select with 10 options', inject(function ($compile) {
-    element = angular.element('<numselect nb-options="options"></numselect>');
+    element = angular.element('<num-select ng-model="selected" nb-options="options"></num-select>');
     element = $compile(element)(scope);
 
     scope.options = 9;
@@ -50,7 +51,7 @@ describe('Directive: numselect', function () {
     //Create Spy
     scope.fn = jasmine.createSpy();
 
-    element = angular.element('<numselect nb-options="options" on-change="fn()"></numselect>');
+    element = angular.element('<num-select ng-model="selected" nb-options="options" on-change="fn()"></num-select>');
     element = $compile(element)(scope);
 
     scope.$digest();
