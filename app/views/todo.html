@@ -1,6 +1,12 @@
 <section id="todo">
-    <h1>TODO</h1>
-    <ul class="list-group">
-         <li class="list-group-item" ng-repeat="todo in todo.todos">{{todo}}</li>
-    </ul>
+  <h2>TODO</h2>
+
+  <md-list>
+    <md-list-item class="md-2-line" ng-repeat="todo in todo.todos">
+      <div class="md-list-item-text">
+        <p>{{todo}}</p>
+      </div>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
 </section>

@@ -20,17 +20,22 @@
     <!-- endbuild -->
 	</head>
 	<body>
-		<nav>
-			<ul class="nav nav-pills black">
-				<li ui-sref-active="active"><a id="homeMenu" ui-sref="home" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
-				<li ui-sref-active="active"><a id="matchMenu" ui-sref="match">Match</a></li>
-				<li ui-sref-active="active"><a id="matchMenu" ui-sref="histo">Historique</a></li>
-				<li ui-sref-active="active"><a id="todoMenu" ui-sref="todo"><i class="glyphicon glyphicon-list"></i> Todo</a></li>
-			</ul>
-		</nav>
-		<div class="container" ui-view></div>
+		<div layout="column" layout-fill>
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <span>Volley Score</span>
+              <!-- fill up the space between left and right area -->
+              <span flex></span>
+              <md-button ui-sref="home">Home</md-button>
+              <md-button ui-sref="match">Match</md-button>
+              <md-button ui-sref="histo">Historique</md-button>
+              <md-button ui-sref="todo">Todo</md-button>
+            </div>
+          </md-toolbar>
+          <md-content layout-margin layout-fill layout-padding ui-view></md-content>
+        </div>
 
-		<!-- build:js scripts/vendor.js -->
+   	<!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="libs/jquery/jquery.js"></script>
     <script src="libs/es5-shim/es5-shim.js"></script>

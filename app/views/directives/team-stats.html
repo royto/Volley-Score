@@ -1,3 +1,21 @@
-<h3>{{stats.name}}</h3>
-max Consecutives Points : {{ stats.maxConsecutivesPoints }}
-points win on service : {{ stats.nbPointsWinOnService }}
+<md-card>
+  <md-card-content>
+   <h2 class="md-title">{{stats.name}}</h2>
+
+   <md-list>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <p>Max Consecutives Points : {{ stats.maxConsecutivesPoints }}</p>
+      </div>
+      <md-divider></md-divider>
+    </md-list-item>
+
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <p>Points win on service : {{ stats.nbPointsWinOnService }}</p>
+      </div>
+    </md-list-item>
+  </md-list>
+
+  </md-card-content>
+</md-card>

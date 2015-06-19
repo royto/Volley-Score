@@ -1,16 +1,20 @@
 <section id="histo">
-    <p class="lead">
-      <ng-pluralize count="history.matchs.length" when="history.matchForms"></ng-pluralize>
-    </p>
-    <p>
-      <a href="" class="btn btn-danger" ng-hide="history.matchs.length === 0" ng-click="history.clearMatchs()"> <i class="glyphicon glyphicon-trash"></i> Tout supprimer</a>
-    </p>
+  <p class="lead">
+    <ng-pluralize count="history.matchs.length" when="history.matchForms"></ng-pluralize>
+  </p>
 
-    <div class="list-group" ng-repeat="match in history.matchs">
-        <match-score match="match"></match-score>
+  <div class="md-actions" layout="row" layout-align="end center">
+  	<md-button  class="md-raised md-warn" ng-click="history.clearMatchs()">Tout supprimer</md-button>
+  </div>
 
-        <a class="btn btn-primary" ui-sref="stat({matchId: $index})"><i class="glyphicon glyphicon-stats"></i> Stats</a>
-        <a class="btn btn-danger" href="" ng-click="history.removeMatch($index)"><i class="glyphicon glyphicon-trash"></i> Supprimer</a>
-        </div>
-    </div>
+  <md-card ng-repeat="match in history.matchs">
+    <md-card-content>
+      <h2 class="md-title">{{match.teams.team1}} - {{match.teams.team2}}</h2>
+        <match-score  class="md-list-item-text" match="match"></match-score>
+		  <div class="md-actions" layout="row" layout-align="end center">
+		    <md-button ui-sref="stat({matchId: $index})" class="md-raised md-primary">Stats</md-button>
+			<md-button ng-click="history.removeMatch($index)" class="md-raised md-warn">Supprimer</md-button>
+		  </div>
+    </md-card-content>
+  </md-card>
 </section>

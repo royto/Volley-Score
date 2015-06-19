@@ -1,6 +1,6 @@
 <section id="match">
     <div ng-hide="matchCtrl.match.isMatchStarted">
-        <h1>Accueil</h1>
+        <h1>Nouveau Match</h1>
         <form role="form" name="matchCtrl.startMatchForm">
 
        <!--<md-content>-->
@@ -14,7 +14,7 @@
             </md-input-container>
 
             <p>Service :</p>
-            <md-radio-group ng-model="matchCtrl.match.startService">
+            <md-radio-group class="md-primary" ng-model="matchCtrl.match.startService">
               <md-radio-button value="1">{{matchCtrl.match.team1Name}}</md-radio-button>
               <md-radio-button value="2">{{matchCtrl.match.team2Name}}</md-radio-button>
             </md-radio-group>
@@ -67,24 +67,6 @@
             <button class="btn btn-primary" ng-disabled="matchCtrl.match.timeOut1 === 0" ng-click="matchCtrl.askTimeOut(1)">TimeOut ({{matchCtrl.match.timeOut1}})</button>
             <button class="btn btn-primary" ng-disabled="matchCtrl.match.timeOut2 === 0" ng-click="matchCtrl.askTimeOut(2)">TimeOut ({{matchCtrl.match.timeOut2}})</button>
         </div>
-
-        <!--<div ng-repeat="set in difference">
-            Set {{$index + 1}}
-            <ul>
-                 <li ng-repeat="diff in set track by $index">
-                   {{diff}}
-                 </li>
-           </ul>
-        </div>-->
-        <!--
-            Stats Graphs
-            gRaphael ??
-            angular chart
-                -> http://bouil.github.io/angular-google-chart
-                -> http://chinmaymk.github.io/angular-charts/
-                ->https://github.com/pablojim/highcharts-ng ++ permet de gérer des séries avec un nombre de valeurs différentes
-                ->http://www.sitepoint.com/creating-visualization-app-using-google-charts-api-angularjs-part4/
-        -->
 
         <div id="gameScore">
             <h1>{{matchCtrl.match.scoreTeam1[matchCtrl.match.currentSet -1 ]}}</h1>

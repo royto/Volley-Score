@@ -67,7 +67,7 @@ label
 @media screen and (max-width:480px) {
 
 }
-*/
+
 h2 {
   background-color: #4285f4 !important;
   color: #f1f1f1 !important;
@@ -81,6 +81,7 @@ h2 {
   padding: 0 10px;
   width: 100%;
 }
+
 .itemInfo {
   border-radius: 2px;
   width: 300px;
@@ -91,15 +92,18 @@ h2 {
   padding: 0;
   vertical-align: top;
 }
+
 .itemInfo h3 {
   font-size: 24px;
-  padding: 5px;
-  margin: 0;
+  padding : 5px;
+  margin : 0;
   background-color: #5677fc;
-  color: #e7e9fd;
+  color : #e7e9fd;
 }
+
 .itemInfo p {
   padding: 5px;
   font-size: 56px;
-  color: #424242;
+  color : #424242;
 }
+*/

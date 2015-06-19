@@ -13,6 +13,7 @@
  * Display show stats for the match at the end (after save ?)
 
 ## Ideas
+* Save match date (match end -> match duration)
 * Stats
  * Max difference per set -> with or without sign
  * Max difference per set and team
