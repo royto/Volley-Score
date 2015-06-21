@@ -37,7 +37,8 @@ class="chart" style="width: 90%; height:250px;"></div>`;
             display: true,
             position: 'right'
           },
-          colors: ['#3276b1']
+          colors: ['#3276b1'],
+          xAxisMaxTicks : 10
         };
 
         scope.scoreDifferenceEvolution();
