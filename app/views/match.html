@@ -59,13 +59,13 @@
         </table>
 
         <div class="form-group">
-            <button class="btn btn-primary" ng-disabled="matchCtrl.isMatchOver" ng-click="matchCtrl.addPoint(1)">Add point</button>
-            <button class="btn btn-primary" ng-disabled="matchCtrl.isMatchOver" ng-click="matchCtrl.addPoint(2)">Add point</button>
+          <md-button ng-click="matchCtrl.addPoint(1)" ng-disabled="matchCtrl.isMatchOver" class="md-raised md-primary">Add point</md-button>
+          <md-button ng-click="matchCtrl.addPoint(2)" ng-disabled="matchCtrl.isMatchOver" class="md-raised md-primary">Add point</md-button>
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary" ng-disabled="matchCtrl.match.timeOut1 === 0" ng-click="matchCtrl.askTimeOut(1)">TimeOut ({{matchCtrl.match.timeOut1}})</button>
-            <button class="btn btn-primary" ng-disabled="matchCtrl.match.timeOut2 === 0" ng-click="matchCtrl.askTimeOut(2)">TimeOut ({{matchCtrl.match.timeOut2}})</button>
+            <md-button class="md-raised md-primary" ng-disabled="matchCtrl.match.timeOut1 === 0" ng-click="matchCtrl.askTimeOut(1)">TimeOut ({{matchCtrl.match.timeOut1}})</md-button>
+            <md-button class="md-raised md-primary" ng-disabled="matchCtrl.match.timeOut2 === 0" ng-click="matchCtrl.askTimeOut(2)">TimeOut ({{matchCtrl.match.timeOut2}})</md-button>
         </div>
 
         <div id="gameScore">
@@ -76,8 +76,8 @@
             <h1>{{matchCtrl.match.scoreTeam2[matchCtrl.match.currentSet -1 ]}}</h1>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" ng-show="matchCtrl.match.isMatchOver" ng-click="matchCtrl.newGame()">New Game</button>
-          <button class="btn btn-success" ng-disabled="matchCtrl.match.isMatchSaved" ng-show="matchCtrl.match.isMatchOver" ng-click="matchCtrl.saveMatch()">Save Match</button>
+          <md-button class="md-raised md-primary" ng-show="matchCtrl.match.isMatchOver" ng-click="matchCtrl.newGame()">New Game</md-button>
+          <md-button class="md-raised md-success" ng-disabled="matchCtrl.match.isMatchSaved" ng-show="matchCtrl.match.isMatchOver" ng-click="matchCtrl.saveMatch()">Save Match</md-button>
         </div>
     </div>
 </section>
