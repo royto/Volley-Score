@@ -2,7 +2,7 @@
 
   <match-score match="stat.currentGame"></match-score>
 
-  <md-card>
+  <md-card class="md-whiteframe-z3">
     <md-card-content>
      <h2 class="md-title">Global Stats</h2>
 
@@ -41,30 +41,36 @@
 
   </md-card>
 
-  <div layout="row" layout-margin layout-fill layout-padding>
+  <div layout="row" layout-fill>
     <team-stats flex stats="stat.team1"></team-stats>
     <team-stats flex stats="stat.team2"></team-stats>
   </div>
+  <div layout="row" layout-fill>
+    <md-card flex class="md-whiteframe-z3">
+      <md-card-content>
+       <h2 class="md-title">Time Machine</h2>
+        <p>
+          Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" ng-model="stat.currentSet"></num-select>
+        </p>
+        <p>
+          Point : <num-select nb-options="stat.currentSetPoints()" start-at-one="true" ng-model="stat.currentPoint"></num-select>
+        </p>
+        {{stat.currentSetScore(1)}} - {{stat.currentSetScore(2)}}
+      </md-card-content>
+    </md-card>
 
-  <h2>Time Machine</h2>
-  <p>
-    Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" ng-model="stat.currentSet"></num-select>
-  </p>
-  <p>
-    Point : <num-select nb-options="stat.currentSetPoints()" start-at-one="true" ng-model="stat.currentPoint"></num-select>
-  </p>
-  {{stat.currentSetScore(1)}} - {{stat.currentSetScore(2)}}
+    <md-card flex class="md-whiteframe-z3">
+      <md-card-content>
+        <h2 class="md-title">Evolution points difference</h2>
+        <p>
+          Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.scoreDifferenceEvolution()" ng-model="stat.diffCurrentSet"></num-select>
+        </p>
+        Max difference in the set : {{stat.maxDiff}}
 
-  <h2>Evolution points difference</h2>
-  <p>
-    Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.scoreDifferenceEvolution()" ng-model="stat.diffCurrentSet"></num-select>
-  </p>
-  Max difference in the set : {{stat.maxDiff}}
-
-  <set-evolution-chart set="stat.currentGame.score[stat.diffCurrentSet - 1]"></set-evolution-chart>
+        <set-evolution-chart set="stat.currentGame.score[stat.diffCurrentSet - 1]"></set-evolution-chart>
+       </md-card-content>
+     </md-card>
+  </div>
 <div>
-
-<p>
-  <a href="#/histo" class="btn btn-primary">Back</a>
-</p>
+  <md-button href="#/histo" class="md-raised md-primary">Back</md-button>
 </div>
