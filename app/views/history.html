@@ -8,13 +8,15 @@
   </div>
 
   <md-card ng-repeat="match in history.matchs">
-    <md-card-content>
+    <md-toolbar layout-padding>
       <h2 class="md-title">{{match.teams.team1}} - {{match.teams.team2}}</h2>
-        <match-score  class="md-list-item-text" match="match"></match-score>
-		  <div class="md-actions" layout="row" layout-align="end center">
-		    <md-button ui-sref="stat({matchId: $index})" class="md-raised md-primary">Stats</md-button>
-			<md-button ng-click="history.removeMatch($index)" class="md-raised md-warn">Supprimer</md-button>
-		  </div>
+    </md-toolbar>
+    <md-card-content>
+      <match-score  class="md-list-item-text" match="match"></match-score>
+      <div class="md-actions" layout="row" layout-align="end center">
+        <md-button ui-sref="stat({matchId: $index})" class="md-raised md-primary">Stats</md-button>
+        <md-button ng-click="history.removeMatch($index)" class="md-raised md-warn">Supprimer</md-button>
+      </div>
     </md-card-content>
   </md-card>
 </section>

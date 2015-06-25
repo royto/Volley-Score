@@ -3,9 +3,10 @@
   <match-score match="stat.currentGame"></match-score>
 
   <md-card class="md-whiteframe-z3">
+    <md-toolbar layout-padding>
+       <h2 class="md-title">Global Stats</h2>
+    </md-toolbar>
     <md-card-content>
-     <h2 class="md-title">Global Stats</h2>
-
       <div layout="row" layout-margin layout-fill layout-padding>
         <md-list flex>
           <md-list-item class="md-2-line">
@@ -38,7 +39,6 @@
       </div>
 
     </md-card-content>
-
   </md-card>
 
   <div layout="row" layout-fill>
@@ -47,8 +47,10 @@
   </div>
   <div layout="row" layout-fill>
     <md-card flex class="md-whiteframe-z3">
+      <md-toolbar layout-padding>
+        <h2 class="md-title">Time Machine</h2>
+      </md-toolbar>
       <md-card-content>
-       <h2 class="md-title">Time Machine</h2>
         <p>
           Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.tmSetChanged()" ng-model="stat.currentSet"></num-select>
         </p>
@@ -60,8 +62,10 @@
     </md-card>
 
     <md-card flex class="md-whiteframe-z3">
+      <md-toolbar layout-padding>
+       <h2 class="md-title">Evolution points difference</h2>
+      </md-toolbar>
       <md-card-content>
-        <h2 class="md-title">Evolution points difference</h2>
         <p>
           Set : <num-select nb-options="stat.nbSet()" start-at-one="true" on-change="stat.scoreDifferenceEvolution()" ng-model="stat.diffCurrentSet"></num-select>
         </p>
