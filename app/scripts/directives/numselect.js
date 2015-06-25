@@ -5,20 +5,18 @@ Usage :
     <input type="button" ng-click="point = 3" value="Set to 3">
     demo : http://jsfiddle.net/royto/8L1jLrf1/
 */
-(function (angular) {
-  'use strict';
-  angular.module('volleyApp').
-  directive('numSelect', function () {
-    return {
-      restrict: 'E',
-      scope: {
+
+class NumSelect {
+  constructor() {
+    this.templateUrl = 'views/directives/num-select.html';
+    this.restrict = 'E';
+    this.scope = {
         nbOptions: '=',
         ngModel: '=',
         onChange: '&'
-      },
-      require: 'ngModel',
-      link: function (scope, element, attrs, ngModel) {
-
+    };
+    this.require = 'ngModel';
+    this.link = function(scope, element, attrs, ngModelCtrl) {
         scope.num = [];
 
         var updateOptions = function () {
@@ -43,8 +41,8 @@ Usage :
             scope.onChange();
           });
         });
-      },
-      templateUrl: 'views/directives/num-select.html'
     };
-  });
-})(angular);
+  }
+}
+
+angular.module('volleyApp').directive('numSelect', [() => new NumSelect()]);
