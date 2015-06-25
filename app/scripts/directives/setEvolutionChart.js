@@ -19,7 +19,7 @@ class="chart" style="width: 90%; height:250px;"></div>`;
           series: [''],
           data: tmpData
         };
-      }
+      };
 
       scope.initEvolutionChart = () => {
         scope.diffCurrentSet = 1;
@@ -41,7 +41,7 @@ class="chart" style="width: 90%; height:250px;"></div>`;
         };
 
         scope.scoreDifferenceEvolution();
-      }
+      };
       scope.initEvolutionChart();
 
       scope.$watch('set', function () {
@@ -51,4 +51,4 @@ class="chart" style="width: 90%; height:250px;"></div>`;
   }
 }
 
-angular.module('volleyApp').directive('setEvolutionChart',['StatService', (StatService) => new SetEvolutionChart(StatService)]);
+angular.module('volleyApp').directive('setEvolutionChart', ['StatService', (StatService) => new SetEvolutionChart(StatService)]);
