@@ -11,6 +11,7 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
+  grunt.loadNpmTasks('gruntify-eslint');
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
@@ -31,7 +32,7 @@ module.exports = function (grunt) {
     babel: {
       options: {
         sourceMap: true,
-        blacklist: ["strict"]
+        blacklist: ['strict']
       },
       dev: {
         files: [{
@@ -129,14 +130,18 @@ module.exports = function (grunt) {
 
     // Make sure code styles are up to par and there are no obvious mistakes
     eslint: {
-      options: {
-        config: '.eslintrc'
-      },
-      all: [
+      all: {
+        options: {
+          configFile: '.eslintrc'
+        },
+        src : [
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js'
-      ],
+      ]},
       test: {
+        options: {
+          configFile: '.eslintrc'
+        },
         src: ['test/spec/{,*/}*.js']
       }
     },
