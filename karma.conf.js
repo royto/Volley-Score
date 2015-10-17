@@ -21,7 +21,6 @@ module.exports = function(config) {
       'app/libs/angular-charts/dist/angular-charts.js',
       'app/libs/angular-bootstrap/ui-bootstrap.min.js',
       'app/libs/lodash/dist/lodash.min.js',
-      'app/libs/angular-lodash/angular-lodash.js',
       'dist/scripts/*.js',
       'dist/scripts/**/*.js',
       'test/mock/**/*.js',
