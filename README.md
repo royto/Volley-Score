@@ -1,9 +1,12 @@
 # Volley Score
 Volley score is a web app for managing volley ball matches.
 
-The app is developped with the amazing framework [Angular JS](http://angularjs.org/).
+The app is developed with the amazing framework [Angular JS](http://angularjs.org/).
 
-##Functionalities 
+## Demo
+The application is available [here](https://royto.github.io/Volley-Score/)
+
+## Functionalities 
 * Manage score of a match
 * History : possibility to save match and consult them
 * See statistics about saved match
